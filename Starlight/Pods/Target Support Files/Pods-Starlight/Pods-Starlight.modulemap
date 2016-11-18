@@ -1,0 +1,6 @@
+framework module Pods_Starlight {
+  umbrella header "Pods-Starlight-umbrella.h"
+
+  export *
+  module * { export * }
+}
