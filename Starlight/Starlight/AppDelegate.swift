@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SwiftyJSON
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -16,6 +17,18 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
+        
+        SunlightAPIClient().getLegislatorsWithLat(lat: 40.746019, lng: -73.989137, completion: { (json, error) -> Void in
+            if (error != nil) {
+                print("\(error)")
+            } else if let json = json {
+                let results = json["results"]
+                let legislators = Legislator.legislatorsWithResults(results: results)
+                print(legislators)
+            }
+        })
+        
+        
         return true
     }
 

@@ -36,7 +36,7 @@ struct Legislator {
     let senate_class: Int?
     let state: String
     let state_name: String
-    let state_rank: String
+    let state_rank: String?
 //    let term_end: Date
 //    let term_start: Date
     let thomas_id: String?
@@ -86,7 +86,7 @@ struct Legislator {
         self.senate_class = result["senate_class"].int
         self.state        = result["state"].string!
         self.state_name   = result["state_name"].string!
-        self.state_rank   = result["state_rank"].string!
+        self.state_rank   = result["state_rank"].string
 //        self.term_end     = result["term_end"]
 //        self.term_start   = result["term_start"]
         self.thomas_id    = result["thomas_id"].string
@@ -95,5 +95,15 @@ struct Legislator {
         self.votesmart_id = result["votesmart_id"].string
         self.website      = result["website"].string
         self.youtube_id   = result["youtube_id"].string
+    }
+    
+    static func legislatorsWithResults(results: JSON) -> [Legislator] {
+        var legislators = Array<Legislator>()
+        for i in 0..<results.count {
+            let result = results[i]
+            let legislator = Legislator(result: result)
+            legislators.append(legislator)
+        }
+        return legislators;
     }
 }

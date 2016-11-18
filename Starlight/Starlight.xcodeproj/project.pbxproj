@@ -15,6 +15,7 @@
 		4DC7FDE31DDEA20000F63B39 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4DC7FDE11DDEA20000F63B39 /* LaunchScreen.storyboard */; };
 		4DC7FDEE1DDEA20000F63B39 /* StarlightTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DC7FDED1DDEA20000F63B39 /* StarlightTests.swift */; };
 		4DC7FDFB1DDEA43B00F63B39 /* Legislator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DC7FDFA1DDEA43B00F63B39 /* Legislator.swift */; };
+		4DC7FDFD1DDEB35A00F63B39 /* SunlightAPIClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DC7FDFC1DDEB35A00F63B39 /* SunlightAPIClient.swift */; };
 		F70AB12C828ABEE8EA9991F7 /* Pods_StarlightTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9A1378EB3A30B2CCFEB0CBF8 /* Pods_StarlightTests.framework */; };
 /* End PBXBuildFile section */
 
@@ -41,6 +42,7 @@
 		4DC7FDED1DDEA20000F63B39 /* StarlightTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StarlightTests.swift; sourceTree = "<group>"; };
 		4DC7FDEF1DDEA20000F63B39 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		4DC7FDFA1DDEA43B00F63B39 /* Legislator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Legislator.swift; sourceTree = "<group>"; };
+		4DC7FDFC1DDEB35A00F63B39 /* SunlightAPIClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SunlightAPIClient.swift; sourceTree = "<group>"; };
 		760FA6B8C835B08C3909EB3D /* Pods-StarlightTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-StarlightTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-StarlightTests/Pods-StarlightTests.debug.xcconfig"; sourceTree = "<group>"; };
 		9A1378EB3A30B2CCFEB0CBF8 /* Pods_StarlightTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_StarlightTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B1303A92BA26A08B1E1A12BE /* Pods-StarlightTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-StarlightTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-StarlightTests/Pods-StarlightTests.release.xcconfig"; sourceTree = "<group>"; };
@@ -134,6 +136,7 @@
 		4DC7FDF91DDEA39F00F63B39 /* Networking */ = {
 			isa = PBXGroup;
 			children = (
+				4DC7FDFC1DDEB35A00F63B39 /* SunlightAPIClient.swift */,
 			);
 			path = Networking;
 			sourceTree = "<group>";
@@ -352,6 +355,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				4DC7FDFB1DDEA43B00F63B39 /* Legislator.swift in Sources */,
+				4DC7FDFD1DDEB35A00F63B39 /* SunlightAPIClient.swift in Sources */,
 				4DC7FDDB1DDEA20000F63B39 /* ViewController.swift in Sources */,
 				4DC7FDD91DDEA20000F63B39 /* AppDelegate.swift in Sources */,
 			);
