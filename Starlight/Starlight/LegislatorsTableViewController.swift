@@ -41,6 +41,14 @@ class LegislatorsTableViewController: UITableViewController {
         
         return cell
     }
+    
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let legislator = legislators[indexPath.row]
+        guard let number = URL(string: "telprompt://" + legislator.phone) else { return }
+        UIApplication.shared.open(number, options: [:], completionHandler: nil)
+        
+        tableView.deselectRow(at: indexPath, animated: true)
+    }
 
 }
 
