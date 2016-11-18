@@ -8,7 +8,17 @@
 
 import Foundation
 import Alamofire
+import INTULocationManager
 import SwiftyJSON
+
+enum JSONResult {
+    case json(json: JSON)
+    case error(error: Error)
+}
+
+enum SunlightError: Error {
+    case NoLocation
+}
 
 class SunlightAPIClient {
     static let sharedInstance = SunlightAPIClient()
@@ -18,7 +28,7 @@ class SunlightAPIClient {
     let latitude = "latitude"
     let longitude = "longitude"
     
-    func getLegislatorsWithLat(lat: Double, lng: Double, completion: @escaping (_ json: JSON?, _ error: Error?) -> Void) {
+    func getLegislatorsWithLat(lat: Double, lng: Double, completion: @escaping (JSONResult) -> Void) {
         
         let urlString = sunlightURL+legislators+"/"+locate+"?"+latitude+"="+String(lat)+"&"+longitude+"="+String(lng)
         let url = URL(string: urlString)!
@@ -34,20 +44,43 @@ class SunlightAPIClient {
                 switch response.result {
                 case .failure(let error):
                     print("Alamofire error: \(error)")
-                    completion(nil, error)
+                    completion(JSONResult.error(error: error))
                 case .success:
                     if let value = response.result.value {
                         let json = JSON(value)
                         guard json.error == nil else {
-                            print(json.error!)
-                            completion(nil, json.error)
+                            let error = json.error!
+                            print(error)
+                            completion(JSONResult.error(error: error))
                             return;
                         }
                         
                         print("SunlightAPIClient: return fresh API response")
-                        completion(json, nil)
+                        completion(JSONResult.json(json: json))
                     }
                 }
+        }
+    }
+    
+    func getLegislatorsWithCurrentLocationWithCompletion(completion: @escaping (JSONResult) -> Void) {
+        
+        let locationManager = INTULocationManager.sharedInstance()
+        
+        locationManager.requestLocation(withDesiredAccuracy: INTULocationAccuracy.neighborhood, timeout: TimeInterval(5), delayUntilAuthorized: true) { (location, accuracy, status) -> Void in
+            print(status)
+            
+            guard let location = location else {
+                print("location request returned nil")
+                completion(JSONResult.error(error: SunlightError.NoLocation))
+                return;
+            }
+        
+            let lat = location.coordinate.latitude
+            let lng = location.coordinate.longitude
+            
+            self.getLegislatorsWithLat(lat: lat, lng: lng, completion: { (result) in
+                completion(result)
+            })
         }
     }
     

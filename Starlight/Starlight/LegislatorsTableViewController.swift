@@ -15,16 +15,16 @@ class LegislatorsTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        SunlightAPIClient().getLegislatorsWithLat(lat: 40.746019, lng: -73.989137, completion: { (json, error) -> Void in
-            if (error != nil) {
-                print("\(error)")
-            } else if let json = json {
-                print(json)
+        SunlightAPIClient().getLegislatorsWithCurrentLocationWithCompletion { (jsonResult) in
+            switch jsonResult {
+            case .error(let error):
+                print(error)
+            case .json(let json):
                 let results = json["results"]
                 self.legislators = Legislator.legislatorsWithResults(results: results)
                 self.tableView.reloadData()
             }
-        })
+        }
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
