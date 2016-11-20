@@ -60,7 +60,7 @@ struct Legislator {
     }
     
     var seatDescription: String {
-        var seat = party + " " + state_name + " " + chamber.capitalized + ", "
+        var seat = party + "-" + state + ", " + chamber.capitalized + " "
         if chamber == "senate" && senate_class != nil {
             seat += "Class \(senate_class!)"
         } else if chamber == "house" && district != nil {
