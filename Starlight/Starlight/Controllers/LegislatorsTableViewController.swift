@@ -23,6 +23,8 @@ class LegislatorsTableViewController: UITableViewController, UISearchBarDelegate
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        self.navigationItem.title = "Legislators"
+        
         locationManager.requestLocation(withDesiredAccuracy: INTULocationAccuracy.neighborhood, timeout: TimeInterval(5), delayUntilAuthorized: true) { (location, accuracy, status) -> Void in
             print(status)
             
@@ -45,7 +47,7 @@ class LegislatorsTableViewController: UITableViewController, UISearchBarDelegate
                     self.navigationItem.title = "Could Not Geocode Coordinate"
                 } else if let placemark = placemarks?.first {
                     self.placemark = placemark;
-                    self.navigationItem.title = self.addressWithPlacemark(placemark: placemark)
+                    self.searchBar.text = self.addressWithPlacemark(placemark: placemark)
                 }
             })
         }
@@ -110,7 +112,7 @@ class LegislatorsTableViewController: UITableViewController, UISearchBarDelegate
             SunlightAPIClient().getLegislatorsWithLat(lat: lat, lng: lng, completion: { (jsonResult) in
                 self.updateWithJSONResult(jsonResult: jsonResult)
                 if let placemark = self.placemark {
-                    self.navigationItem.title = self.addressWithPlacemark(placemark: placemark)
+                    self.searchBar.text = self.addressWithPlacemark(placemark: placemark)
                 }
             })
         }
@@ -136,7 +138,7 @@ class LegislatorsTableViewController: UITableViewController, UISearchBarDelegate
                 
                 SunlightAPIClient.sharedInstance.getLegislatorsWithLat(lat: lat, lng: lng, completion: { (jsonResult) in
                     self.updateWithJSONResult(jsonResult: jsonResult)
-                    self.navigationItem.title = self.addressWithPlacemark(placemark: placemark)
+                    self.searchBar.text = self.addressWithPlacemark(placemark: placemark)
                 })
             }
         })
@@ -144,11 +146,17 @@ class LegislatorsTableViewController: UITableViewController, UISearchBarDelegate
     
     func addressWithPlacemark(placemark: CLPlacemark) -> String {
         var string = ""
+        if let street = placemark.thoroughfare {
+            string += street
+        }
         if let city = placemark.locality {
-            string += city
+            string += ", " + city
         }
         if let state = placemark.administrativeArea {
             string += ", " + state
+        }
+        if let zip = placemark.postalCode {
+            string += " " + zip
         }
         
         return string
