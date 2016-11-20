@@ -47,9 +47,20 @@ class LegislatorsTableViewController: UITableViewController, UISearchBarDelegate
         let legislator = legislators[indexPath.row]
         
         cell.textLabel?.text = legislator.fullName
-        cell.detailTextLabel?.text = legislator.phone
+        cell.detailTextLabel?.text = legislator.seatDescription
         
         return cell
+    }
+    
+    override func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        let legislator = legislators[indexPath.row]
+        if (legislator.party == "D") {
+            cell.backgroundColor = UIColor.blue.withAlphaComponent(0.2);
+        } else if (legislator.party == "R") {
+            cell.backgroundColor = UIColor.red.withAlphaComponent(0.2)
+        } else {
+            cell.backgroundColor = UIColor.white
+        }
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {

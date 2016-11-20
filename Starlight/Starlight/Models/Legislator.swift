@@ -59,6 +59,17 @@ struct Legislator {
         return fullName
     }
     
+    var seatDescription: String {
+        var seat = party + " " + state_name + " " + chamber.capitalized + ", "
+        if chamber == "senate" && senate_class != nil {
+            seat += "Class \(senate_class!)"
+        } else if chamber == "house" && district != nil {
+            seat += "District \(district!)"
+        }
+        
+        return seat
+    }
+    
     init(result: JSON) {
         self.bioguide_id  = result["bioguide_id"].string
 //        self.birthday     = result["birthday"]
