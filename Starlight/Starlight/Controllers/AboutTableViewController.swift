@@ -10,7 +10,7 @@ import UIKit
 import MessageUI
 
 enum AboutTVCIndex: Int {
-    case oss, github, contact
+    case database, sunlight, oss, github, contact
 }
 
 class AboutTableViewController: UITableViewController, MFMailComposeViewControllerDelegate {
@@ -35,6 +35,12 @@ class AboutTableViewController: UITableViewController, MFMailComposeViewControll
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let index = AboutTVCIndex(rawValue: indexPath.row)!
         switch index {
+        case .database:
+            self.usCongressDatabaseCellSelected()
+            break;
+        case .sunlight:
+            self.sunlightCellSelected()
+            break
         case .oss:
             break
         case .github:
@@ -46,6 +52,16 @@ class AboutTableViewController: UITableViewController, MFMailComposeViewControll
         }
         
         tableView.deselectRow(at: indexPath, animated: true)
+    }
+    
+    func usCongressDatabaseCellSelected() {
+        guard let url = URL(string: "https://github.com/unitedstates/congress-legislators") else { return }
+        UIApplication.shared.open(url, options: [:], completionHandler: nil)
+    }
+    
+    func sunlightCellSelected() {
+        guard let url = URL(string: "https://sunlightlabs.github.io/congress") else { return }
+        UIApplication.shared.open(url, options: [:], completionHandler: nil)
     }
     
     func openSourceCellSelected() {
