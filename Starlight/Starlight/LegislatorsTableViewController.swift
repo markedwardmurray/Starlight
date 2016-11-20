@@ -18,6 +18,7 @@ class LegislatorsTableViewController: UITableViewController, UISearchBarDelegate
     let locationManager = INTULocationManager.sharedInstance()
     let geoCoder = CLGeocoder()
     var location: CLLocation?
+    var placemark: CLPlacemark?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -30,6 +31,8 @@ class LegislatorsTableViewController: UITableViewController, UISearchBarDelegate
                 return;
             }
             
+            self.location = location
+            
             let lat = location.coordinate.latitude
             let lng = location.coordinate.longitude
             
@@ -41,6 +44,7 @@ class LegislatorsTableViewController: UITableViewController, UISearchBarDelegate
                 if (error != nil || placemarks?.count == 0) {
                     self.navigationItem.title = "Could Not Geocode Coordinate"
                 } else if let placemark = placemarks?.first {
+                    self.placemark = placemark;
                     self.navigationItem.title = self.addressWithPlacemark(placemark: placemark)
                 }
             })
@@ -99,6 +103,17 @@ class LegislatorsTableViewController: UITableViewController, UISearchBarDelegate
     
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
         searchBar.endEditing(true)
+        searchBar.text = ""
+        if let location = self.location {
+            let lat = location.coordinate.latitude
+            let lng = location.coordinate.longitude
+            SunlightAPIClient().getLegislatorsWithLat(lat: lat, lng: lng, completion: { (jsonResult) in
+                self.updateWithJSONResult(jsonResult: jsonResult)
+                if let placemark = self.placemark {
+                    self.navigationItem.title = self.addressWithPlacemark(placemark: placemark)
+                }
+            })
+        }
     }
     
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
