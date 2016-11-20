@@ -7,20 +7,43 @@
 //
 
 import UIKit
-import CoreLocation
+import INTULocationManager
+import Hex
 
 class LegislatorsTableViewController: UITableViewController, UISearchBarDelegate {
     
     @IBOutlet var searchBar: UISearchBar!
     
     var legislators: [Legislator] = []
+    let locationManager = INTULocationManager.sharedInstance()
     let geoCoder = CLGeocoder()
-
+    var location: CLLocation?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        SunlightAPIClient().getLegislatorsWithCurrentLocationWithCompletion { (jsonResult) in
-            self.updateWithJSONResult(jsonResult: jsonResult)
+        locationManager.requestLocation(withDesiredAccuracy: INTULocationAccuracy.neighborhood, timeout: TimeInterval(5), delayUntilAuthorized: true) { (location, accuracy, status) -> Void in
+            print(status)
+            
+            guard let location = location else {
+                self.showAlertWithTitle(title: "Error!", message: "Could not get your location")
+                return;
+            }
+            
+            let lat = location.coordinate.latitude
+            let lng = location.coordinate.longitude
+            
+            SunlightAPIClient().getLegislatorsWithLat(lat: lat, lng: lng, completion: { (jsonResult) in
+                self.updateWithJSONResult(jsonResult: jsonResult)
+            })
+            
+            self.geoCoder.reverseGeocodeLocation(location, completionHandler: { (placemarks, error) in
+                if (error != nil || placemarks?.count == 0) {
+                    self.navigationItem.title = "Could Not Geocode Coordinate"
+                } else if let placemark = placemarks?.first {
+                    self.navigationItem.title = self.addressWithPlacemark(placemark: placemark)
+                }
+            })
         }
     }
     
@@ -28,6 +51,7 @@ class LegislatorsTableViewController: UITableViewController, UISearchBarDelegate
         switch jsonResult {
         case .error(let error):
             print(error)
+            self.showAlertWithTitle(title: "Error!", message: error.localizedDescription)
         case .json(let json):
             let results = json["results"]
             self.legislators = Legislator.legislatorsWithResults(results: results)
@@ -55,9 +79,9 @@ class LegislatorsTableViewController: UITableViewController, UISearchBarDelegate
     override func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         let legislator = legislators[indexPath.row]
         if (legislator.party == "D") {
-            cell.backgroundColor = UIColor.blue.withAlphaComponent(0.2);
+            cell.backgroundColor = UIColor.init(hex: "DAF0FF");
         } else if (legislator.party == "R") {
-            cell.backgroundColor = UIColor.red.withAlphaComponent(0.2)
+            cell.backgroundColor = UIColor.init(hex: "FFDFF3");
         } else {
             cell.backgroundColor = UIColor.white
         }
@@ -85,17 +109,21 @@ class LegislatorsTableViewController: UITableViewController, UISearchBarDelegate
                 return;
             }
             
-            guard let location = placemarks?.first?.location else {
+            guard placemarks?.first?.location != nil else {
                 self.showAlertWithTitle(title: "Invalid Address", message: "Could not locate that address")
                 return;
             }
             
-            let lat = location.coordinate.latitude
-            let lng = location.coordinate.longitude
-            
-            SunlightAPIClient.sharedInstance.getLegislatorsWithLat(lat: lat, lng: lng, completion: { (jsonResult) in
-                self.updateWithJSONResult(jsonResult: jsonResult)
-            })
+            if let placemark = placemarks?.first {
+                
+                let lat = placemark.location!.coordinate.latitude
+                let lng = placemark.location!.coordinate.longitude
+                
+                SunlightAPIClient.sharedInstance.getLegislatorsWithLat(lat: lat, lng: lng, completion: { (jsonResult) in
+                    self.updateWithJSONResult(jsonResult: jsonResult)
+                    self.navigationItem.title = self.addressWithPlacemark(placemark: placemark)
+                })
+            }
         })
     }
     
@@ -104,6 +132,18 @@ class LegislatorsTableViewController: UITableViewController, UISearchBarDelegate
         let okAction = UIAlertAction(title: "OK", style: .cancel, handler: nil)
         alertController.addAction(okAction)
         self.present(alertController, animated: true, completion: nil)
+    }
+    
+    func addressWithPlacemark(placemark: CLPlacemark) -> String {
+        var string = ""
+        if let city = placemark.locality {
+            string += city
+        }
+        if let state = placemark.administrativeArea {
+            string += ", " + state
+        }
+        
+        return string
     }
 
 }

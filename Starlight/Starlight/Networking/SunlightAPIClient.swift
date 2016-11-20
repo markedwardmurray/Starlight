@@ -8,16 +8,11 @@
 
 import Foundation
 import Alamofire
-import INTULocationManager
 import SwiftyJSON
 
 enum JSONResult {
     case json(json: JSON)
     case error(error: Error)
-}
-
-enum SunlightError: Error {
-    case NoLocation
 }
 
 class SunlightAPIClient {
@@ -61,27 +56,4 @@ class SunlightAPIClient {
                 }
         }
     }
-    
-    func getLegislatorsWithCurrentLocationWithCompletion(completion: @escaping (JSONResult) -> Void) {
-        
-        let locationManager = INTULocationManager.sharedInstance()
-        
-        locationManager.requestLocation(withDesiredAccuracy: INTULocationAccuracy.neighborhood, timeout: TimeInterval(5), delayUntilAuthorized: true) { (location, accuracy, status) -> Void in
-            print(status)
-            
-            guard let location = location else {
-                print("location request returned nil")
-                completion(JSONResult.error(error: SunlightError.NoLocation))
-                return;
-            }
-        
-            let lat = location.coordinate.latitude
-            let lng = location.coordinate.longitude
-            
-            self.getLegislatorsWithLat(lat: lat, lng: lng, completion: { (result) in
-                completion(result)
-            })
-        }
-    }
-    
 }
