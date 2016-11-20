@@ -142,13 +142,6 @@ class LegislatorsTableViewController: UITableViewController, UISearchBarDelegate
         })
     }
     
-    func showAlertWithTitle(title: String, message: String) {
-        let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
-        let okAction = UIAlertAction(title: "OK", style: .cancel, handler: nil)
-        alertController.addAction(okAction)
-        self.present(alertController, animated: true, completion: nil)
-    }
-    
     func addressWithPlacemark(placemark: CLPlacemark) -> String {
         var string = ""
         if let city = placemark.locality {

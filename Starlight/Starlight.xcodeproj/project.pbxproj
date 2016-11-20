@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		1F5328649140E9BA1DC75A44 /* Pods_Starlight.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E6BDEDC4E11829D606B0F8E5 /* Pods_Starlight.framework */; };
+		4D56B5BA1DE19B8800F9A52A /* AboutTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D56B5B91DE19B8800F9A52A /* AboutTableViewController.swift */; };
+		4D56B5BC1DE1A2ED00F9A52A /* UIViewController+Alerts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D56B5BB1DE1A2ED00F9A52A /* UIViewController+Alerts.swift */; };
 		4DC7FDD91DDEA20000F63B39 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DC7FDD81DDEA20000F63B39 /* AppDelegate.swift */; };
 		4DC7FDDB1DDEA20000F63B39 /* LegislatorsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DC7FDDA1DDEA20000F63B39 /* LegislatorsTableViewController.swift */; };
 		4DC7FDDE1DDEA20000F63B39 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4DC7FDDC1DDEA20000F63B39 /* Main.storyboard */; };
@@ -31,6 +33,8 @@
 
 /* Begin PBXFileReference section */
 		22F5A2B706FFFAFAF1C6F2AF /* Pods-Starlight.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Starlight.release.xcconfig"; path = "Pods/Target Support Files/Pods-Starlight/Pods-Starlight.release.xcconfig"; sourceTree = "<group>"; };
+		4D56B5B91DE19B8800F9A52A /* AboutTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AboutTableViewController.swift; sourceTree = "<group>"; };
+		4D56B5BB1DE1A2ED00F9A52A /* UIViewController+Alerts.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIViewController+Alerts.swift"; sourceTree = "<group>"; };
 		4DC7FDD51DDEA20000F63B39 /* Starlight.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Starlight.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4DC7FDD81DDEA20000F63B39 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		4DC7FDDA1DDEA20000F63B39 /* LegislatorsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LegislatorsTableViewController.swift; sourceTree = "<group>"; };
@@ -85,6 +89,8 @@
 			isa = PBXGroup;
 			children = (
 				4DC7FDDA1DDEA20000F63B39 /* LegislatorsTableViewController.swift */,
+				4D56B5B91DE19B8800F9A52A /* AboutTableViewController.swift */,
+				4D56B5BB1DE1A2ED00F9A52A /* UIViewController+Alerts.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -363,6 +369,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				4DC7FDFB1DDEA43B00F63B39 /* Legislator.swift in Sources */,
+				4D56B5BC1DE1A2ED00F9A52A /* UIViewController+Alerts.swift in Sources */,
+				4D56B5BA1DE19B8800F9A52A /* AboutTableViewController.swift in Sources */,
 				4DC7FDFD1DDEB35A00F63B39 /* SunlightAPIClient.swift in Sources */,
 				4DC7FDDB1DDEA20000F63B39 /* LegislatorsTableViewController.swift in Sources */,
 				4DC7FDD91DDEA20000F63B39 /* AppDelegate.swift in Sources */,
