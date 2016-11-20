@@ -81,6 +81,14 @@
 			name = Pods;
 			sourceTree = "<group>";
 		};
+		4D56B5B81DE19B0D00F9A52A /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				4DC7FDDA1DDEA20000F63B39 /* LegislatorsTableViewController.swift */,
+			);
+			path = Controllers;
+			sourceTree = "<group>";
+		};
 		4DC7FDCC1DDEA20000F63B39 = {
 			isa = PBXGroup;
 			children = (
@@ -105,13 +113,13 @@
 			isa = PBXGroup;
 			children = (
 				4DC7FDD81DDEA20000F63B39 /* AppDelegate.swift */,
-				4DC7FDDA1DDEA20000F63B39 /* LegislatorsTableViewController.swift */,
 				4DC7FDDC1DDEA20000F63B39 /* Main.storyboard */,
+				4D56B5B81DE19B0D00F9A52A /* Controllers */,
+				4DC7FDF91DDEA39F00F63B39 /* Networking */,
+				4DC7FDF81DDEA38B00F63B39 /* Models */,
 				4DC7FDDF1DDEA20000F63B39 /* Assets.xcassets */,
 				4DC7FDE11DDEA20000F63B39 /* LaunchScreen.storyboard */,
 				4DC7FDE41DDEA20000F63B39 /* Info.plist */,
-				4DC7FDF91DDEA39F00F63B39 /* Networking */,
-				4DC7FDF81DDEA38B00F63B39 /* Models */,
 			);
 			path = Starlight;
 			sourceTree = "<group>";
