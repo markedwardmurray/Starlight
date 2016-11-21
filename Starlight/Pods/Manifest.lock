@@ -1,21 +1,24 @@
 PODS:
   - Alamofire (4.1.0)
+  - Down (0.3)
   - Hex (5.0.0)
   - INTULocationManager (4.2.0)
   - SwiftyJSON (3.1.3)
 
 DEPENDENCIES:
   - Alamofire (= 4.1.0)
+  - Down
   - Hex (= 5.0.0)
   - INTULocationManager (= 4.2.0)
   - SwiftyJSON (= 3.1.3)
 
 SPEC CHECKSUMS:
   Alamofire: e266cf991b933498df791e645e0d8ac294492153
+  Down: dea228f55b736ea0a7b96e02dd14b33600ce83a2
   Hex: 024e4dba5d5a9351e7817713f3dee61553258dcd
   INTULocationManager: 73f8254b3d05c897c56bb13c190e5b7c648c0998
   SwiftyJSON: 38a8ea2006779c0fc4c310cb2ee8195327740faf
 
-PODFILE CHECKSUM: 9aa4b07ebe6c4e0635b12602bb6e13d3fa02e472
+PODFILE CHECKSUM: aa4bbddec3e0d6a19ba0ffdbbbf59533a6314e66
 
 COCOAPODS: 1.1.1
