@@ -19,11 +19,8 @@ class AboutTableViewController: UITableViewController, MFMailComposeViewControll
     @IBOutlet var tableHeaderViewLabel: UILabel!
     @IBOutlet var tableFooterViewLabel: UILabel!
     
-    @IBOutlet var headerLabelHeightConstraint: NSLayoutConstraint!
-    
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         
         let appVersion = Bundle.main.object(forInfoDictionaryKey: "CFBundleShortVersionString")!
         let build = Bundle.main.object(forInfoDictionaryKey: "CFBundleVersion")!

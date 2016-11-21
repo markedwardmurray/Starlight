@@ -115,8 +115,11 @@
                             <rect key="frame" x="0.0" y="484" width="320" height="48"/>
                             <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <subviews>
-                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="1000" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RMG-Wa-pez">
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RMG-Wa-pez">
                                     <rect key="frame" x="16" y="8" width="288" height="32"/>
+                                    <constraints>
+                                        <constraint firstAttribute="width" constant="288" id="7Ef-wG-pCr"/>
+                                    </constraints>
                                     <string key="text">Made In USA
 v0.0.0 (0)</string>
                                     <fontDescription key="fontDescription" type="system" pointSize="12"/>
@@ -126,10 +129,9 @@ v0.0.0 (0)</string>
                             </subviews>
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             <constraints>
+                                <constraint firstItem="RMG-Wa-pez" firstAttribute="centerX" secondItem="Kg8-B4-Ueo" secondAttribute="centerX" id="E0D-OF-zw3"/>
                                 <constraint firstAttribute="bottom" secondItem="RMG-Wa-pez" secondAttribute="bottom" constant="8" id="IOa-UZ-cPJ"/>
                                 <constraint firstItem="RMG-Wa-pez" firstAttribute="top" secondItem="Kg8-B4-Ueo" secondAttribute="top" constant="8" id="Ydw-cP-go6"/>
-                                <constraint firstAttribute="trailing" secondItem="RMG-Wa-pez" secondAttribute="trailing" constant="16" id="jaz-I5-o7L"/>
-                                <constraint firstItem="RMG-Wa-pez" firstAttribute="leading" secondItem="Kg8-B4-Ueo" secondAttribute="leading" constant="16" id="kzw-X8-cEx"/>
                             </constraints>
                         </view>
                         <sections>
