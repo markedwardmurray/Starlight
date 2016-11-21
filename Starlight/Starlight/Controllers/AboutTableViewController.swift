@@ -76,6 +76,7 @@ class AboutTableViewController: UITableViewController, MFMailComposeViewControll
         }
         
         let ossVC = UIViewController()
+        ossVC.title = "Acknowledgements"
         let downView = try? DownView(frame: self.view.frame, markdownString: markdown)
         if let downView = downView {
             ossVC.view.addSubview(downView)
