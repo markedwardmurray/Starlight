@@ -86,7 +86,7 @@ class AboutTableViewController: UITableViewController, MFMailComposeViewControll
         let mailComposerVC = MFMailComposeViewController()
         mailComposerVC.mailComposeDelegate = self
         
-        mailComposerVC.setToRecipients(["markedwardmurray+starlight@gmail.com"])
+        mailComposerVC.setToRecipients(["starlightcongress@gmail.com"])
         mailComposerVC.setSubject("iOS In-App Email")
         
         let appVersion = Bundle.main.object(forInfoDictionaryKey: "CFBundleShortVersionString")!
@@ -94,12 +94,11 @@ class AboutTableViewController: UITableViewController, MFMailComposeViewControll
         let systemVersion = UIDevice.current.systemVersion
         let model = UIDevice.current.model
         let firstLanguage = NSLocale.preferredLanguages.first!
-        let country = NSLocale.current.identifier
         
         let messageBody = "\n\n\n" +
-            "v\(appVersion) (\(build))" +
+            "v\(appVersion) (\(build))\n" +
             "iOS \(systemVersion), \(model)\n" +
-            "\(firstLanguage), \(country)"
+            "\(firstLanguage)"
         
         mailComposerVC.setMessageBody(messageBody, isHTML: false)
         

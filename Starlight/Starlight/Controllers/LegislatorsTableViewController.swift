@@ -96,12 +96,7 @@ class LegislatorsTableViewController: UITableViewController, UISearchBarDelegate
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let legislator = legislators[indexPath.row]
         guard let url = URL(string: "telprompt://" + legislator.phone) else { return }
-        UIApplication.shared.open(url, options: [:], completionHandler: { (success) in
-            
-            if (success == false) {
-                self.showAlertWithTitle(title: "Error!", message: "Voice calling is not configured on this device. Please use another device to call \(legislator.fullName) at\n\n\(legislator.phone)")
-            }
-        })
+        UIApplication.shared.open(url, options: [:], completionHandler: nil)
         
         tableView.deselectRow(at: indexPath, animated: true)
     }
