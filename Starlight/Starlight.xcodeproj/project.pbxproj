@@ -20,6 +20,9 @@
 		4DC7FDEE1DDEA20000F63B39 /* StarlightTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DC7FDED1DDEA20000F63B39 /* StarlightTests.swift */; };
 		4DC7FDFB1DDEA43B00F63B39 /* Legislator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DC7FDFA1DDEA43B00F63B39 /* Legislator.swift */; };
 		4DC7FDFD1DDEB35A00F63B39 /* SunlightAPIClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DC7FDFC1DDEB35A00F63B39 /* SunlightAPIClient.swift */; };
+		4DD7E6C71DE548F60078298F /* Bill.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DD7E6C61DE548F60078298F /* Bill.swift */; };
+		4DD7E6C91DE5558B0078298F /* UpcomingBill.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DD7E6C81DE5558B0078298F /* UpcomingBill.swift */; };
+		4DD7E6CC1DE565D60078298F /* Functions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DD7E6CB1DE565D60078298F /* Functions.swift */; };
 		F70AB12C828ABEE8EA9991F7 /* Pods_StarlightTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9A1378EB3A30B2CCFEB0CBF8 /* Pods_StarlightTests.framework */; };
 /* End PBXBuildFile section */
 
@@ -50,6 +53,9 @@
 		4DC7FDEF1DDEA20000F63B39 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		4DC7FDFA1DDEA43B00F63B39 /* Legislator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Legislator.swift; sourceTree = "<group>"; };
 		4DC7FDFC1DDEB35A00F63B39 /* SunlightAPIClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SunlightAPIClient.swift; sourceTree = "<group>"; };
+		4DD7E6C61DE548F60078298F /* Bill.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Bill.swift; sourceTree = "<group>"; };
+		4DD7E6C81DE5558B0078298F /* UpcomingBill.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UpcomingBill.swift; sourceTree = "<group>"; };
+		4DD7E6CB1DE565D60078298F /* Functions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Functions.swift; sourceTree = "<group>"; };
 		760FA6B8C835B08C3909EB3D /* Pods-StarlightTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-StarlightTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-StarlightTests/Pods-StarlightTests.debug.xcconfig"; sourceTree = "<group>"; };
 		9A1378EB3A30B2CCFEB0CBF8 /* Pods_StarlightTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_StarlightTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B1303A92BA26A08B1E1A12BE /* Pods-StarlightTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-StarlightTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-StarlightTests/Pods-StarlightTests.release.xcconfig"; sourceTree = "<group>"; };
@@ -126,6 +132,7 @@
 				4D56B5B81DE19B0D00F9A52A /* Controllers */,
 				4DC7FDF91DDEA39F00F63B39 /* Networking */,
 				4DC7FDF81DDEA38B00F63B39 /* Models */,
+				4DD7E6CA1DE565AA0078298F /* Helpers */,
 				4DC7FDDF1DDEA20000F63B39 /* Assets.xcassets */,
 				4DC7FDE11DDEA20000F63B39 /* LaunchScreen.storyboard */,
 				4DC7FDE41DDEA20000F63B39 /* Info.plist */,
@@ -146,7 +153,9 @@
 		4DC7FDF81DDEA38B00F63B39 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				4DD7E6C61DE548F60078298F /* Bill.swift */,
 				4DC7FDFA1DDEA43B00F63B39 /* Legislator.swift */,
+				4DD7E6C81DE5558B0078298F /* UpcomingBill.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -157,6 +166,14 @@
 				4DC7FDFC1DDEB35A00F63B39 /* SunlightAPIClient.swift */,
 			);
 			path = Networking;
+			sourceTree = "<group>";
+		};
+		4DD7E6CA1DE565AA0078298F /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				4DD7E6CB1DE565D60078298F /* Functions.swift */,
+			);
+			path = Helpers;
 			sourceTree = "<group>";
 		};
 		EEB4392E982587A4172031F5 /* Frameworks */ = {
@@ -373,7 +390,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4DD7E6C71DE548F60078298F /* Bill.swift in Sources */,
+				4DD7E6C91DE5558B0078298F /* UpcomingBill.swift in Sources */,
 				4DC7FDFB1DDEA43B00F63B39 /* Legislator.swift in Sources */,
+				4DD7E6CC1DE565D60078298F /* Functions.swift in Sources */,
 				4D56B5BC1DE1A2ED00F9A52A /* UIViewController+Alerts.swift in Sources */,
 				4D56B5BA1DE19B8800F9A52A /* AboutTableViewController.swift in Sources */,
 				4DC7FDFD1DDEB35A00F63B39 /* SunlightAPIClient.swift in Sources */,
