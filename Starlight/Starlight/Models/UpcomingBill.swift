@@ -16,23 +16,25 @@ enum UpcomingBillsResult {
 
 struct UpcomingBill {
     let bill_id         : String
-    let source_type     : String
-    let url             : URL?
     let chamber         : String
     let congress        : Int
-    let range           : String
-    let legislative_day : Date?
     let context         : String? // senate only
+    let legislative_day : Date?
+    let range           : String
+    let scheduled_at    : Date?
+    let source_type     : String
+    let url             : URL?
     
     init(result: JSON) {
         self.bill_id         = result["bill_id"].string!
-        self.source_type     = result["source_type"].string!
-        self.url             = result["url"].URL
         self.chamber         = result["chamber"].string!
         self.congress        = result["congress"].int!
-        self.range           = result["range"].string!
-        self.legislative_day = zuluDay(string: result["legislative_day"].string)
         self.context         = result["context"].string
+        self.legislative_day = zuluDay(string: result["legislative_day"].string)
+        self.range           = result["range"].string!
+        self.scheduled_at    = zuluTime(string: result["scheduled_at"].string)
+        self.source_type     = result["source_type"].string!
+        self.url             = result["url"].URL
     }
     
     static func upcomingBillsWithResults(results: JSON) -> [UpcomingBill] {

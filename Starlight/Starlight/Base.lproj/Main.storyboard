@@ -12,7 +12,7 @@
         <!--Legislators-->
         <scene sceneID="M8Y-Cj-1o6">
             <objects>
-                <tableViewController storyboardIdentifier="LegislatorsTableViewController" title="Legislators" id="BqG-r5-aNL" customClass="MainTableViewController" customModule="Starlight" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController storyboardIdentifier="MainTableViewController" title="Legislators" id="BqG-r5-aNL" customClass="MainTableViewController" customModule="Starlight" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="fAc-3T-fbh">
                         <rect key="frame" x="0.0" y="64" width="414" height="672"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
