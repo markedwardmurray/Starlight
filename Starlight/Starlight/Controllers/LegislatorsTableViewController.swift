@@ -38,8 +38,8 @@ class LegislatorsTableViewController: UITableViewController, UISearchBarDelegate
             let lat = location.coordinate.latitude
             let lng = location.coordinate.longitude
             
-            SunlightAPIClient().getLegislatorsWithLat(lat: lat, lng: lng, completion: { (jsonResult) in
-                self.updateWithJSONResult(jsonResult: jsonResult)
+            SunlightAPIClient().getLegislatorsWithLat(lat: lat, lng: lng, completion: { (legislatorsResult) in
+                self.updateWith(legislatorsResult: legislatorsResult)
             })
             
             self.geoCoder.reverseGeocodeLocation(location, completionHandler: { (placemarks, error) in
@@ -53,14 +53,13 @@ class LegislatorsTableViewController: UITableViewController, UISearchBarDelegate
         }
     }
     
-    func updateWithJSONResult(jsonResult: JSONResult) {
-        switch jsonResult {
+    func updateWith(legislatorsResult: LegislatorsResult) {
+        switch legislatorsResult {
         case .error(let error):
             print(error)
             self.showAlertWithTitle(title: "Error!", message: error.localizedDescription)
-        case .json(let json):
-            let results = json["results"]
-            self.legislators = Legislator.legislatorsWithResults(results: results)
+        case .legislators(let legislators):
+            self.legislators = legislators
             self.tableView.reloadData()
         }
     }
@@ -109,8 +108,8 @@ class LegislatorsTableViewController: UITableViewController, UISearchBarDelegate
         if let location = self.location {
             let lat = location.coordinate.latitude
             let lng = location.coordinate.longitude
-            SunlightAPIClient().getLegislatorsWithLat(lat: lat, lng: lng, completion: { (jsonResult) in
-                self.updateWithJSONResult(jsonResult: jsonResult)
+            SunlightAPIClient().getLegislatorsWithLat(lat: lat, lng: lng, completion: { (legislatorsResult) in
+                self.updateWith(legislatorsResult: legislatorsResult)
                 if let placemark = self.placemark {
                     self.searchBar.text = self.addressWithPlacemark(placemark: placemark)
                 }
@@ -136,8 +135,8 @@ class LegislatorsTableViewController: UITableViewController, UISearchBarDelegate
                 let lat = placemark.location!.coordinate.latitude
                 let lng = placemark.location!.coordinate.longitude
                 
-                SunlightAPIClient.sharedInstance.getLegislatorsWithLat(lat: lat, lng: lng, completion: { (jsonResult) in
-                    self.updateWithJSONResult(jsonResult: jsonResult)
+                SunlightAPIClient.sharedInstance.getLegislatorsWithLat(lat: lat, lng: lng, completion: { (legislatorsResult) in
+                    self.updateWith(legislatorsResult: legislatorsResult)
                     self.searchBar.text = self.addressWithPlacemark(placemark: placemark)
                 })
             }

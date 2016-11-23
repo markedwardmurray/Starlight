@@ -9,6 +9,11 @@
 import Foundation
 import SwiftyJSON
 
+enum UpcomingBillsResult {
+    case error(error: Error)
+    case upcomingBills(upcomingBills: [UpcomingBill])
+}
+
 struct UpcomingBill {
     let source_type     : String
     let url             : String

@@ -9,6 +9,11 @@
 import Foundation
 import SwiftyJSON
 
+enum LegislatorsResult {
+    case error(error: Error)
+    case legislators(legislators: [Legislator])
+}
+
 struct Legislator {
     let bioguide_id: String?
     let birthday: Date?

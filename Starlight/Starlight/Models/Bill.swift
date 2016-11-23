@@ -9,6 +9,11 @@
 import Foundation
 import SwiftyJSON
 
+enum BillsResult {
+    case error(error: Error)
+    case bills(bills: [Bill])
+}
+
 struct Bill {
     let bill_id     : String
     let bill_type   : String
