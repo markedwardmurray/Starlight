@@ -10,11 +10,18 @@ import UIKit
 import INTULocationManager
 import Hex
 
+enum SegmentIndex: Int {
+    case legislators, upcomingBills
+}
+
 class LegislatorsTableViewController: UITableViewController, UISearchBarDelegate {
     
     @IBOutlet var searchBar: UISearchBar!
     
+    var segmentIndex: SegmentIndex = SegmentIndex.legislators
+    
     var legislators: [Legislator] = []
+    var upcomingBills: [UpcomingBill] = []
     let locationManager = INTULocationManager.sharedInstance()
     let geoCoder = CLGeocoder()
     var location: CLLocation?
@@ -23,8 +30,32 @@ class LegislatorsTableViewController: UITableViewController, UISearchBarDelegate
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.navigationItem.title = "Legislators"
+        let segmentedControl = UISegmentedControl(items: ["Legislators","Upcoming Bills"])
+        segmentedControl.addTarget(self, action: #selector(segmentedControlValueChanged(sender:)), for: .valueChanged)
+        segmentedControl.tintColor = UIColor.white
+        segmentedControl.subviews[0].backgroundColor = UIColor.clear
+        self.navigationItem.titleView = segmentedControl
         
+        self.loadLegislatorsWithCurrentLocation()
+        self.loadUpcomingBills()
+    }
+    
+    func segmentedControlValueChanged(sender: UISegmentedControl) {
+        self.segmentIndex = SegmentIndex(rawValue: sender.selectedSegmentIndex)!
+        sender.tintColor = UIColor.white
+        sender.subviews[sender.selectedSegmentIndex].backgroundColor = UIColor.clear
+        
+        switch self.segmentIndex {
+        case .legislators:
+            self.tableView.tableHeaderView = self.searchBar
+        case .upcomingBills:
+            self.tableView.tableHeaderView = nil
+        }
+        
+        self.tableView.reloadData()
+    }
+    
+    func loadLegislatorsWithCurrentLocation() {
         locationManager.requestLocation(withDesiredAccuracy: INTULocationAccuracy.neighborhood, timeout: TimeInterval(5), delayUntilAuthorized: true) { (location, accuracy, status) -> Void in
             print(status)
             
@@ -60,44 +91,85 @@ class LegislatorsTableViewController: UITableViewController, UISearchBarDelegate
             self.showAlertWithTitle(title: "Error!", message: error.localizedDescription)
         case .legislators(let legislators):
             self.legislators = legislators
-            self.tableView.reloadData()
+            if self.segmentIndex == .legislators {
+                self.tableView.reloadData()
+            }
+        }
+    }
+    
+    func loadUpcomingBills() {
+        SunlightAPIClient.sharedInstance.getUpcomingBills { (upcomingBillsResult) in
+            switch upcomingBillsResult {
+            case .error(let error):
+                print(error)
+                self.showAlertWithTitle(title: "Error!", message: error.localizedDescription)
+            case .upcomingBills(let upcomingBills):
+                self.upcomingBills = upcomingBills
+                if self.segmentIndex == .upcomingBills {
+                    self.tableView.reloadData()
+                }
+            }
         }
     }
     
     //MARK: UITableViewDataSource/Delegate
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return legislators.count
+        switch self.segmentIndex {
+        case .legislators:
+            return legislators.count
+        case .upcomingBills:
+            return upcomingBills.count
+        }
+        
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "legislatorCell")!
-        
-        let legislator = legislators[indexPath.row]
-        
-        cell.textLabel?.text = legislator.fullName
-        cell.detailTextLabel?.text = legislator.seatDescription
-        
-        return cell
+        switch self.segmentIndex {
+        case .legislators:
+            let cell = tableView.dequeueReusableCell(withIdentifier: "legislatorCell")!
+            
+            let legislator = legislators[indexPath.row]
+            
+            cell.textLabel?.text = legislator.fullName
+            cell.detailTextLabel?.text = legislator.seatDescription
+            
+            return cell
+            
+        case .upcomingBills:
+            return UITableViewCell()
+        }
     }
     
     override func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-        let legislator = legislators[indexPath.row]
-        if (legislator.party == "D") {
-            cell.backgroundColor = UIColor.init(hex: "DAF0FF");
-        } else if (legislator.party == "R") {
-            cell.backgroundColor = UIColor.init(hex: "FFDFF3");
-        } else {
-            cell.backgroundColor = UIColor.white
+        switch self.segmentIndex {
+        case .legislators:
+            let legislator = legislators[indexPath.row]
+            if (legislator.party == "D") {
+                cell.backgroundColor = UIColor.init(hex: "DAF0FF");
+            } else if (legislator.party == "R") {
+                cell.backgroundColor = UIColor.init(hex: "FFDFF3");
+            } else {
+                cell.backgroundColor = UIColor.white
+            }
+            break
+        case .upcomingBills:
+            break
         }
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let legislator = legislators[indexPath.row]
-        guard let url = URL(string: "telprompt://" + legislator.phone) else { return }
-        UIApplication.shared.open(url, options: [:], completionHandler: nil)
-        
-        tableView.deselectRow(at: indexPath, animated: true)
+        switch self.segmentIndex {
+        case .legislators:
+            let legislator = legislators[indexPath.row]
+            guard let url = URL(string: "telprompt://" + legislator.phone) else { return }
+            UIApplication.shared.open(url, options: [:], completionHandler: nil)
+            
+            tableView.deselectRow(at: indexPath, animated: true)
+            break
+        case .upcomingBills:
+            break
+        }
     }
     
     //MARK: UISearchBarDelegate

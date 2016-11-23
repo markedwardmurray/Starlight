@@ -48,7 +48,7 @@ struct Legislator {
     let title: String
     let twitter_id: String?
     let votesmart_id: String?
-    let website: String?
+    let website: URL?
     let youtube_id: String?
     
     var fullName: String {
@@ -109,7 +109,7 @@ struct Legislator {
         self.title        = result["title"].string!
         self.twitter_id   = result["twitter_id"].string
         self.votesmart_id = result["votesmart_id"].string
-        self.website      = result["website"].string
+        self.website      = result["website"].URL
         self.youtube_id   = result["youtube_id"].string
     }
     
