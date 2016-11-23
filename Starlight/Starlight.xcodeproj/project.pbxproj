@@ -13,7 +13,7 @@
 		4D56B5BE1DE2E7CA00F9A52A /* Pods-Starlight-acknowledgements.markdown in Sources */ = {isa = PBXBuildFile; fileRef = 4D56B5BD1DE2E7CA00F9A52A /* Pods-Starlight-acknowledgements.markdown */; };
 		4D56B5BF1DE2E7E100F9A52A /* Pods-Starlight-acknowledgements.markdown in Resources */ = {isa = PBXBuildFile; fileRef = 4D56B5BD1DE2E7CA00F9A52A /* Pods-Starlight-acknowledgements.markdown */; };
 		4DC7FDD91DDEA20000F63B39 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DC7FDD81DDEA20000F63B39 /* AppDelegate.swift */; };
-		4DC7FDDB1DDEA20000F63B39 /* LegislatorsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DC7FDDA1DDEA20000F63B39 /* LegislatorsTableViewController.swift */; };
+		4DC7FDDB1DDEA20000F63B39 /* MainTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DC7FDDA1DDEA20000F63B39 /* MainTableViewController.swift */; };
 		4DC7FDDE1DDEA20000F63B39 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4DC7FDDC1DDEA20000F63B39 /* Main.storyboard */; };
 		4DC7FDE01DDEA20000F63B39 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4DC7FDDF1DDEA20000F63B39 /* Assets.xcassets */; };
 		4DC7FDE31DDEA20000F63B39 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4DC7FDE11DDEA20000F63B39 /* LaunchScreen.storyboard */; };
@@ -43,7 +43,7 @@
 		4D56B5BD1DE2E7CA00F9A52A /* Pods-Starlight-acknowledgements.markdown */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = "Pods-Starlight-acknowledgements.markdown"; sourceTree = "<group>"; };
 		4DC7FDD51DDEA20000F63B39 /* Starlight.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Starlight.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4DC7FDD81DDEA20000F63B39 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		4DC7FDDA1DDEA20000F63B39 /* LegislatorsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LegislatorsTableViewController.swift; sourceTree = "<group>"; };
+		4DC7FDDA1DDEA20000F63B39 /* MainTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTableViewController.swift; sourceTree = "<group>"; };
 		4DC7FDDD1DDEA20000F63B39 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		4DC7FDDF1DDEA20000F63B39 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		4DC7FDE21DDEA20000F63B39 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -97,7 +97,7 @@
 		4D56B5B81DE19B0D00F9A52A /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				4DC7FDDA1DDEA20000F63B39 /* LegislatorsTableViewController.swift */,
+				4DC7FDDA1DDEA20000F63B39 /* MainTableViewController.swift */,
 				4D56B5B91DE19B8800F9A52A /* AboutTableViewController.swift */,
 				4D56B5BB1DE1A2ED00F9A52A /* UIViewController+Alerts.swift */,
 			);
@@ -398,7 +398,7 @@
 				4D56B5BA1DE19B8800F9A52A /* AboutTableViewController.swift in Sources */,
 				4DC7FDFD1DDEB35A00F63B39 /* SunlightAPIClient.swift in Sources */,
 				4D56B5BE1DE2E7CA00F9A52A /* Pods-Starlight-acknowledgements.markdown in Sources */,
-				4DC7FDDB1DDEA20000F63B39 /* LegislatorsTableViewController.swift in Sources */,
+				4DC7FDDB1DDEA20000F63B39 /* MainTableViewController.swift in Sources */,
 				4DC7FDD91DDEA20000F63B39 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

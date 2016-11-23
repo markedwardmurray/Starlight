@@ -14,7 +14,7 @@ enum SegmentIndex: Int {
     case legislators, upcomingBills
 }
 
-class LegislatorsTableViewController: UITableViewController, UISearchBarDelegate {
+class MainTableViewController: UITableViewController, UISearchBarDelegate {
     
     @IBOutlet var searchBar: UISearchBar!
     
