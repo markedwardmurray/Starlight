@@ -67,7 +67,7 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" id="OXS-aj-r7Z">
-                        <barButtonItem key="rightBarButtonItem" title="ⓘ" style="plain" id="WBJ-o4-6qe">
+                        <barButtonItem key="rightBarButtonItem" title="ⓘ" id="WBJ-o4-6qe">
                             <connections>
                                 <segue destination="U2B-8y-QKt" kind="show" id="xRF-Qg-MGK"/>
                             </connections>

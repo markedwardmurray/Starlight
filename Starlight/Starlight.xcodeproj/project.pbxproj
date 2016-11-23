@@ -10,7 +10,6 @@
 		1F5328649140E9BA1DC75A44 /* Pods_Starlight.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E6BDEDC4E11829D606B0F8E5 /* Pods_Starlight.framework */; };
 		4D56B5BA1DE19B8800F9A52A /* AboutTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D56B5B91DE19B8800F9A52A /* AboutTableViewController.swift */; };
 		4D56B5BC1DE1A2ED00F9A52A /* UIViewController+Alerts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D56B5BB1DE1A2ED00F9A52A /* UIViewController+Alerts.swift */; };
-		4D56B5BE1DE2E7CA00F9A52A /* Pods-Starlight-acknowledgements.markdown in Sources */ = {isa = PBXBuildFile; fileRef = 4D56B5BD1DE2E7CA00F9A52A /* Pods-Starlight-acknowledgements.markdown */; };
 		4D56B5BF1DE2E7E100F9A52A /* Pods-Starlight-acknowledgements.markdown in Resources */ = {isa = PBXBuildFile; fileRef = 4D56B5BD1DE2E7CA00F9A52A /* Pods-Starlight-acknowledgements.markdown */; };
 		4DC7FDD91DDEA20000F63B39 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DC7FDD81DDEA20000F63B39 /* AppDelegate.swift */; };
 		4DC7FDDB1DDEA20000F63B39 /* MainTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DC7FDDA1DDEA20000F63B39 /* MainTableViewController.swift */; };
@@ -397,7 +396,6 @@
 				4D56B5BC1DE1A2ED00F9A52A /* UIViewController+Alerts.swift in Sources */,
 				4D56B5BA1DE19B8800F9A52A /* AboutTableViewController.swift in Sources */,
 				4DC7FDFD1DDEB35A00F63B39 /* SunlightAPIClient.swift in Sources */,
-				4D56B5BE1DE2E7CA00F9A52A /* Pods-Starlight-acknowledgements.markdown in Sources */,
 				4DC7FDDB1DDEA20000F63B39 /* MainTableViewController.swift in Sources */,
 				4DC7FDD91DDEA20000F63B39 /* AppDelegate.swift in Sources */,
 			);
