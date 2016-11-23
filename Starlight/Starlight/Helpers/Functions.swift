@@ -78,5 +78,3 @@ func stringURLs(stringJSONs: [String:JSON]?) -> [String:URL] {
     return stringURLs
 }
 
-
-

@@ -78,7 +78,7 @@ class MainTableViewController: UITableViewController, UISearchBarDelegate {
                     self.navigationItem.title = "Could Not Geocode Coordinate"
                 } else if let placemark = placemarks?.first {
                     self.placemark = placemark;
-                    self.searchBar.text = self.addressWithPlacemark(placemark: placemark)
+                    self.searchBar.text = placemark.address
                 }
             })
         }
@@ -183,7 +183,7 @@ class MainTableViewController: UITableViewController, UISearchBarDelegate {
             SunlightAPIClient().getLegislatorsWithLat(lat: lat, lng: lng, completion: { (legislatorsResult) in
                 self.updateWith(legislatorsResult: legislatorsResult)
                 if let placemark = self.placemark {
-                    self.searchBar.text = self.addressWithPlacemark(placemark: placemark)
+                    self.searchBar.text = placemark.address
                 }
             })
         }
@@ -209,29 +209,11 @@ class MainTableViewController: UITableViewController, UISearchBarDelegate {
                 
                 SunlightAPIClient.sharedInstance.getLegislatorsWithLat(lat: lat, lng: lng, completion: { (legislatorsResult) in
                     self.updateWith(legislatorsResult: legislatorsResult)
-                    self.searchBar.text = self.addressWithPlacemark(placemark: placemark)
+                    self.searchBar.text = placemark.address
                 })
             }
         })
     }
     
-    func addressWithPlacemark(placemark: CLPlacemark) -> String {
-        var string = ""
-        if let street = placemark.thoroughfare {
-            string += street
-        }
-        if let city = placemark.locality {
-            string += ", " + city
-        }
-        if let state = placemark.administrativeArea {
-            string += ", " + state
-        }
-        if let zip = placemark.postalCode {
-            string += " " + zip
-        }
-        
-        return string
-    }
-
 }
 
