@@ -164,23 +164,34 @@ class MainTableViewController: UITableViewController, UISearchBarDelegate {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         switch self.segmentIndex {
         case .legislators:
-            let cell = tableView.dequeueReusableCell(withIdentifier: MainTVCReuseIdentifier.legislatorCell.rawValue)!
+            let legislatorCell = tableView.dequeueReusableCell(withIdentifier: MainTVCReuseIdentifier.legislatorCell.rawValue)!
             
             let legislator = legislators[indexPath.row]
             
-            cell.textLabel?.text = legislator.fullName
-            cell.detailTextLabel?.text = legislator.seatDescription
+            legislatorCell.textLabel?.text = legislator.fullName
+            legislatorCell.detailTextLabel?.text = legislator.seatDescription
             
-            return cell
+            return legislatorCell
             
         case .upcomingBills:
-            let cell = tableView.dequeueReusableCell(withIdentifier: MainTVCReuseIdentifier.upcomingBillCell.rawValue)!
-            
-            let upcomingBill = upcomingBillAndBills[indexPath.row].0;
-            
-            cell.textLabel?.text = upcomingBill.bill_id;
-            
-            return cell
+            let upcomingBillAndBill = self.upcomingBillAndBills[indexPath.row]
+            if let bill = upcomingBillAndBill.1 {
+                let billCell = tableView.dequeueReusableCell(withIdentifier: MainTVCReuseIdentifier.billCell.rawValue)!
+                
+                billCell.textLabel?.text = bill.official_title
+                billCell.detailTextLabel?.text = bill.bill_id
+                
+                return billCell
+            }
+            else {
+                let upcomingBill = upcomingBillAndBill.0;
+                
+                let upcomingBillCell = tableView.dequeueReusableCell(withIdentifier: MainTVCReuseIdentifier.upcomingBillCell.rawValue)!
+                
+                upcomingBillCell.textLabel?.text = upcomingBill.bill_id;
+                
+                return upcomingBillCell
+            }
         }
     }
     
