@@ -37,7 +37,7 @@ class MainTableViewController: UITableViewController, UISearchBarDelegate {
         let segmentedControl = UISegmentedControl(items: ["Legislators","Upcoming Bills"])
         segmentedControl.addTarget(self, action: #selector(segmentedControlValueChanged(sender:)), for: .valueChanged)
         segmentedControl.tintColor = UIColor.white
-        segmentedControl.subviews[0].backgroundColor = UIColor.clear
+        segmentedControl.selectedSegmentIndex = 0
         self.navigationItem.titleView = segmentedControl
         
         self.loadLegislatorsWithCurrentLocation()
