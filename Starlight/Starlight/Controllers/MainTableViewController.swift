@@ -25,7 +25,7 @@ class MainTableViewController: UITableViewController, UISearchBarDelegate {
     var segmentIndex: SegmentIndex = SegmentIndex.legislators
     
     var legislators: [Legislator] = []
-    var upcomingBills: [UpcomingBill] = []
+    var upcomingBillAndBills: [(UpcomingBill, Bill?)] = []
     let locationManager = INTULocationManager.sharedInstance()
     let geoCoder = CLGeocoder()
     var location: CLLocation?
@@ -108,12 +108,46 @@ class MainTableViewController: UITableViewController, UISearchBarDelegate {
                 print(error)
                 self.showAlertWithTitle(title: "Error!", message: error.localizedDescription)
             case .upcomingBills(let upcomingBills):
-                self.upcomingBills = upcomingBills
+                self.upcomingBillAndBills = self.upcomingBillAndBills(upcomingBills: upcomingBills)
+                
                 if self.segmentIndex == .upcomingBills {
                     self.tableView.reloadData()
                 }
+                
+                for i in 0..<self.upcomingBillAndBills.count {
+                    let upcomingBillAndBill = self.upcomingBillAndBills[i]
+                    let upcomingBill = upcomingBillAndBill.0
+                    self.loadBill(upcomingBill: upcomingBill, row: i)
+                }
             }
         }
+    }
+    
+    func loadBill(upcomingBill: UpcomingBill, row: Int) {
+        let billId = upcomingBill.bill_id
+        SunlightAPIClient.sharedInstance.getBill(billId: billId, completion: { (billResult) in
+            switch billResult {
+            case .error(let error):
+                print(error)
+                self.showAlertWithTitle(title: "Error!", message: error.localizedDescription)
+            case .bill(let bill):
+                let upcomingBillAndBill = (upcomingBill, Optional<Bill>(bill))
+                self.upcomingBillAndBills[row] = upcomingBillAndBill
+                if self.segmentIndex == .upcomingBills {
+                    let indexPath = IndexPath(row: row, section: 0)
+                    self.tableView.reloadRows(at: [indexPath], with: .left)
+                }
+            }
+        })
+    }
+    
+    func upcomingBillAndBills(upcomingBills: [UpcomingBill]) -> [(UpcomingBill, Bill?)] {
+        var upcomingBillAndBills = [(UpcomingBill, Bill?)]()
+        for upcomingBill in upcomingBills {
+            upcomingBillAndBills.append((upcomingBill, nil))
+        }
+        
+        return upcomingBillAndBills
     }
     
     //MARK: UITableViewDataSource/Delegate
@@ -123,7 +157,7 @@ class MainTableViewController: UITableViewController, UISearchBarDelegate {
         case .legislators:
             return legislators.count
         case .upcomingBills:
-            return upcomingBills.count
+            return upcomingBillAndBills.count
         }
     }
 
@@ -142,7 +176,7 @@ class MainTableViewController: UITableViewController, UISearchBarDelegate {
         case .upcomingBills:
             let cell = tableView.dequeueReusableCell(withIdentifier: MainTVCReuseIdentifier.upcomingBillCell.rawValue)!
             
-            let upcomingBill = upcomingBills[indexPath.row];
+            let upcomingBill = upcomingBillAndBills[indexPath.row].0;
             
             cell.textLabel?.text = upcomingBill.bill_id;
             

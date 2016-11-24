@@ -95,7 +95,7 @@ class SunlightAPIClient {
     let bills = "bills"
     let bill_id = "bill_id"
     
-    func getBill(billId: String, completion: @escaping (UpcomingBillsResult) -> Void) {
+    func getBill(billId: String, completion: @escaping (BillResult) -> Void) {
         let urlString = sunlightURL+bills+"?"+bill_id+"="+billId
         let url = URL(string: urlString)!
         print(url)
@@ -110,21 +110,21 @@ class SunlightAPIClient {
                 switch response.result {
                 case .failure(let error):
                     print("Alamofire error: \(error)")
-                    completion(UpcomingBillsResult.error(error: error))
+                    completion(BillResult.error(error: error))
                 case .success:
                     if let value = response.result.value {
                         let json = JSON(value)
                         guard json.error == nil else {
                             let error = json.error!
                             print(error)
-                            completion(UpcomingBillsResult.error(error: error))
+                            completion(BillResult.error(error: error))
                             return;
                         }
                         
                         print("SunlightAPIClient: bill with id \(billId)")
-                        let results = json["results"]
-                        let upcomingBills = UpcomingBill.upcomingBillsWithResults(results: results)
-                        completion(UpcomingBillsResult.upcomingBills(upcomingBills: upcomingBills))
+                        let result = json["results"][0]
+                        let bill = Bill(result: result)
+                        completion(BillResult.bill(bill: bill))
                     }
                 }
         }
