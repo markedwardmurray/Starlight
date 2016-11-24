@@ -14,6 +14,10 @@ enum SegmentIndex: Int {
     case legislators, upcomingBills
 }
 
+enum MainTVCReuseIdentifier: String {
+    case legislatorCell, upcomingBillCell, billCell
+}
+
 class MainTableViewController: UITableViewController, UISearchBarDelegate {
     
     @IBOutlet var searchBar: UISearchBar!
@@ -121,13 +125,12 @@ class MainTableViewController: UITableViewController, UISearchBarDelegate {
         case .upcomingBills:
             return upcomingBills.count
         }
-        
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         switch self.segmentIndex {
         case .legislators:
-            let cell = tableView.dequeueReusableCell(withIdentifier: "legislatorCell")!
+            let cell = tableView.dequeueReusableCell(withIdentifier: MainTVCReuseIdentifier.legislatorCell.rawValue)!
             
             let legislator = legislators[indexPath.row]
             
@@ -137,7 +140,13 @@ class MainTableViewController: UITableViewController, UISearchBarDelegate {
             return cell
             
         case .upcomingBills:
-            return UITableViewCell()
+            let cell = tableView.dequeueReusableCell(withIdentifier: MainTVCReuseIdentifier.upcomingBillCell.rawValue)!
+            
+            let upcomingBill = upcomingBills[indexPath.row];
+            
+            cell.textLabel?.text = upcomingBill.bill_id;
+            
+            return cell
         }
     }
     
