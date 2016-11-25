@@ -19,7 +19,7 @@ enum BillsResult {
     case bills(bills: [Bill])
 }
 
-struct Bill {
+struct Bill : BillType {
     let bill_id     : String
     let bill_type   : String
     let chamber     : String

@@ -25,7 +25,7 @@ class MainTableViewController: UITableViewController, UISearchBarDelegate {
     var segmentIndex: SegmentIndex = SegmentIndex.legislators
     
     var legislators: [Legislator] = []
-    var upcomingBillAndBills: [(UpcomingBill, Bill?)] = []
+    var billTypes: [BillType] = []
     let locationManager = INTULocationManager.sharedInstance()
     let geoCoder = CLGeocoder()
     var location: CLLocation?
@@ -108,22 +108,20 @@ class MainTableViewController: UITableViewController, UISearchBarDelegate {
                 print(error)
                 self.showAlertWithTitle(title: "Error!", message: error.localizedDescription)
             case .upcomingBills(let upcomingBills):
-                self.upcomingBillAndBills = self.upcomingBillAndBills(upcomingBills: upcomingBills)
+                self.billTypes = upcomingBills
                 
                 if self.segmentIndex == .upcomingBills {
                     self.tableView.reloadData()
                 }
                 
-                for i in 0..<self.upcomingBillAndBills.count {
-                    let upcomingBillAndBill = self.upcomingBillAndBills[i]
-                    let upcomingBill = upcomingBillAndBill.0
-                    self.loadBill(upcomingBill: upcomingBill, row: i)
+                for upcomingBill in upcomingBills {
+                    self.replaceWithBill(upcomingBill: upcomingBill)
                 }
             }
         }
     }
     
-    func loadBill(upcomingBill: UpcomingBill, row: Int) {
+    func replaceWithBill(upcomingBill: UpcomingBill) {
         let billId = upcomingBill.bill_id
         SunlightAPIClient.sharedInstance.getBill(billId: billId, completion: { (billResult) in
             switch billResult {
@@ -131,23 +129,20 @@ class MainTableViewController: UITableViewController, UISearchBarDelegate {
                 print(error)
                 self.showAlertWithTitle(title: "Error!", message: error.localizedDescription)
             case .bill(let bill):
-                let upcomingBillAndBill = (upcomingBill, Optional<Bill>(bill))
-                self.upcomingBillAndBills[row] = upcomingBillAndBill
+                guard let row = self.billTypes.index(where: { (billType) -> Bool in
+                    return billType.bill_id == upcomingBill.bill_id
+                }) else {
+                    print("upcoming bill not found in billTypes array")
+                    return
+                }
+                
+                self.billTypes[row] = bill
                 if self.segmentIndex == .upcomingBills {
                     let indexPath = IndexPath(row: row, section: 0)
                     self.tableView.reloadRows(at: [indexPath], with: .left)
                 }
             }
         })
-    }
-    
-    func upcomingBillAndBills(upcomingBills: [UpcomingBill]) -> [(UpcomingBill, Bill?)] {
-        var upcomingBillAndBills = [(UpcomingBill, Bill?)]()
-        for upcomingBill in upcomingBills {
-            upcomingBillAndBills.append((upcomingBill, nil))
-        }
-        
-        return upcomingBillAndBills
     }
     
     //MARK: UITableViewDataSource/Delegate
@@ -157,7 +152,7 @@ class MainTableViewController: UITableViewController, UISearchBarDelegate {
         case .legislators:
             return legislators.count
         case .upcomingBills:
-            return upcomingBillAndBills.count
+            return billTypes.count
         }
     }
 
@@ -174,8 +169,9 @@ class MainTableViewController: UITableViewController, UISearchBarDelegate {
             return legislatorCell
             
         case .upcomingBills:
-            let upcomingBillAndBill = self.upcomingBillAndBills[indexPath.row]
-            if let bill = upcomingBillAndBill.1 {
+            let billType = self.billTypes[indexPath.row]
+            if type(of: billType) == Bill.self {
+                let bill = billType as! Bill
                 let billCell = tableView.dequeueReusableCell(withIdentifier: MainTVCReuseIdentifier.billCell.rawValue)!
                 
                 billCell.textLabel?.text = bill.official_title
@@ -183,14 +179,18 @@ class MainTableViewController: UITableViewController, UISearchBarDelegate {
                 
                 return billCell
             }
-            else {
-                let upcomingBill = upcomingBillAndBill.0;
+            else if type(of: billType) == UpcomingBill.self {
+                let upcomingBill = billType as! UpcomingBill
                 
                 let upcomingBillCell = tableView.dequeueReusableCell(withIdentifier: MainTVCReuseIdentifier.upcomingBillCell.rawValue)!
                 
                 upcomingBillCell.textLabel?.text = upcomingBill.bill_id;
                 
                 return upcomingBillCell
+            }
+            else {
+                print("unrecognized BillType")
+                return UITableViewCell()
             }
         }
     }

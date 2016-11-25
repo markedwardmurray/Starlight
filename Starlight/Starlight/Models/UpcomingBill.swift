@@ -14,7 +14,7 @@ enum UpcomingBillsResult {
     case upcomingBills(upcomingBills: [UpcomingBill])
 }
 
-struct UpcomingBill {
+struct UpcomingBill : BillType {
     let bill_id         : String
     let chamber         : String
     let congress        : Int
