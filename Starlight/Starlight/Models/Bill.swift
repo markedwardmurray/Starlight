@@ -45,6 +45,8 @@ struct Bill : BillType {
     let urls            : [String:URL]
     let withdrawn_cosponsors_count : Int
     
+    var upcomingBill : UpcomingBill?
+    
     var sponsorName: String {
         var fullName = ""
         if let title = self.sponsor["title"] {

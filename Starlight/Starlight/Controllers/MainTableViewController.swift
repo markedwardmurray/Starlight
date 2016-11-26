@@ -132,7 +132,9 @@ class MainTableViewController: UITableViewController, UISearchBarDelegate {
             case .error(let error):
                 print(error)
                 self.showAlertWithTitle(title: "Error!", message: error.localizedDescription)
-            case .bill(let bill):
+            case .bill(var bill):
+                bill.upcomingBill = upcomingBill
+                
                 guard let row = self.billTypes.index(where: { (billType) -> Bool in
                     return billType.bill_id == upcomingBill.bill_id
                 }) else {
@@ -181,9 +183,8 @@ class MainTableViewController: UITableViewController, UISearchBarDelegate {
                 var shortTitleText = bill.bill_id
                 if let shortTitle = bill.short_title {
                     shortTitleText += " - " + shortTitle
-                } else if let popularTitle = bill.popular_title {
-                    shortTitleText += " - " + popularTitle
                 }
+                billCell.popularTitleLabel.text = bill.popular_title
                 billCell.shortTitleLabel.text = shortTitleText
                 billCell.fullTitleLabel.text = bill.official_title
                 
@@ -192,6 +193,16 @@ class MainTableViewController: UITableViewController, UISearchBarDelegate {
                     sponsorLabelText += " and \(bill.cosponsors_count) others"
                 }
                 billCell.sponsorLabel.text = sponsorLabelText
+                
+                if let legislativeDay = bill.upcomingBill?.legislative_day {
+                    let dateFormatter = DateFormatter()
+                    dateFormatter.dateStyle = .medium
+                    let dayText = dateFormatter.string(from: legislativeDay)
+                    billCell.legislativeDayLabel.text = (bill.upcomingBill?.range.capitalized)! + " of " + dayText
+                } else {
+                    billCell.legislativeDayLabel.text = "Undetermined Time Frame"
+                }
+                billCell.contextLabel.text = bill.upcomingBill?.context
                 
                 return billCell
             }

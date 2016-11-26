@@ -11,7 +11,11 @@ import UIKit
 class BillTableViewCell: UITableViewCell {
     
     @IBOutlet var shortTitleLabel: UILabel!
+    @IBOutlet var popularTitleLabel: UILabel!
     @IBOutlet var fullTitleLabel: UILabel!
     @IBOutlet var sponsorLabel: UILabel!
+    
+    @IBOutlet var legislativeDayLabel: UILabel!
+    @IBOutlet var contextLabel: UILabel!
     
 }
