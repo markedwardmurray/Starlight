@@ -9,6 +9,7 @@
 import UIKit
 import INTULocationManager
 import Hex
+import JSQWebViewController
 
 enum SegmentIndex: Int {
     case legislators, upcomingBills
@@ -237,6 +238,14 @@ class MainTableViewController: UITableViewController, UISearchBarDelegate {
             tableView.deselectRow(at: indexPath, animated: true)
             break
         case .upcomingBills:
+            let billType = self.billTypes[indexPath.row]
+            if type(of: billType) == Bill.self {
+                let bill = billType as! Bill
+                if let url = bill.last_version.urls["pdf"] {
+                    let webVC = WebViewController(url: url)
+                    self.navigationController?.pushViewController(webVC, animated: true)
+                }
+            }
             break
         }
     }
