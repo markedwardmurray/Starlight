@@ -40,6 +40,9 @@ class MainTableViewController: UITableViewController, UISearchBarDelegate {
         segmentedControl.selectedSegmentIndex = 0
         self.navigationItem.titleView = segmentedControl
         
+        self.tableView.rowHeight = UITableViewAutomaticDimension
+        self.tableView.estimatedRowHeight = 100
+        
         self.loadLegislatorsWithCurrentLocation()
         self.loadUpcomingBills()
     }
@@ -172,10 +175,22 @@ class MainTableViewController: UITableViewController, UISearchBarDelegate {
             let billType = self.billTypes[indexPath.row]
             if type(of: billType) == Bill.self {
                 let bill = billType as! Bill
-                let billCell = tableView.dequeueReusableCell(withIdentifier: MainTVCReuseIdentifier.billCell.rawValue)!
+                let billCell = tableView.dequeueReusableCell(withIdentifier: MainTVCReuseIdentifier.billCell.rawValue)! as! BillTableViewCell
                 
-                billCell.textLabel?.text = bill.official_title
-                billCell.detailTextLabel?.text = bill.bill_id
+                var shortTitleText = bill.bill_id
+                if let shortTitle = bill.short_title {
+                    shortTitleText += " - " + shortTitle
+                } else if let popularTitle = bill.popular_title {
+                    shortTitleText += " - " + popularTitle
+                }
+                billCell.shortTitleLabel.text = shortTitleText
+                billCell.fullTitleLabel.text = bill.official_title
+                
+                var sponsorLabelText = "Sponsored by " + bill.sponsorName
+                if (bill.cosponsors_count > 0) {
+                    sponsorLabelText += " and \(bill.cosponsors_count) others"
+                }
+                billCell.sponsorLabel.text = sponsorLabelText
                 
                 return billCell
             }
@@ -268,6 +283,5 @@ class MainTableViewController: UITableViewController, UISearchBarDelegate {
             }
         })
     }
-    
 }
 

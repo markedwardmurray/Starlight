@@ -10,4 +10,8 @@ import UIKit
 
 class BillTableViewCell: UITableViewCell {
     
+    @IBOutlet var shortTitleLabel: UILabel!
+    @IBOutlet var fullTitleLabel: UILabel!
+    @IBOutlet var sponsorLabel: UILabel!
+    
 }

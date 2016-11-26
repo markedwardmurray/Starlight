@@ -30,6 +30,9 @@ struct Bill : BillType {
     let last_version_on : Date?
     let last_vote_at    : Date?
     
+    let last_version : BillVersion
+    let history      : BillHistory
+    
     let committee_ids   : [String]
     let cosponsors_count: Int
     let enacted_as      : String?
@@ -74,6 +77,9 @@ struct Bill : BillType {
         self.last_version_on = zuluDay(string: result["last_version_on"].string)
         self.last_vote_at    = zuluTime(string: result["last_vote_at"].string)
         
+        self.last_version = BillVersion(json: result["last_version"])
+        self.history      = BillHistory(json: result["history"])
+        
         self.committee_ids   = strings(jsons: result["committee_ids"].array)
         self.cosponsors_count = result["cosponsors_count"].int!
         self.enacted_as      = result["enacted_as"].string
@@ -81,7 +87,7 @@ struct Bill : BillType {
         self.popular_title   = result["popular_title"].string
         self.related_bill_ids = strings(jsons: result["related_bill_ids"].array)
         self.short_title     = result["short_title"].string
-        self.sponsor         = stringStrings(stringJSONs: result["sponser"].dictionary)
+        self.sponsor         = stringStrings(stringJSONs: result["sponsor"].dictionary)
         self.sponsor_id      = result["sponsor_id"].string!
         self.urls            = stringURLs(stringJSONs: result["urls"].dictionary)
         self.withdrawn_cosponsors_count = result["withdrawn_cosponsors_count"].int!
@@ -98,3 +104,34 @@ struct Bill : BillType {
     }
 }
 
+struct BillHistory {
+    let active  : Bool
+    let awaiting_signature : Bool
+    let enacted : Bool
+    let vetoed  : Bool
+    
+    init(json: JSON) {
+        self.active  = json["active"].bool!
+        self.awaiting_signature = json["awaiting_signature"].bool!
+        self.enacted = json["enacted"].bool!
+        self.vetoed  = json["vetoed"].bool!
+    }
+}
+
+struct BillVersion {
+    let version_code    : String
+    let issued_on       : Date?
+    let version_name    : String
+    let bill_version_id : String
+    let urls  : [String:URL] // html, pdf, xml
+    let pages : Int
+    
+    init(json: JSON) {
+        self.version_code    = json["version_code"].string!
+        self.issued_on       = zuluDay(string: json["issued_on"].string)
+        self.version_name    = json["version_name"].string!
+        self.bill_version_id = json["bill_version_id"].string!
+        self.urls  = stringURLs(stringJSONs: json["urls"].dictionary)
+        self.pages = json["pages"].int!
+    }
+}
