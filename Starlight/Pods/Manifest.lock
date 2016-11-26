@@ -3,6 +3,7 @@ PODS:
   - Down (0.3)
   - Hex (5.0.0)
   - INTULocationManager (4.2.0)
+  - JSQWebViewController (5.0.0)
   - SwiftyJSON (3.1.3)
 
 DEPENDENCIES:
@@ -10,6 +11,7 @@ DEPENDENCIES:
   - Down
   - Hex (= 5.0.0)
   - INTULocationManager (= 4.2.0)
+  - JSQWebViewController (= 5.0.0)
   - SwiftyJSON (= 3.1.3)
 
 SPEC CHECKSUMS:
@@ -17,8 +19,9 @@ SPEC CHECKSUMS:
   Down: dea228f55b736ea0a7b96e02dd14b33600ce83a2
   Hex: 024e4dba5d5a9351e7817713f3dee61553258dcd
   INTULocationManager: 73f8254b3d05c897c56bb13c190e5b7c648c0998
+  JSQWebViewController: 0461aa42612b221571556df61d9c09f080cb2eef
   SwiftyJSON: 38a8ea2006779c0fc4c310cb2ee8195327740faf
 
-PODFILE CHECKSUM: aa4bbddec3e0d6a19ba0ffdbbbf59533a6314e66
+PODFILE CHECKSUM: 065bce29291e01b66f687ee9010910688b18bfb6
 
 COCOAPODS: 1.1.1
