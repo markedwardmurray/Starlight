@@ -31,7 +31,7 @@
                             </connections>
                         </searchBar>
                         <view key="tableFooterView" contentMode="scaleToFill" id="0Wy-3T-gW3" userLabel="FooterView">
-                            <rect key="frame" x="0.0" y="672" width="414" height="44"/>
+                            <rect key="frame" x="0.0" y="628" width="414" height="44"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         </view>
@@ -83,7 +83,7 @@
                                 <rect key="frame" x="0.0" y="160" width="414" height="170"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="LbC-If-1M6" id="dLW-2Q-CNb">
-                                    <rect key="frame" x="0.0" y="0.0" width="381" height="169"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="381" height="169.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="1000" text="Short Title" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3hq-hH-lru">
@@ -339,7 +339,7 @@ v0.0.0 (0)</string>
         <!--Navigation Controller-->
         <scene sceneID="TvO-nF-paJ">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="hX9-xc-59s" sceneMemberID="viewController">
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" toolbarHidden="NO" id="hX9-xc-59s" sceneMemberID="viewController">
                     <toolbarItems/>
                     <simulatedStatusBarMetrics key="simulatedStatusBarMetrics" statusBarStyle="lightContent"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" barStyle="black" translucent="NO" id="YKX-RJ-bTx">
@@ -352,6 +352,10 @@ v0.0.0 (0)</string>
                         </textAttributes>
                     </navigationBar>
                     <nil name="viewControllers"/>
+                    <toolbar key="toolbar" opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="3q4-iR-viz">
+                        <rect key="frame" x="0.0" y="692" width="414" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </toolbar>
                     <connections>
                         <segue destination="BqG-r5-aNL" kind="relationship" relationship="rootViewController" id="OOB-ee-dyk"/>
                     </connections>
