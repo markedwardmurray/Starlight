@@ -32,7 +32,7 @@ class StoreCoordinator {
     let k_legislators = "legislators"
     
     func modificationDate(fileName: String) -> Date? {
-        let filePath = NSHomeDirectory() + fileName + k_dot_json
+        let filePath = NSHomeDirectory() + "/" + fileName + k_dot_json
         do {
             let attr = try fileManager.attributesOfItem(atPath: filePath)
             return attr[FileAttributeKey.modificationDate] as? Date
@@ -43,7 +43,7 @@ class StoreCoordinator {
     }
     
     fileprivate func loadJSON(fileName: String) -> JSONResult {
-        let filePath = NSHomeDirectory() + fileName + k_dot_json
+        let filePath = NSHomeDirectory() + "/" + fileName + k_dot_json
         let fileURL = URL(fileURLWithPath: filePath)
         
         guard fileManager.fileExists(atPath: filePath) else {
@@ -63,7 +63,7 @@ class StoreCoordinator {
     }
     
     fileprivate func save(json: JSON, fileName: String) -> SuccessResult {
-        let filePath = NSHomeDirectory() + fileName + k_dot_json
+        let filePath = NSHomeDirectory() + "/" + fileName + k_dot_json
         
         if self.fileManager.fileExists(atPath: filePath) {
             do {
@@ -77,8 +77,8 @@ class StoreCoordinator {
         
         do {
             let data = try json.rawData(options: .prettyPrinted)
-            fileManager.createFile(atPath: filePath, contents: data, attributes: nil)
-            return SuccessResult.success(success: true)
+            let fileCreated = fileManager.createFile(atPath: filePath, contents: data, attributes: nil)
+            return SuccessResult.success(success: fileCreated)
         }
         catch let error as NSError {
             print(error.localizedDescription)

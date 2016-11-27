@@ -32,6 +32,7 @@ class MainTableViewController: UITableViewController, UISearchBarDelegate {
     var location: CLLocation?
     var placemark: CLPlacemark?
     
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -44,7 +45,19 @@ class MainTableViewController: UITableViewController, UISearchBarDelegate {
         self.tableView.rowHeight = UITableViewAutomaticDimension
         self.tableView.estimatedRowHeight = 100
         
-        self.loadLegislatorsWithCurrentLocation()
+        let result = StoreCoordinator.sharedInstance.loadLegislators()
+        switch result {
+        case .error:
+            self.loadLegislatorsWithCurrentLocation()
+        case .legislators(let legislators):
+            if legislators.count == 0 {
+                self.loadLegislatorsWithCurrentLocation()
+            } else {
+                self.legislators = legislators
+                self.tableView.reloadData()
+            }
+        }
+        
         self.loadUpcomingBills()
     }
     
