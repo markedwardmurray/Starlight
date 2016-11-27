@@ -22,6 +22,7 @@
 		4DC7FDFB1DDEA43B00F63B39 /* Legislator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DC7FDFA1DDEA43B00F63B39 /* Legislator.swift */; };
 		4DC7FDFD1DDEB35A00F63B39 /* SunlightAPIClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DC7FDFC1DDEB35A00F63B39 /* SunlightAPIClient.swift */; };
 		4DCA2A631DEA3C8800F83A96 /* StoreCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DCA2A621DEA3C8800F83A96 /* StoreCoordinator.swift */; };
+		4DCA2A6B1DEAB7A800F83A96 /* UIViewController+LegislatorsToolbar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DCA2A6A1DEAB7A800F83A96 /* UIViewController+LegislatorsToolbar.swift */; };
 		4DD7E6C71DE548F60078298F /* Bill.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DD7E6C61DE548F60078298F /* Bill.swift */; };
 		4DD7E6C91DE5558B0078298F /* UpcomingBill.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DD7E6C81DE5558B0078298F /* UpcomingBill.swift */; };
 		4DD7E6CC1DE565D60078298F /* Functions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DD7E6CB1DE565D60078298F /* Functions.swift */; };
@@ -59,6 +60,7 @@
 		4DC7FDFA1DDEA43B00F63B39 /* Legislator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Legislator.swift; sourceTree = "<group>"; };
 		4DC7FDFC1DDEB35A00F63B39 /* SunlightAPIClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SunlightAPIClient.swift; sourceTree = "<group>"; };
 		4DCA2A621DEA3C8800F83A96 /* StoreCoordinator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StoreCoordinator.swift; sourceTree = "<group>"; };
+		4DCA2A6A1DEAB7A800F83A96 /* UIViewController+LegislatorsToolbar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIViewController+LegislatorsToolbar.swift"; sourceTree = "<group>"; };
 		4DD7E6C61DE548F60078298F /* Bill.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Bill.swift; sourceTree = "<group>"; };
 		4DD7E6C81DE5558B0078298F /* UpcomingBill.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UpcomingBill.swift; sourceTree = "<group>"; };
 		4DD7E6CB1DE565D60078298F /* Functions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Functions.swift; sourceTree = "<group>"; };
@@ -107,6 +109,7 @@
 				4DC7FDDA1DDEA20000F63B39 /* MainTableViewController.swift */,
 				4D56B5B91DE19B8800F9A52A /* AboutTableViewController.swift */,
 				4D56B5BB1DE1A2ED00F9A52A /* UIViewController+Alerts.swift */,
+				4DCA2A6A1DEAB7A800F83A96 /* UIViewController+LegislatorsToolbar.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -417,6 +420,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4DCA2A6B1DEAB7A800F83A96 /* UIViewController+LegislatorsToolbar.swift in Sources */,
 				4DD7E6C71DE548F60078298F /* Bill.swift in Sources */,
 				4DD7E6CE1DE589880078298F /* CLPlacemark+Extensions.swift in Sources */,
 				4DD7E6C91DE5558B0078298F /* UpcomingBill.swift in Sources */,
