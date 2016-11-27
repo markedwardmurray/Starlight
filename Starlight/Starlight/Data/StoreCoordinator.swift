@@ -24,7 +24,7 @@ enum StoreError: Error {
 }
 
 class StoreCoordinator {
-    let sharedInstance = StoreCoordinator()
+    static let sharedInstance = StoreCoordinator()
     
     let fileManager = FileManager.default
     

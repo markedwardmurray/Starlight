@@ -153,10 +153,26 @@ class MainTableViewController: UITableViewController, UISearchBarDelegate {
     
     //MARK: UITableViewDataSource/Delegate
     
+    override func numberOfSections(in tableView: UITableView) -> Int {
+        switch self.segmentIndex {
+        case .legislators:
+            return 2
+        case .upcomingBills:
+            return 1
+        }
+    }
+    
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         switch self.segmentIndex {
         case .legislators:
-            return legislators.count
+            switch section {
+            case 0:
+                return legislators.count
+            case 1:
+                return legislators.count > 0 ? 1 : 0
+            default:
+                return 0
+            }
         case .upcomingBills:
             return billTypes.count
         }
@@ -165,14 +181,28 @@ class MainTableViewController: UITableViewController, UISearchBarDelegate {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         switch self.segmentIndex {
         case .legislators:
-            let legislatorCell = tableView.dequeueReusableCell(withIdentifier: MainTVCReuseIdentifier.legislatorCell.rawValue)!
-            
-            let legislator = legislators[indexPath.row]
-            
-            legislatorCell.textLabel?.text = legislator.fullName
-            legislatorCell.detailTextLabel?.text = legislator.seatDescription
-            
-            return legislatorCell
+            switch indexPath.section {
+            case 0:
+                let legislatorCell = tableView.dequeueReusableCell(withIdentifier: MainTVCReuseIdentifier.legislatorCell.rawValue)!
+                
+                let legislator = legislators[indexPath.row]
+                
+                legislatorCell.textLabel?.text = legislator.fullName
+                legislatorCell.detailTextLabel?.text = legislator.seatDescription
+                
+                return legislatorCell
+
+            case 1:
+                let saveCell = UITableViewCell(style: .default, reuseIdentifier: "saveCell")
+                saveCell.textLabel?.textColor = UIColor.blue
+                saveCell.textLabel?.textAlignment = .center
+                saveCell.textLabel?.text = "Save"
+                
+                return saveCell
+                
+            default:
+                return UITableViewCell()
+            }
             
         case .upcomingBills:
             let billType = self.billTypes[indexPath.row]
@@ -225,13 +255,19 @@ class MainTableViewController: UITableViewController, UISearchBarDelegate {
     override func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         switch self.segmentIndex {
         case .legislators:
-            let legislator = legislators[indexPath.row]
-            if (legislator.party == "D") {
-                cell.backgroundColor = UIColor.init(hex: "DAF0FF");
-            } else if (legislator.party == "R") {
-                cell.backgroundColor = UIColor.init(hex: "FFDFF3");
-            } else {
-                cell.backgroundColor = UIColor.white
+            switch indexPath.section {
+            case 0:
+                let legislator = legislators[indexPath.row]
+                if (legislator.party == "D") {
+                    cell.backgroundColor = UIColor.init(hex: "DAF0FF");
+                } else if (legislator.party == "R") {
+                    cell.backgroundColor = UIColor.init(hex: "FFDFF3");
+                } else {
+                    cell.backgroundColor = UIColor.white
+                }
+                
+            default:
+                break
             }
             break
         case .upcomingBills:
@@ -242,11 +278,24 @@ class MainTableViewController: UITableViewController, UISearchBarDelegate {
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         switch self.segmentIndex {
         case .legislators:
-            let legislator = legislators[indexPath.row]
-            guard let url = URL(string: "telprompt://" + legislator.phone) else { return }
-            UIApplication.shared.open(url, options: [:], completionHandler: nil)
-            
-            tableView.deselectRow(at: indexPath, animated: true)
+            switch indexPath.section {
+            case 0:
+                let legislator = legislators[indexPath.row]
+                guard let url = URL(string: "telprompt://" + legislator.phone) else { return }
+                UIApplication.shared.open(url, options: [:], completionHandler: nil)
+                
+            case 1:
+                let result = StoreCoordinator.sharedInstance.save(legislators: self.legislators)
+                switch result {
+                case .error:
+                    self.showAlertWithTitle(title: "Error!", message: "Failed to save your legislators")
+                case .success:
+                    break
+                }
+                
+            default:
+                break
+            }
             break
         case .upcomingBills:
             let billType = self.billTypes[indexPath.row]
@@ -259,6 +308,7 @@ class MainTableViewController: UITableViewController, UISearchBarDelegate {
             }
             break
         }
+        tableView.deselectRow(at: indexPath, animated: true)
     }
     
     //MARK: UISearchBarDelegate
