@@ -101,6 +101,8 @@ class StoreCoordinator {
     }
     
     func save(homeLegislators: [Legislator]) -> SuccessResult {
+        self.homeLegislators = homeLegislators
+        
         var jsonArray = [JSON]()
         for legislator in homeLegislators {
             jsonArray.append(legislator.json)

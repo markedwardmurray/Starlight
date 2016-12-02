@@ -64,7 +64,7 @@ class MainTableViewController: UITableViewController, UISearchBarDelegate {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
-        self.loadToolbar(legislators: self.legislators)
+        self.loadToolbarWithHomeLegislators()
     }
     
     func segmentedControlValueChanged(sender: UISegmentedControl) {
@@ -315,7 +315,7 @@ class MainTableViewController: UITableViewController, UISearchBarDelegate {
                 case .error:
                     self.showAlertWithTitle(title: "Error!", message: "Failed to save your legislators")
                 case .success:
-                    self.loadToolbar(legislators: legislators)
+                    self.loadToolbarWithHomeLegislators()
                     self.tableView.reloadData()
                     break
                 }
