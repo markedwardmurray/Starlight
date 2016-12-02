@@ -45,7 +45,7 @@ class MainTableViewController: UITableViewController, UISearchBarDelegate {
         self.tableView.rowHeight = UITableViewAutomaticDimension
         self.tableView.estimatedRowHeight = 100
         
-        let result = StoreCoordinator.sharedInstance.loadLegislators()
+        let result = StoreCoordinator.sharedInstance.loadHomeLegislators()
         switch result {
         case .error:
             self.loadLegislatorsWithCurrentLocation()
@@ -310,7 +310,7 @@ class MainTableViewController: UITableViewController, UISearchBarDelegate {
                 UIApplication.shared.open(url, options: [:], completionHandler: nil)
                 
             case 1:
-                let result = StoreCoordinator.sharedInstance.save(legislators: self.legislators)
+                let result = StoreCoordinator.sharedInstance.save(homeLegislators: self.legislators)
                 switch result {
                 case .error:
                     self.showAlertWithTitle(title: "Error!", message: "Failed to save your legislators")

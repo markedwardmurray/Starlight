@@ -26,10 +26,12 @@ enum StoreError: Error {
 class StoreCoordinator {
     static let sharedInstance = StoreCoordinator()
     
-    let fileManager = FileManager.default
+    var homeLegislators = [Legislator]()
     
-    let k_dot_json = ".json"
-    let k_legislators = "legislators"
+    fileprivate let fileManager = FileManager.default
+    
+    fileprivate let k_dot_json = ".json"
+    fileprivate let k_legislators_home = "legislators_home"
     
     func modificationDate(fileName: String) -> Date? {
         let filePath = NSHomeDirectory() + "/" + fileName + k_dot_json
@@ -87,25 +89,25 @@ class StoreCoordinator {
     }
     
     
-    func loadLegislators() -> LegislatorsResult {
-        let result = self.loadJSON(fileName: k_legislators)
+    func loadHomeLegislators() -> LegislatorsResult {
+        let result = self.loadJSON(fileName: k_legislators_home)
         switch result {
         case .error(let error):
             return LegislatorsResult.error(error: error)
         case .json(let json):
-            let legislators = Legislator.legislatorsWithResults(results: json)
-            return LegislatorsResult.legislators(legislators: legislators)
+            self.homeLegislators = Legislator.legislatorsWithResults(results: json)
+            return LegislatorsResult.legislators(legislators: self.homeLegislators)
         }
     }
     
-    func save(legislators: [Legislator]) -> SuccessResult {
+    func save(homeLegislators: [Legislator]) -> SuccessResult {
         var jsonArray = [JSON]()
-        for legislator in legislators {
+        for legislator in homeLegislators {
             jsonArray.append(legislator.json)
         }
         let json = JSON(jsonArray)
         
-        return self.save(json: json, fileName: k_legislators)
+        return self.save(json: json, fileName: k_legislators_home)
     }
 }
 
