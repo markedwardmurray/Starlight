@@ -21,29 +21,30 @@ extension UIViewController {
         for i in 0..<legislators.count {
             let legislator = legislators[i]
             
-            let label = UILabel();
-            label.textColor = UIColor.blue
-            label.numberOfLines = 3;
-            label.textAlignment = .center
-            label.font = UIFont.systemFont(ofSize: 10)
-            label.text = legislator.title + "." + "\n" + legislator.first_name + "\n" + legislator.last_name
-            label.sizeToFit()
+            let button = UIButton();
+            button.addTarget(self, action: #selector(callLegislatorFromToolbar(sender:)), for: .touchUpInside)
+            button.tag = i
+            button.setTitleColor(UIColor.blue, for: .normal)
+            button.titleLabel?.numberOfLines = 3;
+            button.titleLabel?.textAlignment = .center
+            button.titleLabel?.font = UIFont.systemFont(ofSize: 10)
+            let title = legislator.title + "." + "\n" + legislator.first_name + "\n" + legislator.last_name
+            button.setTitle(title, for: .normal)
+            button.sizeToFit()
             
-            let callButton = UIBarButtonItem(customView: label)
-            callButton.target = self
-            callButton.action = #selector(callLegislatorFromToolbar(sender:))
-            callButton.tag = i
+            let barButton = UIBarButtonItem(customView: button)
             
-            items.append(callButton)
+            items.append(barButton)
             items.append(UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil))
         }
         
         toolbar.items = items
     }
     
-    func callLegislatorFromToolbar(sender: UIBarButtonItem) {
-//        let legislator = self.legislators[sender.tag]
-//        guard let url = URL(string: "telprompt://" + legislator.phone) else { return }
-//        UIApplication.shared.open(url, options: [:], completionHandler: nil)
+    @objc fileprivate func callLegislatorFromToolbar(sender: UIButton) {
+        let legislator = StoreCoordinator.sharedInstance.homeLegislators[sender.tag]
+        guard let url = URL(string: "telprompt://" + legislator.phone) else { return }
+        UIApplication.shared.open(url, options: [:], completionHandler: nil)
+        print("call legislator: \(legislator.phone)")
     }
 }
