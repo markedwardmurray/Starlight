@@ -42,8 +42,8 @@ extension UIViewController {
     }
     
     func callLegislatorFromToolbar(sender: UIBarButtonItem) {
-        let legislator = self.legislators[sender.tag]
-        guard let url = URL(string: "telprompt://" + legislator.phone) else { return }
-        UIApplication.shared.open(url, options: [:], completionHandler: nil)
+//        let legislator = self.legislators[sender.tag]
+//        guard let url = URL(string: "telprompt://" + legislator.phone) else { return }
+//        UIApplication.shared.open(url, options: [:], completionHandler: nil)
     }
 }

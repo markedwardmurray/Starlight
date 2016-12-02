@@ -253,6 +253,12 @@ class MainTableViewController: UITableViewController, UISearchBarDelegate {
                 }
                 billCell.contextLabel.text = bill.upcomingBill?.context
                 
+                if bill.last_version?.urls["pdf"] != nil {
+                    billCell.accessoryType = .disclosureIndicator
+                } else {
+                    billCell.accessoryType = .none
+                }
+                
                 return billCell
             }
             else if type(of: billType) == UpcomingBill.self {
@@ -322,13 +328,14 @@ class MainTableViewController: UITableViewController, UISearchBarDelegate {
             let billType = self.billTypes[indexPath.row]
             if type(of: billType) == Bill.self {
                 let bill = billType as! Bill
-                if let url = bill.last_version.urls["pdf"] {
+                if let url = bill.last_version?.urls["pdf"] {
                     let webVC = WebViewController(url: url)
                     self.navigationController?.pushViewController(webVC, animated: true)
                 }
             }
             break
         }
+        
         tableView.deselectRow(at: indexPath, animated: true)
     }
     

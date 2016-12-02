@@ -30,8 +30,8 @@ struct Bill : BillType {
     let last_version_on : Date?
     let last_vote_at    : Date?
     
-    let last_version : BillVersion
-    let history      : BillHistory
+    let last_version : BillVersion?
+    let history      : BillHistory?
     
     let committee_ids   : [String]
     let cosponsors_count: Int
@@ -112,7 +112,11 @@ struct BillHistory {
     let enacted : Bool
     let vetoed  : Bool
     
-    init(json: JSON) {
+    init?(json: JSON) {
+        if json == JSON.null {
+            return nil
+        }
+        
         self.active  = json["active"].bool!
         self.awaiting_signature = json["awaiting_signature"].bool!
         self.enacted = json["enacted"].bool!
@@ -128,7 +132,11 @@ struct BillVersion {
     let urls  : [String:URL] // html, pdf, xml
     let pages : Int
     
-    init(json: JSON) {
+    init?(json: JSON) {
+        if json == JSON.null {
+            return nil
+        }
+        
         self.version_code    = json["version_code"].string!
         self.issued_on       = zuluDay(string: json["issued_on"].string)
         self.version_name    = json["version_name"].string!
