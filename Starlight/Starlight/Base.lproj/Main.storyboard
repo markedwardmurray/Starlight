@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11542" systemVersion="15G1108" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="hX9-xc-59s">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11542" systemVersion="15G1108" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="dR7-sh-AIt">
     <device id="retina5_5" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -167,13 +167,10 @@ Title</string>
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" id="OXS-aj-r7Z">
-                        <barButtonItem key="rightBarButtonItem" title="ⓘ" id="WBJ-o4-6qe">
-                            <connections>
-                                <segue destination="U2B-8y-QKt" kind="show" id="xRF-Qg-MGK"/>
-                            </connections>
-                        </barButtonItem>
+                        <barButtonItem key="leftBarButtonItem" image="icon_menu" id="DKv-zI-AJp"/>
                     </navigationItem>
                     <connections>
+                        <outlet property="menuBarButton" destination="DKv-zI-AJp" id="X4d-P6-snt"/>
                         <outlet property="searchBar" destination="qju-Gf-i6a" id="Ecp-cR-7vo"/>
                     </connections>
                 </tableViewController>
@@ -327,14 +324,130 @@ v0.0.0 (0)</string>
                             <outlet property="delegate" destination="U2B-8y-QKt" id="yfF-W9-pQf"/>
                         </connections>
                     </tableView>
+                    <navigationItem key="navigationItem" title="About" id="rWC-mq-61x">
+                        <barButtonItem key="leftBarButtonItem" image="icon_menu" id="9qL-GQ-9fB"/>
+                    </navigationItem>
                     <connections>
+                        <outlet property="menuBarButton" destination="9qL-GQ-9fB" id="KJD-6B-Nea"/>
                         <outlet property="tableFooterViewLabel" destination="RMG-Wa-pez" id="VaK-kt-exs"/>
                         <outlet property="tableHeaderViewLabel" destination="nFV-Un-6Bq" id="uh3-5s-fPc"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="UFX-Ur-MeW" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1450" y="21"/>
+            <point key="canvasLocation" x="691" y="735"/>
+        </scene>
+        <!--Main Reveal View Controller-->
+        <scene sceneID="dXa-y3-XMj">
+            <objects>
+                <viewController id="dR7-sh-AIt" customClass="MainRevealViewController" customModule="Starlight" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="ODA-6n-qhs"/>
+                        <viewControllerLayoutGuide type="bottom" id="Rzv-1Z-Zso"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="7yA-wS-xtj">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                    </view>
+                    <simulatedStatusBarMetrics key="simulatedStatusBarMetrics"/>
+                    <connections>
+                        <segue destination="zbB-ZO-hXe" kind="custom" identifier="sw_rear" customClass="SWRevealViewControllerSegueSetController" id="Cvr-GH-ld0"/>
+                        <segue destination="hX9-xc-59s" kind="custom" identifier="sw_front" customClass="SWRevealViewControllerSegueSetController" id="139-NG-hxq"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="wGi-wu-RCK" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-1262" y="20"/>
+        </scene>
+        <!--Left Menu Table View Controller-->
+        <scene sceneID="Lan-Fj-2c7">
+            <objects>
+                <tableViewController id="zbB-ZO-hXe" customClass="LeftMenuTableViewController" customModule="Starlight" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="Wz3-h5-LNH">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" red="0.0" green="0.062745098040000002" blue="0.50980392159999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <view key="tableHeaderView" contentMode="scaleToFill" id="MvW-0h-5lc" userLabel="TableHeaderView">
+                            <rect key="frame" x="0.0" y="0.0" width="414" height="44"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <color key="backgroundColor" red="0.0" green="0.062745098040000002" blue="0.50980392159999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        </view>
+                        <sections>
+                            <tableViewSection id="SAo-ix-PfO">
+                                <cells>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" textLabel="Rlx-a5-tZx" style="IBUITableViewCellStyleDefault" id="9eJ-1o-VF8">
+                                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="9eJ-1o-VF8" id="c7o-tg-TwN">
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="44"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Upcoming Bills" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Rlx-a5-tZx">
+                                                    <rect key="frame" x="15" y="0.0" width="384" height="44"/>
+                                                    <autoresizingMask key="autoresizingMask"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                        </tableViewCellContentView>
+                                        <color key="backgroundColor" red="0.0" green="0.062745098040000002" blue="0.50980392159999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <connections>
+                                            <segue destination="hX9-xc-59s" kind="custom" customClass="SWRevealViewControllerSeguePushController" id="SFD-Xu-O6V"/>
+                                        </connections>
+                                    </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" textLabel="Psd-5Y-9kS" style="IBUITableViewCellStyleDefault" id="fTY-q1-qG6">
+                                        <rect key="frame" x="0.0" y="88" width="414" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="fTY-q1-qG6" id="sPq-18-EAT">
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="44"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Legislators" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Psd-5Y-9kS">
+                                                    <rect key="frame" x="15" y="0.0" width="384" height="44"/>
+                                                    <autoresizingMask key="autoresizingMask"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                        </tableViewCellContentView>
+                                        <color key="backgroundColor" red="0.0" green="0.062745098040000002" blue="0.50980392159999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" textLabel="AkE-Zu-d22" style="IBUITableViewCellStyleDefault" id="nr4-om-Vya">
+                                        <rect key="frame" x="0.0" y="132" width="414" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="nr4-om-Vya" id="jaX-Pp-bpI">
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="44"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="About" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="AkE-Zu-d22">
+                                                    <rect key="frame" x="15" y="0.0" width="384" height="44"/>
+                                                    <autoresizingMask key="autoresizingMask"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                        </tableViewCellContentView>
+                                        <color key="backgroundColor" red="0.0" green="0.062745098040000002" blue="0.50980392159999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <connections>
+                                            <segue destination="XmF-SY-oMo" kind="custom" customClass="SWRevealViewControllerSeguePushController" id="5tR-Ns-dR7"/>
+                                        </connections>
+                                    </tableViewCell>
+                                </cells>
+                            </tableViewSection>
+                        </sections>
+                        <connections>
+                            <outlet property="dataSource" destination="zbB-ZO-hXe" id="Ead-uJ-XoH"/>
+                            <outlet property="delegate" destination="zbB-ZO-hXe" id="Qx4-1V-0n9"/>
+                        </connections>
+                    </tableView>
+                    <nil key="simulatedStatusBarMetrics"/>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="5OG-gp-Eza" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-1262" y="735"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="TvO-nF-paJ">
@@ -364,5 +477,39 @@ v0.0.0 (0)</string>
             </objects>
             <point key="canvasLocation" x="-247.19999999999999" y="21.139430284857571"/>
         </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="6pt-UW-Kqf">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="XmF-SY-oMo" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <simulatedStatusBarMetrics key="simulatedStatusBarMetrics" statusBarStyle="lightContent"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" barStyle="black" translucent="NO" id="tp3-Sj-xG7">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="barTintColor" red="0.0" green="0.062745098040000002" blue="0.50980392159999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <textAttributes key="titleTextAttributes">
+                            <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        </textAttributes>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <toolbar key="toolbar" opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="zis-sh-mvP">
+                        <rect key="frame" x="0.0" y="692" width="414" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </toolbar>
+                    <connections>
+                        <segue destination="U2B-8y-QKt" kind="relationship" relationship="rootViewController" id="Nc4-Qu-KKT"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="LWK-dl-Xtz" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-248" y="735"/>
+        </scene>
     </scenes>
+    <resources>
+        <image name="icon_menu" width="22" height="22"/>
+    </resources>
+    <inferredMetricsTieBreakers>
+        <segue reference="SFD-Xu-O6V"/>
+    </inferredMetricsTieBreakers>
 </document>

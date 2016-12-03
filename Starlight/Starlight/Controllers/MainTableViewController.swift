@@ -21,6 +21,8 @@ enum MainTVCReuseIdentifier: String {
 
 class MainTableViewController: UITableViewController, UISearchBarDelegate {
     
+    @IBOutlet var menuBarButton: UIBarButtonItem!
+    
     @IBOutlet var searchBar: UISearchBar!
     
     var segmentIndex: SegmentIndex = SegmentIndex.legislators
@@ -35,6 +37,12 @@ class MainTableViewController: UITableViewController, UISearchBarDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        if self.revealViewController() != nil {
+            self.menuBarButton.target = self.revealViewController()
+            self.menuBarButton.action = Selector(("revealToggle:"))
+            self.view.addGestureRecognizer(self.revealViewController().panGestureRecognizer())
+        }
         
         let segmentedControl = UISegmentedControl(items: ["Legislators","Upcoming Bills"])
         segmentedControl.addTarget(self, action: #selector(segmentedControlValueChanged(sender:)), for: .valueChanged)

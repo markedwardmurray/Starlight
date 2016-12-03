@@ -11,6 +11,8 @@
 		4D56B5BA1DE19B8800F9A52A /* AboutTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D56B5B91DE19B8800F9A52A /* AboutTableViewController.swift */; };
 		4D56B5BC1DE1A2ED00F9A52A /* UIViewController+Alerts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D56B5BB1DE1A2ED00F9A52A /* UIViewController+Alerts.swift */; };
 		4D56B5BF1DE2E7E100F9A52A /* Pods-Starlight-acknowledgements.markdown in Resources */ = {isa = PBXBuildFile; fileRef = 4D56B5BD1DE2E7CA00F9A52A /* Pods-Starlight-acknowledgements.markdown */; };
+		4D93928C1DF247F5004CD9B7 /* MainRevealViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D93928B1DF247F5004CD9B7 /* MainRevealViewController.swift */; };
+		4D93928E1DF249B5004CD9B7 /* LeftMenuTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D93928D1DF249B5004CD9B7 /* LeftMenuTableViewController.swift */; };
 		4DABF3F91DE73B2400634948 /* BillTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DABF3F81DE73B2400634948 /* BillTableViewCell.swift */; };
 		4DABF3FE1DE74F6700634948 /* BillType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DABF3FD1DE74F6700634948 /* BillType.swift */; };
 		4DC7FDD91DDEA20000F63B39 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DC7FDD81DDEA20000F63B39 /* AppDelegate.swift */; };
@@ -45,6 +47,8 @@
 		4D56B5B91DE19B8800F9A52A /* AboutTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AboutTableViewController.swift; sourceTree = "<group>"; };
 		4D56B5BB1DE1A2ED00F9A52A /* UIViewController+Alerts.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIViewController+Alerts.swift"; sourceTree = "<group>"; };
 		4D56B5BD1DE2E7CA00F9A52A /* Pods-Starlight-acknowledgements.markdown */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = "Pods-Starlight-acknowledgements.markdown"; sourceTree = "<group>"; };
+		4D93928B1DF247F5004CD9B7 /* MainRevealViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainRevealViewController.swift; sourceTree = "<group>"; };
+		4D93928D1DF249B5004CD9B7 /* LeftMenuTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LeftMenuTableViewController.swift; sourceTree = "<group>"; };
 		4DABF3F81DE73B2400634948 /* BillTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BillTableViewCell.swift; sourceTree = "<group>"; };
 		4DABF3FD1DE74F6700634948 /* BillType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BillType.swift; sourceTree = "<group>"; };
 		4DC7FDD51DDEA20000F63B39 /* Starlight.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Starlight.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -106,6 +110,8 @@
 		4D56B5B81DE19B0D00F9A52A /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				4D93928B1DF247F5004CD9B7 /* MainRevealViewController.swift */,
+				4D93928D1DF249B5004CD9B7 /* LeftMenuTableViewController.swift */,
 				4DC7FDDA1DDEA20000F63B39 /* MainTableViewController.swift */,
 				4D56B5B91DE19B8800F9A52A /* AboutTableViewController.swift */,
 				4D56B5BB1DE1A2ED00F9A52A /* UIViewController+Alerts.swift */,
@@ -421,6 +427,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				4DCA2A6B1DEAB7A800F83A96 /* UIViewController+LegislatorsToolbar.swift in Sources */,
+				4D93928E1DF249B5004CD9B7 /* LeftMenuTableViewController.swift in Sources */,
 				4DD7E6C71DE548F60078298F /* Bill.swift in Sources */,
 				4DD7E6CE1DE589880078298F /* CLPlacemark+Extensions.swift in Sources */,
 				4DD7E6C91DE5558B0078298F /* UpcomingBill.swift in Sources */,
@@ -430,6 +437,7 @@
 				4DCA2A631DEA3C8800F83A96 /* StoreCoordinator.swift in Sources */,
 				4DABF3FE1DE74F6700634948 /* BillType.swift in Sources */,
 				4D56B5BC1DE1A2ED00F9A52A /* UIViewController+Alerts.swift in Sources */,
+				4D93928C1DF247F5004CD9B7 /* MainRevealViewController.swift in Sources */,
 				4D56B5BA1DE19B8800F9A52A /* AboutTableViewController.swift in Sources */,
 				4DC7FDFD1DDEB35A00F63B39 /* SunlightAPIClient.swift in Sources */,
 				4DC7FDDB1DDEA20000F63B39 /* MainTableViewController.swift in Sources */,
