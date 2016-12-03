@@ -11,12 +11,13 @@ import INTULocationManager
 import Hex
 
 class LegislatorsTableViewController: UITableViewController, UISearchBarDelegate {
+    static let navConStoryboardId = "LegislatorsNavigationController"
     
     @IBOutlet var menuBarButton: UIBarButtonItem!
     
     @IBOutlet var searchBar: UISearchBar!
     
-    var legislators: [Legislator] = []
+    var legislators: [Legislator] = DataManager.sharedInstance.homeLegislators
     let locationManager = INTULocationManager.sharedInstance()
     let geoCoder = CLGeocoder()
     var location: CLLocation?
@@ -34,24 +35,19 @@ class LegislatorsTableViewController: UITableViewController, UISearchBarDelegate
         
         self.tableView.rowHeight = UITableViewAutomaticDimension
         
-        let result = StoreCoordinator.sharedInstance.loadHomeLegislators()
-        switch result {
-        case .error:
+        if legislators.count == 0 {
             self.loadLegislatorsWithCurrentLocation()
-        case .legislators(let legislators):
-            if legislators.count == 0 {
-                self.loadLegislatorsWithCurrentLocation()
-            } else {
-                self.legislators = legislators
-                self.tableView.reloadData()
-            }
         }
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
-        self.loadToolbarWithHomeLegislators()
+        if DataManager.sharedInstance.homeLegislators.count > 0 {
+            self.loadToolbarWithHomeLegislators()
+        } else {
+            self.navigationController?.isToolbarHidden = true
+        }
     }
     
     func loadLegislatorsWithCurrentLocation() {
@@ -161,7 +157,7 @@ class LegislatorsTableViewController: UITableViewController, UISearchBarDelegate
             UIApplication.shared.open(url, options: [:], completionHandler: nil)
             
         case 1:
-            let result = StoreCoordinator.sharedInstance.save(homeLegislators: self.legislators)
+            let result = DataManager.sharedInstance.save(homeLegislators: self.legislators)
             switch result {
             case .error:
                 self.showAlertWithTitle(title: "Error!", message: "Failed to save your legislators")

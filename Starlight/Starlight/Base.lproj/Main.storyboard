@@ -496,7 +496,7 @@ v0.0.0 (0)</string>
         <!--Navigation Controller-->
         <scene sceneID="oEY-Ce-zHb">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" toolbarHidden="NO" id="YCl-g1-Cly" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="LegislatorsNavigationController" automaticallyAdjustsScrollViewInsets="NO" toolbarHidden="NO" id="YCl-g1-Cly" sceneMemberID="viewController">
                     <toolbarItems/>
                     <simulatedStatusBarMetrics key="simulatedStatusBarMetrics" statusBarStyle="lightContent"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" barStyle="black" translucent="NO" id="yXy-7c-ZbB">

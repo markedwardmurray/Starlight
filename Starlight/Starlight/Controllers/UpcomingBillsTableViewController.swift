@@ -169,6 +169,7 @@ class UpcomingBillsTableViewController: UITableViewController {
             if let url = bill.last_version?.urls["pdf"] {
                 let webVC = WebViewController(url: url)
                 self.navigationController?.pushViewController(webVC, animated: true)
+                self.navigationController?.isToolbarHidden = true
             }
         }
         
