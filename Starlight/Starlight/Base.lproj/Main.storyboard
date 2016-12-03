@@ -6,6 +6,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11524"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -332,7 +333,29 @@ v0.0.0 (0)</string>
                         <view key="tableHeaderView" contentMode="scaleToFill" id="MvW-0h-5lc" userLabel="TableHeaderView">
                             <rect key="frame" x="0.0" y="0.0" width="414" height="44"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <subviews>
+                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="AppIcon60x60" translatesAutoresizingMaskIntoConstraints="NO" id="DqZ-sC-7Kn">
+                                    <rect key="frame" x="8" y="8" width="28" height="28"/>
+                                    <constraints>
+                                        <constraint firstAttribute="width" secondItem="DqZ-sC-7Kn" secondAttribute="height" multiplier="1:1" id="f29-aM-jBj"/>
+                                    </constraints>
+                                </imageView>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Starlight" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="h3I-cv-b0l">
+                                    <rect key="frame" x="36" y="10.333333333333336" width="362" height="24"/>
+                                    <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
+                                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
+                            </subviews>
                             <color key="backgroundColor" red="0.0" green="0.062745098040000002" blue="0.50980392159999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <constraints>
+                                <constraint firstAttribute="bottom" secondItem="DqZ-sC-7Kn" secondAttribute="bottom" constant="8" id="54X-kO-zwg"/>
+                                <constraint firstItem="DqZ-sC-7Kn" firstAttribute="leading" secondItem="MvW-0h-5lc" secondAttribute="leading" constant="8" id="T1T-Qa-chm"/>
+                                <constraint firstItem="DqZ-sC-7Kn" firstAttribute="top" secondItem="MvW-0h-5lc" secondAttribute="top" constant="8" id="WPU-dN-Xlk"/>
+                                <constraint firstAttribute="trailing" secondItem="h3I-cv-b0l" secondAttribute="trailing" constant="16" id="evE-Ob-ZuX"/>
+                                <constraint firstItem="h3I-cv-b0l" firstAttribute="centerY" secondItem="DqZ-sC-7Kn" secondAttribute="centerY" id="g6F-iI-KEW"/>
+                                <constraint firstItem="h3I-cv-b0l" firstAttribute="leading" secondItem="DqZ-sC-7Kn" secondAttribute="trailing" id="vqp-NB-3HR"/>
+                            </constraints>
                         </view>
                         <sections>
                             <tableViewSection id="SAo-ix-PfO">
@@ -412,7 +435,7 @@ v0.0.0 (0)</string>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="5OG-gp-Eza" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1262" y="735"/>
+            <point key="canvasLocation" x="-1262.3188405797102" y="734.51086956521749"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="TvO-nF-paJ">
@@ -569,6 +592,7 @@ v0.0.0 (0)</string>
         </scene>
     </scenes>
     <resources>
+        <image name="AppIcon60x60" width="16" height="16"/>
         <image name="icon_menu" width="22" height="22"/>
     </resources>
     <inferredMetricsTieBreakers>
