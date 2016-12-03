@@ -48,7 +48,12 @@ class SunlightAPIClient {
                         
                         print("SunlightAPIClient: legislators")
                         let results = json["results"]
-                        let legislators = Legislator.legislatorsWithResults(results: results)
+                        var legislators = Legislator.legislatorsWithResults(results: results)
+                        
+                        legislators = legislators.sorted {
+                            return $0.chamber == $1.chamber ? $0.last_name < $1.last_name : $0.chamber < $1.chamber
+                        }
+                        
                         completion(LegislatorsResult.legislators(legislators: legislators))
                     }
                 }
