@@ -315,7 +315,7 @@ v0.0.0 (0)</string>
                     <simulatedStatusBarMetrics key="simulatedStatusBarMetrics"/>
                     <connections>
                         <segue destination="zbB-ZO-hXe" kind="custom" identifier="sw_rear" customClass="SWRevealViewControllerSegueSetController" id="Cvr-GH-ld0"/>
-                        <segue destination="hX9-xc-59s" kind="custom" identifier="sw_front" customClass="SWRevealViewControllerSegueSetController" id="139-NG-hxq"/>
+                        <segue destination="hX9-xc-59s" kind="custom" identifier="sw_front" customClass="SWRevealViewControllerSegueSetController" id="nOJ-Sa-XAL"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="wGi-wu-RCK" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -377,9 +377,6 @@ v0.0.0 (0)</string>
                                             </subviews>
                                         </tableViewCellContentView>
                                         <color key="backgroundColor" red="0.0" green="0.062745098040000002" blue="0.50980392159999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                        <connections>
-                                            <segue destination="hX9-xc-59s" kind="custom" customClass="SWRevealViewControllerSeguePushController" id="SFD-Xu-O6V"/>
-                                        </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" textLabel="Psd-5Y-9kS" style="IBUITableViewCellStyleDefault" id="fTY-q1-qG6">
                                         <rect key="frame" x="0.0" y="88" width="414" height="44"/>
@@ -398,9 +395,6 @@ v0.0.0 (0)</string>
                                             </subviews>
                                         </tableViewCellContentView>
                                         <color key="backgroundColor" red="0.0" green="0.062745098040000002" blue="0.50980392159999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                        <connections>
-                                            <segue destination="YCl-g1-Cly" kind="custom" customClass="SWRevealViewControllerSeguePushController" id="dP1-nf-stD"/>
-                                        </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" textLabel="AkE-Zu-d22" style="IBUITableViewCellStyleDefault" id="nr4-om-Vya">
                                         <rect key="frame" x="0.0" y="132" width="414" height="44"/>
@@ -419,9 +413,6 @@ v0.0.0 (0)</string>
                                             </subviews>
                                         </tableViewCellContentView>
                                         <color key="backgroundColor" red="0.0" green="0.062745098040000002" blue="0.50980392159999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                        <connections>
-                                            <segue destination="XmF-SY-oMo" kind="custom" customClass="SWRevealViewControllerSeguePushController" id="5tR-Ns-dR7"/>
-                                        </connections>
                                     </tableViewCell>
                                 </cells>
                             </tableViewSection>
@@ -440,7 +431,7 @@ v0.0.0 (0)</string>
         <!--Navigation Controller-->
         <scene sceneID="TvO-nF-paJ">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" toolbarHidden="NO" id="hX9-xc-59s" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="UpcomingBillsNavigationController" automaticallyAdjustsScrollViewInsets="NO" toolbarHidden="NO" id="hX9-xc-59s" sceneMemberID="viewController">
                     <toolbarItems/>
                     <simulatedStatusBarMetrics key="simulatedStatusBarMetrics" statusBarStyle="lightContent"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" barStyle="black" translucent="NO" id="YKX-RJ-bTx">
@@ -463,12 +454,12 @@ v0.0.0 (0)</string>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="I2M-pU-IA1" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-247.19999999999999" y="21.139430284857571"/>
+            <point key="canvasLocation" x="-249" y="20"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="6pt-UW-Kqf">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="XmF-SY-oMo" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="AboutNavigationController" automaticallyAdjustsScrollViewInsets="NO" id="XmF-SY-oMo" sceneMemberID="viewController">
                     <toolbarItems/>
                     <simulatedStatusBarMetrics key="simulatedStatusBarMetrics" statusBarStyle="lightContent"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" barStyle="black" translucent="NO" id="tp3-Sj-xG7">
@@ -613,7 +604,4 @@ v0.0.0 (0)</string>
         <image name="AppIcon60x60" width="16" height="16"/>
         <image name="icon_menu" width="22" height="22"/>
     </resources>
-    <inferredMetricsTieBreakers>
-        <segue reference="SFD-Xu-O6V"/>
-    </inferredMetricsTieBreakers>
 </document>

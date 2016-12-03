@@ -15,6 +15,7 @@ enum AboutTVCIndex: Int {
 }
 
 class AboutTableViewController: UITableViewController, MFMailComposeViewControllerDelegate {
+    static let navConStoryboardId = "AboutNavigationController"
     
     @IBOutlet var menuBarButton: UIBarButtonItem!
 

@@ -63,9 +63,8 @@ extension UIViewController {
     }
     
     @objc fileprivate func navigateToLegislatorsPage(sender: UIBarButtonItem) {
-        let rootVC = UIStoryboard.main.instantiateViewController(withIdentifier: LegislatorsTableViewController.navConStoryboardId)
-        if let revealVC = self.revealViewController() {
-            revealVC.pushFrontViewController(rootVC, animated: true)
+        if let mainRevealVC = self.revealViewController() as? MainRevealViewController {
+            mainRevealVC.pushLegislatorsTVC()
         }
     }
 }

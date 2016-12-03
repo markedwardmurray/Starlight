@@ -9,6 +9,9 @@
 import UIKit
 
 class LeftMenuTableViewController: UITableViewController {
+    var mainRevealController: MainRevealViewController {
+        return self.revealViewController() as! MainRevealViewController
+    }
     
     override var preferredStatusBarStyle: UIStatusBarStyle {
         return .lightContent
@@ -18,8 +21,13 @@ class LeftMenuTableViewController: UITableViewController {
         super.viewDidLoad()
 
         self.clearsSelectionOnViewWillAppear = false
-        
-        let indexPath = IndexPath(row: 0, section: 0)
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+    
+        let row: Int = self.mainRevealController.revealIndex.rawValue
+        let indexPath = IndexPath(row: row, section: 0)
         self.tableView.selectRow(at: indexPath, animated: false, scrollPosition: .top)
     }
     
@@ -29,5 +37,18 @@ class LeftMenuTableViewController: UITableViewController {
         selectionColor.layer.borderColor = UIColor.init(hex: "0000ff").cgColor
         selectionColor.backgroundColor = UIColor.init(hex: "0000ff")
         cell.selectedBackgroundView = selectionColor
+    }
+    
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        switch indexPath.row {
+        case 0:
+            self.mainRevealController.pushUpcomingBillsTVC()
+        case 1:
+            self.mainRevealController.pushLegislatorsTVC()
+        case 2:
+            self.mainRevealController.pushAboutTVC()
+        default:
+            break
+        }
     }
 }

@@ -16,6 +16,7 @@ enum BillTypeCellReuseIdentifier: String {
 }
 
 class UpcomingBillsTableViewController: UITableViewController {
+    static let navConStoryboardId = "UpcomingBillsNavigationController"
     
     @IBOutlet var menuBarButton: UIBarButtonItem!
     
