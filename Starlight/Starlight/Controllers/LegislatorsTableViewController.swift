@@ -16,6 +16,7 @@ class LegislatorsTableViewController: UITableViewController, UISearchBarDelegate
     @IBOutlet var menuBarButton: UIBarButtonItem!
     
     @IBOutlet var searchBar: UISearchBar!
+    @IBOutlet var saveLegislatorsButton: UIButton!
     
     var legislators: [Legislator] = DataManager.sharedInstance.homeLegislators
     let locationManager = INTULocationManager.sharedInstance()
@@ -93,83 +94,40 @@ class LegislatorsTableViewController: UITableViewController, UISearchBarDelegate
     //MARK: UITableViewDataSource/Delegate
     
     override func numberOfSections(in tableView: UITableView) -> Int {
-        return 2
+        return 1
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        switch section {
-        case 0:
-            return legislators.count
-        case 1:
-            return legislators.count > 0 ? 1 : 0
-        default:
-            return 0
-        }
+        return legislators.count
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        switch indexPath.section {
-        case 0:
-            let legislatorCell = tableView.dequeueReusableCell(withIdentifier: "legislatorCell")!
-            
-            let legislator = legislators[indexPath.row]
-            
-            legislatorCell.textLabel?.text = legislator.fullName
-            legislatorCell.detailTextLabel?.text = legislator.seatDescription
-            
-            return legislatorCell
-            
-        case 1:
-            let saveCell = UITableViewCell(style: .default, reuseIdentifier: "saveCell")
-            saveCell.textLabel?.textColor = UIColor.blue
-            saveCell.textLabel?.textAlignment = .center
-            saveCell.textLabel?.text = "Save"
-            
-            return saveCell
-            
-        default:
-            return UITableViewCell()
-        }
+        let legislatorCell = tableView.dequeueReusableCell(withIdentifier: "legislatorCell")!
+        
+        let legislator = legislators[indexPath.row]
+        
+        legislatorCell.textLabel?.text = legislator.fullName
+        legislatorCell.detailTextLabel?.text = legislator.seatDescription
+        
+        return legislatorCell
     }
     
     override func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-        switch indexPath.section {
-        case 0:
-            let legislator = legislators[indexPath.row]
-            if (legislator.party == "D") {
-                cell.backgroundColor = UIColor.init(hex: "DAF0FF");
-            } else if (legislator.party == "R") {
-                cell.backgroundColor = UIColor.init(hex: "FFDFF3");
-            } else {
-                cell.backgroundColor = UIColor.white
-            }
-            
-        default:
-            break
+        let legislator = legislators[indexPath.row]
+        if (legislator.party == "D") {
+            cell.backgroundColor = UIColor.init(hex: "DAF0FF");
+        } else if (legislator.party == "R") {
+            cell.backgroundColor = UIColor.init(hex: "FFDFF3");
+        } else {
+            cell.backgroundColor = UIColor.white
         }
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        switch indexPath.section {
-        case 0:
-            let legislator = legislators[indexPath.row]
-            guard let url = URL(string: "telprompt://" + legislator.phone) else { return }
-            UIApplication.shared.open(url, options: [:], completionHandler: nil)
-            
-        case 1:
-            let result = DataManager.sharedInstance.save(homeLegislators: self.legislators)
-            switch result {
-            case .error:
-                self.showAlertWithTitle(title: "Error!", message: "Failed to save your legislators")
-            case .success:
-                self.loadToolbarWithHomeLegislators()
-                self.tableView.reloadData()
-                break
-            }
-            
-        default:
-            break
-        }
+
+        let legislator = legislators[indexPath.row]
+        guard let url = URL(string: "telprompt://" + legislator.phone) else { return }
+        UIApplication.shared.open(url, options: [:], completionHandler: nil)
         
         tableView.deselectRow(at: indexPath, animated: true)
     }
@@ -215,6 +173,18 @@ class LegislatorsTableViewController: UITableViewController, UISearchBarDelegate
                 })
             }
         })
+    }
+    
+    @IBAction func saveLegislatorsButtonTapped(_ sender: UIButton) {
+        
+        let result = DataManager.sharedInstance.save(homeLegislators: self.legislators)
+        switch result {
+        case .error:
+            self.showAlertWithTitle(title: "Error!", message: "Failed to save your legislators")
+        case .success:
+            self.loadToolbarWithHomeLegislators()
+            self.tableView.reloadData()
+        }
     }
     
 }
