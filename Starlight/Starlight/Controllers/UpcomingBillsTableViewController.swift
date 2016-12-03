@@ -33,7 +33,19 @@ class UpcomingBillsTableViewController: UITableViewController {
         self.tableView.rowHeight = UITableViewAutomaticDimension
         self.tableView.estimatedRowHeight = 100
         
-        self.loadUpcomingBills()
+        if let billTypes = DataManager.sharedInstance.billTypes {
+            self.billTypes = billTypes
+            self.tableView.reloadData()
+            
+            for billType in billTypes {
+                if type(of: billType) == UpcomingBill.self {
+                    let upcomingBill = billType as! UpcomingBill
+                    self.replaceWithBill(upcomingBill: upcomingBill)
+                }
+            }
+        } else {
+            self.loadUpcomingBills()
+        }
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -49,6 +61,7 @@ class UpcomingBillsTableViewController: UITableViewController {
                 print(error)
                 self.showAlertWithTitle(title: "Error!", message: error.localizedDescription)
             case .upcomingBills(let upcomingBills):
+                DataManager.sharedInstance.billTypes = upcomingBills
                 self.billTypes = upcomingBills
                 
                 self.tableView.reloadData()
@@ -77,6 +90,7 @@ class UpcomingBillsTableViewController: UITableViewController {
                     return
                 }
                 
+                DataManager.sharedInstance.billTypes?[row] = bill
                 self.billTypes[row] = bill
 
                 let indexPath = IndexPath(row: row, section: 0)

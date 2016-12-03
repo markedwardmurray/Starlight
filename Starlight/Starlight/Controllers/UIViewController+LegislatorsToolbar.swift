@@ -15,7 +15,7 @@ extension UIViewController {
             return
         }
         
-        let homeLegislators = StoreCoordinator.sharedInstance.homeLegislators
+        let homeLegislators = DataManager.sharedInstance.homeLegislators
         
         var items = [UIBarButtonItem]()
         
@@ -51,7 +51,7 @@ extension UIViewController {
     }
     
     @objc fileprivate func callLegislatorFromToolbar(sender: UIButton) {
-        let legislator = StoreCoordinator.sharedInstance.homeLegislators[sender.tag]
+        let legislator = DataManager.sharedInstance.homeLegislators[sender.tag]
         guard let url = URL(string: "telprompt://" + legislator.phone) else { return }
         UIApplication.shared.open(url, options: [:], completionHandler: nil)
         print("call legislator: \(legislator.phone)")

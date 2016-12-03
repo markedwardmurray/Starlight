@@ -14,6 +14,7 @@
 		4D93928C1DF247F5004CD9B7 /* MainRevealViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D93928B1DF247F5004CD9B7 /* MainRevealViewController.swift */; };
 		4D93928E1DF249B5004CD9B7 /* LeftMenuTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D93928D1DF249B5004CD9B7 /* LeftMenuTableViewController.swift */; };
 		4D9392921DF29223004CD9B7 /* UpcomingBillsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D9392911DF29223004CD9B7 /* UpcomingBillsTableViewController.swift */; };
+		4D9392941DF2A501004CD9B7 /* DataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D9392931DF2A501004CD9B7 /* DataManager.swift */; };
 		4DABF3F91DE73B2400634948 /* BillTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DABF3F81DE73B2400634948 /* BillTableViewCell.swift */; };
 		4DABF3FE1DE74F6700634948 /* BillType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DABF3FD1DE74F6700634948 /* BillType.swift */; };
 		4DC7FDD91DDEA20000F63B39 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DC7FDD81DDEA20000F63B39 /* AppDelegate.swift */; };
@@ -51,6 +52,7 @@
 		4D93928B1DF247F5004CD9B7 /* MainRevealViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainRevealViewController.swift; sourceTree = "<group>"; };
 		4D93928D1DF249B5004CD9B7 /* LeftMenuTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LeftMenuTableViewController.swift; sourceTree = "<group>"; };
 		4D9392911DF29223004CD9B7 /* UpcomingBillsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UpcomingBillsTableViewController.swift; sourceTree = "<group>"; };
+		4D9392931DF2A501004CD9B7 /* DataManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataManager.swift; sourceTree = "<group>"; };
 		4DABF3F81DE73B2400634948 /* BillTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BillTableViewCell.swift; sourceTree = "<group>"; };
 		4DABF3FD1DE74F6700634948 /* BillType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BillType.swift; sourceTree = "<group>"; };
 		4DC7FDD51DDEA20000F63B39 /* Starlight.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Starlight.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -201,6 +203,7 @@
 		4DCA2A611DEA3C6400F83A96 /* Data */ = {
 			isa = PBXGroup;
 			children = (
+				4D9392931DF2A501004CD9B7 /* DataManager.swift */,
 				4DCA2A621DEA3C8800F83A96 /* StoreCoordinator.swift */,
 			);
 			path = Data;
@@ -436,6 +439,7 @@
 				4DD7E6CE1DE589880078298F /* CLPlacemark+Extensions.swift in Sources */,
 				4DD7E6C91DE5558B0078298F /* UpcomingBill.swift in Sources */,
 				4DC7FDFB1DDEA43B00F63B39 /* Legislator.swift in Sources */,
+				4D9392941DF2A501004CD9B7 /* DataManager.swift in Sources */,
 				4DABF3F91DE73B2400634948 /* BillTableViewCell.swift in Sources */,
 				4DD7E6CC1DE565D60078298F /* Functions.swift in Sources */,
 				4DCA2A631DEA3C8800F83A96 /* StoreCoordinator.swift in Sources */,

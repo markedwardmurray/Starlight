@@ -26,8 +26,6 @@ enum StoreError: Error {
 class StoreCoordinator {
     static let sharedInstance = StoreCoordinator()
     
-    var homeLegislators = [Legislator]()
-    
     fileprivate let fileManager = FileManager.default
     
     fileprivate let k_dot_json = ".json"
@@ -95,13 +93,12 @@ class StoreCoordinator {
         case .error(let error):
             return LegislatorsResult.error(error: error)
         case .json(let json):
-            self.homeLegislators = Legislator.legislatorsWithResults(results: json)
-            return LegislatorsResult.legislators(legislators: self.homeLegislators)
+            let homeLegislators = Legislator.legislatorsWithResults(results: json)
+            return LegislatorsResult.legislators(legislators: homeLegislators)
         }
     }
     
     func save(homeLegislators: [Legislator]) -> SuccessResult {
-        self.homeLegislators = homeLegislators
         
         var jsonArray = [JSON]()
         for legislator in homeLegislators {
