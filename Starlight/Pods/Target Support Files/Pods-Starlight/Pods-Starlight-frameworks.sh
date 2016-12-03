@@ -89,6 +89,7 @@ if [[ "$CONFIGURATION" == "Debug" ]]; then
   install_framework "$BUILT_PRODUCTS_DIR/Hex/Hex.framework"
   install_framework "$BUILT_PRODUCTS_DIR/INTULocationManager/INTULocationManager.framework"
   install_framework "$BUILT_PRODUCTS_DIR/JSQWebViewController/JSQWebViewController.framework"
+  install_framework "$BUILT_PRODUCTS_DIR/SWRevealViewController/SWRevealViewController.framework"
   install_framework "$BUILT_PRODUCTS_DIR/SwiftyJSON/SwiftyJSON.framework"
 fi
 if [[ "$CONFIGURATION" == "Release" ]]; then
@@ -97,5 +98,6 @@ if [[ "$CONFIGURATION" == "Release" ]]; then
   install_framework "$BUILT_PRODUCTS_DIR/Hex/Hex.framework"
   install_framework "$BUILT_PRODUCTS_DIR/INTULocationManager/INTULocationManager.framework"
   install_framework "$BUILT_PRODUCTS_DIR/JSQWebViewController/JSQWebViewController.framework"
+  install_framework "$BUILT_PRODUCTS_DIR/SWRevealViewController/SWRevealViewController.framework"
   install_framework "$BUILT_PRODUCTS_DIR/SwiftyJSON/SwiftyJSON.framework"
 fi
