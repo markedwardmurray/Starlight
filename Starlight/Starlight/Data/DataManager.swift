@@ -12,7 +12,7 @@ class DataManager {
     static let sharedInstance = DataManager()
     
     var upcomingBills: [UpcomingBill]?
-    var bills: [Bill]?
+    var bills = Set<Bill>()
     var homeLegislators: [Legislator] = []
     
     func loadHomeLegislators() -> LegislatorsResult {
@@ -31,5 +31,26 @@ class DataManager {
         self.homeLegislators = homeLegislators
         
         return StoreCoordinator.sharedInstance.save(homeLegislators: homeLegislators)
+    }
+    
+    func getBill(billId: String, completion: @escaping (BillResult) -> Void) {
+        let result = StoreCoordinator.sharedInstance.loadBill(bill_id: billId)
+        switch result {
+        case .bill(let bill):
+            self.bills.insert(bill)
+            completion(result)
+        case .error(_):
+            SunlightAPIClient.sharedInstance.getBill(billId: billId, completion: { (billResult) in
+                switch billResult {
+                case .bill(let bill):
+                    self.bills.insert(bill)
+                    _ = StoreCoordinator.sharedInstance.save(bill: bill)
+                case .error(_):
+                    break
+                }
+                
+                completion(billResult)
+            })
+        }
     }
 }

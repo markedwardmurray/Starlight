@@ -75,8 +75,7 @@ class UpcomingBillsTableViewController: UITableViewController {
     
     func getBill(for upcomingBill: UpcomingBill) {
         var upcomingBill = upcomingBill
-        let billId = upcomingBill.bill_id
-        SunlightAPIClient.sharedInstance.getBill(billId: billId, completion: { (billResult) in
+        DataManager.sharedInstance.getBill(billId: upcomingBill.bill_id, completion: { (billResult) in
             switch billResult {
             case .error(let error):
                 print(error)
@@ -93,7 +92,7 @@ class UpcomingBillsTableViewController: UITableViewController {
                 
                 self.upcomingBills[row] = upcomingBill
                 DataManager.sharedInstance.upcomingBills?[row] = upcomingBill
-                DataManager.sharedInstance.bills?.append(bill)
+                DataManager.sharedInstance.bills.insert(bill)
 
                 let indexPath = IndexPath(row: row, section: 0)
                 self.tableView.reloadRows(at: [indexPath], with: .left)

@@ -26,13 +26,17 @@ enum StoreError: Error {
 class StoreCoordinator {
     static let sharedInstance = StoreCoordinator()
     
+    //MARK: Private properties and methods
+    
     fileprivate let fileManager = FileManager.default
+    
+    fileprivate let k_folder_bills = "bills"
     
     fileprivate let k_dot_json = ".json"
     fileprivate let k_legislators_home = "legislators_home"
     
-    func modificationDate(fileName: String) -> Date? {
-        let filePath = NSHomeDirectory() + "/" + fileName + k_dot_json
+    fileprivate func modificationDate(folderName: String?, fileName: String, homeDirectory: Bool) -> Date? {
+        let filePath = self.filePath(folderName: folderName, fileName: fileName, homeDirectory: homeDirectory)
         do {
             let attr = try fileManager.attributesOfItem(atPath: filePath)
             return attr[FileAttributeKey.modificationDate] as? Date
@@ -42,8 +46,8 @@ class StoreCoordinator {
         }
     }
     
-    fileprivate func loadJSON(fileName: String) -> JSONResult {
-        let filePath = NSHomeDirectory() + "/" + fileName + k_dot_json
+    fileprivate func loadJSON(folderName: String?, fileName: String, homeDirectory: Bool) -> JSONResult {
+        let filePath = self.filePath(folderName: folderName, fileName: fileName, homeDirectory: homeDirectory)
         let fileURL = URL(fileURLWithPath: filePath)
         
         guard fileManager.fileExists(atPath: filePath) else {
@@ -62,8 +66,15 @@ class StoreCoordinator {
         }
     }
     
-    fileprivate func save(json: JSON, fileName: String) -> SuccessResult {
-        let filePath = NSHomeDirectory() + "/" + fileName + k_dot_json
+    fileprivate func save(json: JSON, folderName: String?, fileName: String, homeDirectory: Bool) -> SuccessResult {
+        let filePath = self.filePath(folderName: folderName, fileName: fileName, homeDirectory: homeDirectory)
+        
+        if let folderName = folderName {
+            let error = self.createDirectoryIfNeeded(folderName: folderName, homeDirectory: homeDirectory)
+            if let error = error {
+                return SuccessResult.error(error: error)
+            }
+        }
         
         if self.fileManager.fileExists(atPath: filePath) {
             do {
@@ -86,9 +97,42 @@ class StoreCoordinator {
         }
     }
     
+    fileprivate func filePath(folderName: String?, fileName: String, homeDirectory: Bool) -> String {
+        let directory = homeDirectory ? NSHomeDirectory() + "/" : NSTemporaryDirectory()
+        var filePath = directory
+        if let folderName = folderName {
+            filePath += folderName + "/"
+        }
+        filePath += fileName + k_dot_json
+        
+        return filePath
+    }
+    
+    fileprivate func directoryPath(folderName: String, homeDirectory: Bool) -> String {
+        let directory = homeDirectory ? NSHomeDirectory() + "/" : NSTemporaryDirectory()
+        return directory + folderName
+    }
+    
+    fileprivate func createDirectoryIfNeeded(folderName: String, homeDirectory: Bool) -> NSError? {
+        let directoryPath = self.directoryPath(folderName: folderName, homeDirectory: homeDirectory)
+        if self.fileManager.fileExists(atPath: directoryPath) == false {
+            do {
+                try self.fileManager.createDirectory(atPath: directoryPath, withIntermediateDirectories: false, attributes: nil)
+            }
+            catch let error as NSError {
+                print(error.localizedDescription)
+                return error
+            }
+            return nil
+        } else {
+            return nil
+        }
+    }
+    
+    //MARK: Public methods
     
     func loadHomeLegislators() -> LegislatorsResult {
-        let result = self.loadJSON(fileName: k_legislators_home)
+        let result = self.loadJSON(folderName: nil, fileName: k_legislators_home, homeDirectory: true)
         switch result {
         case .error(let error):
             return LegislatorsResult.error(error: error)
@@ -99,14 +143,31 @@ class StoreCoordinator {
     }
     
     func save(homeLegislators: [Legislator]) -> SuccessResult {
-        
         var jsonArray = [JSON]()
         for legislator in homeLegislators {
             jsonArray.append(legislator.json)
         }
         let json = JSON(jsonArray)
         
-        return self.save(json: json, fileName: k_legislators_home)
+        return self.save(json: json, folderName: nil, fileName: k_legislators_home, homeDirectory: true)
     }
+    
+    func loadBill(bill_id: String) -> BillResult {
+        let result = self.loadJSON(folderName: k_folder_bills, fileName: bill_id, homeDirectory: false)
+        switch result {
+        case .error(let error):
+            return BillResult.error(error: error)
+        case .json(let json):
+            let bill = Bill(result: json)
+            print("StoreCoordinator: load bill \(bill.bill_id)")
+            return BillResult.bill(bill: bill)
+        }
+    }
+    
+    func save(bill: Bill) -> SuccessResult {
+        print("StoreCoordinator: save bill \(bill.bill_id)")
+        return self.save(json: bill.json, folderName: k_folder_bills, fileName: bill.bill_id, homeDirectory: false)
+    }
+
 }
 
