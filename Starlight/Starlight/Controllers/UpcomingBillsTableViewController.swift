@@ -20,7 +20,7 @@ class UpcomingBillsTableViewController: UITableViewController {
     
     @IBOutlet var menuBarButton: UIBarButtonItem!
     
-    var billTypes: [BillType] = []
+    var upcomingBills: [UpcomingBill] = []
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -34,14 +34,13 @@ class UpcomingBillsTableViewController: UITableViewController {
         self.tableView.rowHeight = UITableViewAutomaticDimension
         self.tableView.estimatedRowHeight = 100
         
-        if let billTypes = DataManager.sharedInstance.billTypes {
-            self.billTypes = billTypes
+        if let upcomingBills = DataManager.sharedInstance.upcomingBills {
+            self.upcomingBills = upcomingBills
             self.tableView.reloadData()
             
-            for billType in billTypes {
-                if type(of: billType) == UpcomingBill.self {
-                    let upcomingBill = billType as! UpcomingBill
-                    self.replaceWithBill(upcomingBill: upcomingBill)
+            for upcomingBill in upcomingBills {
+                if upcomingBill.bill == nil {
+                    self.getBill(for: upcomingBill)
                 }
             }
         } else {
@@ -62,37 +61,39 @@ class UpcomingBillsTableViewController: UITableViewController {
                 print(error)
                 self.showAlertWithTitle(title: "Error!", message: error.localizedDescription)
             case .upcomingBills(let upcomingBills):
-                DataManager.sharedInstance.billTypes = upcomingBills
-                self.billTypes = upcomingBills
+                DataManager.sharedInstance.upcomingBills = upcomingBills
+                self.upcomingBills = upcomingBills
                 
                 self.tableView.reloadData()
                 
                 for upcomingBill in upcomingBills {
-                    self.replaceWithBill(upcomingBill: upcomingBill)
+                    self.getBill(for: upcomingBill)
                 }
             }
         }
     }
     
-    func replaceWithBill(upcomingBill: UpcomingBill) {
+    func getBill(for upcomingBill: UpcomingBill) {
+        var upcomingBill = upcomingBill
         let billId = upcomingBill.bill_id
         SunlightAPIClient.sharedInstance.getBill(billId: billId, completion: { (billResult) in
             switch billResult {
             case .error(let error):
                 print(error)
                 self.showAlertWithTitle(title: "Error!", message: error.localizedDescription)
-            case .bill(var bill):
-                bill.upcomingBill = upcomingBill
-                
-                guard let row = self.billTypes.index(where: { (billType) -> Bool in
-                    return billType.bill_id == upcomingBill.bill_id
+            case .bill(let bill):
+                upcomingBill.bill = bill
+    
+                guard let row = self.upcomingBills.index(where: { (element) -> Bool in
+                    return element.bill_id == upcomingBill.bill_id
                 }) else {
-                    print("upcoming bill not found in billTypes array")
+                    print("upcoming bill not found in array")
                     return
                 }
                 
-                DataManager.sharedInstance.billTypes?[row] = bill
-                self.billTypes[row] = bill
+                self.upcomingBills[row] = upcomingBill
+                DataManager.sharedInstance.upcomingBills?[row] = upcomingBill
+                DataManager.sharedInstance.bills?.append(bill)
 
                 let indexPath = IndexPath(row: row, section: 0)
                 self.tableView.reloadRows(at: [indexPath], with: .left)
@@ -107,13 +108,12 @@ class UpcomingBillsTableViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return billTypes.count
+        return upcomingBills.count
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let billType = self.billTypes[indexPath.row]
-        if type(of: billType) == Bill.self {
-            let bill = billType as! Bill
+        let upcomingBill = self.upcomingBills[indexPath.row]
+        if let bill = upcomingBill.bill {
             let billCell = tableView.dequeueReusableCell(withIdentifier: BillTypeCellReuseIdentifier.billCell.rawValue)! as! BillTableViewCell
             
             var shortTitleText = bill.bill_id
@@ -130,15 +130,15 @@ class UpcomingBillsTableViewController: UITableViewController {
             }
             billCell.sponsorLabel.text = sponsorLabelText
             
-            if let legislativeDay = bill.upcomingBill?.legislative_day {
+            if let legislativeDay = upcomingBill.legislative_day {
                 let dateFormatter = DateFormatter()
                 dateFormatter.dateStyle = .medium
                 let dayText = dateFormatter.string(from: legislativeDay)
-                billCell.legislativeDayLabel.text = (bill.upcomingBill?.range.capitalized)! + " of " + dayText
+                billCell.legislativeDayLabel.text = upcomingBill.range.capitalized + " of " + dayText
             } else {
                 billCell.legislativeDayLabel.text = "Undetermined Time Frame"
             }
-            billCell.contextLabel.text = bill.upcomingBill?.context
+            billCell.contextLabel.text = upcomingBill.context
             
             if bill.last_version?.urls["pdf"] != nil {
                 billCell.accessoryType = .disclosureIndicator
@@ -148,25 +148,18 @@ class UpcomingBillsTableViewController: UITableViewController {
             
             return billCell
         }
-        else if type(of: billType) == UpcomingBill.self {
-            let upcomingBill = billType as! UpcomingBill
-            
+        else {
             let upcomingBillCell = tableView.dequeueReusableCell(withIdentifier: BillTypeCellReuseIdentifier.upcomingBillCell.rawValue)!
             
             upcomingBillCell.textLabel?.text = upcomingBill.bill_id;
             
             return upcomingBillCell
         }
-        else {
-            print("unrecognized BillType")
-            return UITableViewCell()
-        }
     }
         
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let billType = self.billTypes[indexPath.row]
-        if type(of: billType) == Bill.self {
-            let bill = billType as! Bill
+        let upcomingBill = self.upcomingBills[indexPath.row]
+        if let bill = upcomingBill.bill {
             if let url = bill.last_version?.urls["pdf"] {
                 let webVC = WebViewController(url: url)
                 self.navigationController?.pushViewController(webVC, animated: true)

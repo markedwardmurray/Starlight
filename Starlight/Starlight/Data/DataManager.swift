@@ -11,7 +11,8 @@ import Foundation
 class DataManager {
     static let sharedInstance = DataManager()
     
-    var billTypes: [BillType]?
+    var upcomingBills: [UpcomingBill]?
+    var bills: [Bill]?
     var homeLegislators: [Legislator] = []
     
     func loadHomeLegislators() -> LegislatorsResult {

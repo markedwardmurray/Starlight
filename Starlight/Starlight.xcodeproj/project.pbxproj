@@ -17,7 +17,6 @@
 		4D9392941DF2A501004CD9B7 /* DataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D9392931DF2A501004CD9B7 /* DataManager.swift */; };
 		4D9392961DF2B2A7004CD9B7 /* UIStoryboard+Storyboards.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D9392951DF2B2A7004CD9B7 /* UIStoryboard+Storyboards.swift */; };
 		4DABF3F91DE73B2400634948 /* BillTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DABF3F81DE73B2400634948 /* BillTableViewCell.swift */; };
-		4DABF3FE1DE74F6700634948 /* BillType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DABF3FD1DE74F6700634948 /* BillType.swift */; };
 		4DC7FDD91DDEA20000F63B39 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DC7FDD81DDEA20000F63B39 /* AppDelegate.swift */; };
 		4DC7FDDB1DDEA20000F63B39 /* LegislatorsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DC7FDDA1DDEA20000F63B39 /* LegislatorsTableViewController.swift */; };
 		4DC7FDDE1DDEA20000F63B39 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4DC7FDDC1DDEA20000F63B39 /* Main.storyboard */; };
@@ -56,7 +55,6 @@
 		4D9392931DF2A501004CD9B7 /* DataManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataManager.swift; sourceTree = "<group>"; };
 		4D9392951DF2B2A7004CD9B7 /* UIStoryboard+Storyboards.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIStoryboard+Storyboards.swift"; sourceTree = "<group>"; };
 		4DABF3F81DE73B2400634948 /* BillTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BillTableViewCell.swift; sourceTree = "<group>"; };
-		4DABF3FD1DE74F6700634948 /* BillType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BillType.swift; sourceTree = "<group>"; };
 		4DC7FDD51DDEA20000F63B39 /* Starlight.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Starlight.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4DC7FDD81DDEA20000F63B39 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		4DC7FDDA1DDEA20000F63B39 /* LegislatorsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LegislatorsTableViewController.swift; sourceTree = "<group>"; };
@@ -187,7 +185,6 @@
 			isa = PBXGroup;
 			children = (
 				4DC7FDFA1DDEA43B00F63B39 /* Legislator.swift */,
-				4DABF3FD1DE74F6700634948 /* BillType.swift */,
 				4DD7E6C61DE548F60078298F /* Bill.swift */,
 				4DD7E6C81DE5558B0078298F /* UpcomingBill.swift */,
 			);
@@ -447,7 +444,6 @@
 				4DABF3F91DE73B2400634948 /* BillTableViewCell.swift in Sources */,
 				4DD7E6CC1DE565D60078298F /* Functions.swift in Sources */,
 				4DCA2A631DEA3C8800F83A96 /* StoreCoordinator.swift in Sources */,
-				4DABF3FE1DE74F6700634948 /* BillType.swift in Sources */,
 				4D56B5BC1DE1A2ED00F9A52A /* UIViewController+Alerts.swift in Sources */,
 				4D93928C1DF247F5004CD9B7 /* MainRevealViewController.swift in Sources */,
 				4D56B5BA1DE19B8800F9A52A /* AboutTableViewController.swift in Sources */,

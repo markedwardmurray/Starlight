@@ -19,7 +19,7 @@ enum BillsResult {
     case bills(bills: [Bill])
 }
 
-struct Bill : BillType {
+struct Bill {
     let bill_id     : String
     let bill_type   : String
     let chamber     : String
@@ -44,8 +44,6 @@ struct Bill : BillType {
     let sponsor_id      : String
     let urls            : [String:URL]
     let withdrawn_cosponsors_count : Int
-    
-    var upcomingBill : UpcomingBill?
     
     var sponsorName: String {
         var fullName = ""
