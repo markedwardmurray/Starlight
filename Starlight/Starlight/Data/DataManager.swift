@@ -11,9 +11,9 @@ import Foundation
 class DataManager {
     static let sharedInstance = DataManager()
     
-    var upcomingBills: [UpcomingBill]?
+    var upcomingBills = [UpcomingBill]()
     var bills = Set<Bill>()
-    var homeLegislators: [Legislator] = []
+    var homeLegislators = [Legislator]()
     
     func loadHomeLegislators() -> LegislatorsResult {
         let result = StoreCoordinator.sharedInstance.loadHomeLegislators()
@@ -33,14 +33,20 @@ class DataManager {
         return StoreCoordinator.sharedInstance.save(homeLegislators: homeLegislators)
     }
     
-    func getBill(billId: String, completion: @escaping (BillResult) -> Void) {
-        let result = StoreCoordinator.sharedInstance.loadBill(bill_id: billId)
+    func getBill(bill_id: String, completion: @escaping (BillResult) -> Void) {
+        let bill = self.bills.filter{ $0.bill_id == bill_id }.first
+        if let bill = bill {
+            completion(BillResult.bill(bill: bill))
+            return
+        }
+        
+        let result = StoreCoordinator.sharedInstance.loadBill(bill_id: bill_id)
         switch result {
         case .bill(let bill):
             self.bills.insert(bill)
             completion(result)
         case .error(_):
-            SunlightAPIClient.sharedInstance.getBill(billId: billId, completion: { (billResult) in
+            SunlightAPIClient.sharedInstance.getBill(bill_id: bill_id, completion: { (billResult) in
                 switch billResult {
                 case .bill(let bill):
                     self.bills.insert(bill)

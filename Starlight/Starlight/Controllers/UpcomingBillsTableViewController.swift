@@ -34,8 +34,8 @@ class UpcomingBillsTableViewController: UITableViewController {
         self.tableView.rowHeight = UITableViewAutomaticDimension
         self.tableView.estimatedRowHeight = 100
         
-        if let upcomingBills = DataManager.sharedInstance.upcomingBills {
-            self.upcomingBills = upcomingBills
+        if DataManager.sharedInstance.upcomingBills.count > 0 {
+            self.upcomingBills = DataManager.sharedInstance.upcomingBills
             self.tableView.reloadData()
             
             for upcomingBill in upcomingBills {
@@ -44,7 +44,7 @@ class UpcomingBillsTableViewController: UITableViewController {
                 }
             }
         } else {
-            self.loadUpcomingBills()
+            self.loadNextUpcomingBillsPage()
         }
     }
     
@@ -54,19 +54,35 @@ class UpcomingBillsTableViewController: UITableViewController {
         self.loadToolbarWithHomeLegislators()
     }
     
-    func loadUpcomingBills() {
-        SunlightAPIClient.sharedInstance.getUpcomingBills { (upcomingBillsResult) in
+    fileprivate var upcomingBillsGate = false
+    
+    func loadNextUpcomingBillsPage() {
+        if SunlightAPIClient.sharedInstance.upcomingBills_moreResults == false { return }
+        if self.upcomingBillsGate { return }
+        
+        self.upcomingBillsGate = true
+        SunlightAPIClient.sharedInstance.getNextUpcomingBillsPage { (upcomingBillsResult) in
+            self.upcomingBillsGate = false
+            
             switch upcomingBillsResult {
             case .error(let error):
                 print(error)
                 self.showAlertWithTitle(title: "Error!", message: error.localizedDescription)
-            case .upcomingBills(let upcomingBills):
-                DataManager.sharedInstance.upcomingBills = upcomingBills
-                self.upcomingBills = upcomingBills
+            case .upcomingBills(let nextUpcomingBills):
+                DataManager.sharedInstance.upcomingBills.append(contentsOf: nextUpcomingBills)
+                let previousCount = self.upcomingBills.count
+                self.upcomingBills.append(contentsOf: nextUpcomingBills)
+                let newCount = self.upcomingBills.count
                 
-                self.tableView.reloadData()
+                var indexPaths = [IndexPath]()
+                for row in previousCount..<newCount {
+                    let indexPath = IndexPath(row: row, section: 0)
+                    indexPaths.append(indexPath)
+                }
                 
-                for upcomingBill in upcomingBills {
+                self.tableView.insertRows(at: indexPaths, with: .automatic)
+                
+                for upcomingBill in nextUpcomingBills {
                     self.getBill(for: upcomingBill)
                 }
             }
@@ -75,27 +91,33 @@ class UpcomingBillsTableViewController: UITableViewController {
     
     func getBill(for upcomingBill: UpcomingBill) {
         var upcomingBill = upcomingBill
-        DataManager.sharedInstance.getBill(billId: upcomingBill.bill_id, completion: { (billResult) in
+        DataManager.sharedInstance.getBill(bill_id: upcomingBill.bill_id, completion: { (billResult) in
             switch billResult {
             case .error(let error):
                 print(error)
                 self.showAlertWithTitle(title: "Error!", message: error.localizedDescription)
             case .bill(let bill):
+                DataManager.sharedInstance.bills.insert(bill)
                 upcomingBill.bill = bill
     
-                guard let row = self.upcomingBills.index(where: { (element) -> Bool in
-                    return element.bill_id == upcomingBill.bill_id
-                }) else {
+                let indexes = self.upcomingBills.enumerated().filter {
+                    $0.element.bill_id == upcomingBill.bill_id
+                    }.map{$0.offset}
+                
+                guard indexes.count > 0 else {
                     print("upcoming bill not found in array")
                     return
                 }
                 
-                self.upcomingBills[row] = upcomingBill
-                DataManager.sharedInstance.upcomingBills?[row] = upcomingBill
-                DataManager.sharedInstance.bills.insert(bill)
-
-                let indexPath = IndexPath(row: row, section: 0)
-                self.tableView.reloadRows(at: [indexPath], with: .left)
+                var indexPaths = [IndexPath]()
+                for index in indexes {
+                    self.upcomingBills[index] = upcomingBill
+                    DataManager.sharedInstance.upcomingBills[index] = upcomingBill
+                    let indexPath = IndexPath(row: index, section: 0)
+                    indexPaths.append(indexPath)
+                }
+                
+                self.tableView.reloadRows(at: indexPaths, with: .automatic)
             }
         })
     }
@@ -167,6 +189,15 @@ class UpcomingBillsTableViewController: UITableViewController {
         }
         
         tableView.deselectRow(at: indexPath, animated: true)
+    }
+    
+    //MARK: UIScrollViewDelegate
+    
+    override func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        let bottomEdge = scrollView.contentOffset.y + scrollView.frame.size.height
+        if bottomEdge >= scrollView.contentSize.height {
+            self.loadNextUpcomingBillsPage()
+        }
     }
     
 }
