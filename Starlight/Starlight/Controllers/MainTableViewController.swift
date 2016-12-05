@@ -131,7 +131,19 @@ class MainTableViewController: UITableViewController, UISearchBarDelegate {
             switch billResult {
             case .error(let error):
                 print(error)
-                self.showAlertWithTitle(title: "Error!", message: error.localizedDescription)
+                if type(of: error) == SunlightError.self {
+                    if let index = self.billTypes.index(where: { (billType) -> Bool in
+                        return billType.bill_id == upcomingBill.bill_id
+                    }) {
+                        self.billTypes.remove(at: index)
+                        if self.segmentIndex == .upcomingBills {
+                            let indexPath = IndexPath(row: index, section: 0)
+                            self.tableView.deleteRows(at: [indexPath], with: .automatic)
+                        }
+                    }
+                } else {
+                    self.showAlertWithTitle(title: "Error!", message: error.localizedDescription)
+                }
             case .bill(var bill):
                 bill.upcomingBill = upcomingBill
                 
