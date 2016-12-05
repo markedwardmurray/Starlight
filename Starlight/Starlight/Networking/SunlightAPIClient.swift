@@ -10,6 +10,10 @@ import Foundation
 import Alamofire
 import SwiftyJSON
 
+enum SunlightError: Error {
+    case resultsEmpty
+}
+
 class SunlightAPIClient {
     static let sharedInstance = SunlightAPIClient()
     let k_sunlightURL = "https://congress.api.sunlightfoundation.com/"
@@ -139,6 +143,12 @@ class SunlightAPIClient {
                         
                         print("SunlightAPIClient: bill with id \(bill_id)")
                         let result = json["results"][0]
+                        guard result != JSON.null else {
+                            let error = SunlightError.resultsEmpty
+                            completion(BillResult.error(error: error))
+                            return
+                        }
+                        
                         let bill = Bill(result: result)
                         completion(BillResult.bill(bill: bill))
                     }

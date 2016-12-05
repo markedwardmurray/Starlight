@@ -14,7 +14,7 @@ enum UpcomingBillsResult {
     case upcomingBills(upcomingBills: [UpcomingBill])
 }
 
-struct UpcomingBill {
+struct UpcomingBill: Equatable {
     let bill_id         : String
     let chamber         : String
     let congress        : Int
@@ -49,3 +49,8 @@ struct UpcomingBill {
         return upcomingBills;
     }
 }
+
+func ==(lhs: UpcomingBill, rhs: UpcomingBill) -> Bool {
+    return lhs.bill_id == rhs.bill_id
+}
+

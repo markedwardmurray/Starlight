@@ -95,7 +95,19 @@ class UpcomingBillsTableViewController: UITableViewController {
             switch billResult {
             case .error(let error):
                 print(error)
-                self.showAlertWithTitle(title: "Error!", message: error.localizedDescription)
+                if type(of: error) == SunlightError.self {
+                    if let index = self.upcomingBills.index(where: { (element) -> Bool in
+                        return element == upcomingBill
+                    }) {
+                        DataManager.sharedInstance.upcomingBills.remove(at: index)
+                        self.upcomingBills = DataManager.sharedInstance.upcomingBills
+                        
+                        let indexPath = IndexPath(row: index, section: 0)
+                        self.tableView.deleteRows(at: [indexPath], with: .automatic)
+                    }
+                } else {
+                    self.showAlertWithTitle(title: "Error!", message: error.localizedDescription)
+                }
             case .bill(let bill):
                 DataManager.sharedInstance.bills.insert(bill)
                 upcomingBill.bill = bill
