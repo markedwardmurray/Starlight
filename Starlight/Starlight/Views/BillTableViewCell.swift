@@ -18,4 +18,14 @@ class BillTableViewCell: UITableViewCell {
     @IBOutlet var legislativeDayLabel: UILabel!
     @IBOutlet var contextLabel: UILabel!
     
+    override func prepareForReuse() {
+        self.shortTitleLabel.text = nil
+        self.popularTitleLabel.text = nil
+        self.fullTitleLabel.text = nil
+        self.sponsorLabel.text = nil
+        
+        self.legislativeDayLabel.text = nil
+        self.contextLabel.text = nil
+    }
+    
 }

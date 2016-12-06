@@ -188,11 +188,15 @@ class MainTableViewController: UITableViewController, UISearchBarDelegate {
                 billCell.shortTitleLabel.text = shortTitleText
                 billCell.fullTitleLabel.text = bill.official_title
                 
-                var sponsorLabelText = "Sponsored by " + bill.sponsorName
-                if (bill.cosponsors_count > 0) {
-                    sponsorLabelText += " and \(bill.cosponsors_count) others"
+                if bill.sponsorName.isEmpty == false {
+                    var sponsorLabelText = "Sponsored by " + bill.sponsorName
+                    if (bill.cosponsors_count > 0) {
+                        sponsorLabelText += " and \(bill.cosponsors_count) others"
+                    }
+                    billCell.sponsorLabel.text = sponsorLabelText
+                } else {
+                    billCell.sponsorLabel.text = nil
                 }
-                billCell.sponsorLabel.text = sponsorLabelText
                 
                 if let legislativeDay = bill.upcomingBill?.legislative_day {
                     let dateFormatter = DateFormatter()
