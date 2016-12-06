@@ -124,12 +124,10 @@ class LegislatorsTableViewController: UITableViewController, UISearchBarDelegate
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
 
         let legislator = legislators[indexPath.row]
-        guard let url = URL(string: "telprompt://" + legislator.phone) else { return }
-        UIApplication.shared.open(url, options: [:], completionHandler: nil)
-        
-        tableView.deselectRow(at: indexPath, animated: true)
+        self.telprompt(legislator: legislator)
     }
     
     //MARK: UISearchBarDelegate

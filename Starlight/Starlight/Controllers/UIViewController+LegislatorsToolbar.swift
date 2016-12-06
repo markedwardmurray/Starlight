@@ -57,9 +57,7 @@ extension UIViewController {
     
     @objc fileprivate func callLegislatorFromToolbar(sender: UIButton) {
         let legislator = DataManager.sharedInstance.homeLegislators[sender.tag]
-        guard let url = URL(string: "telprompt://" + legislator.phone) else { return }
-        UIApplication.shared.open(url, options: [:], completionHandler: nil)
-        print("call legislator: \(legislator.phone)")
+        self.telprompt(legislator: legislator)
     }
     
     @objc fileprivate func navigateToLegislatorsPage(sender: UIBarButtonItem) {
@@ -67,4 +65,6 @@ extension UIViewController {
             mainRevealVC.pushLegislatorsTVC()
         }
     }
+    
 }
+
