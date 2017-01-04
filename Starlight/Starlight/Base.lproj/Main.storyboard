@@ -47,7 +47,7 @@
                                 <rect key="frame" x="0.0" y="72" width="414" height="170"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="LbC-If-1M6" id="dLW-2Q-CNb">
-                                    <rect key="frame" x="0.0" y="0.0" width="381" height="169.5"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="381" height="170"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="1000" text="Short Title" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3hq-hH-lru">
@@ -538,7 +538,7 @@ v0.0.0 (0)</string>
                             <subviews>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="plQ-Fr-WTz">
                                     <rect key="frame" x="16" y="7" width="382" height="30"/>
-                                    <state key="normal" title="Save Legislators">
+                                    <state key="normal" title="Save My Legislators">
                                         <color key="titleColor" red="0.0" green="0.0" blue="0.50196078431372548" alpha="1" colorSpace="calibratedRGB"/>
                                     </state>
                                     <connections>

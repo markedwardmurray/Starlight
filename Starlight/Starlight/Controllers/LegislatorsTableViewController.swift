@@ -36,8 +36,22 @@ class LegislatorsTableViewController: UITableViewController, UISearchBarDelegate
         
         self.tableView.rowHeight = UITableViewAutomaticDimension
         
-        if legislators.count == 0 {
-            self.loadLegislatorsWithCurrentLocation()
+        if DataManager.sharedInstance.homeLegislators.count == 0 {
+            self.tableView.tableFooterView?.isHidden = true
+            
+            let onboardingAlert = UIAlertController(title: "Find Your Legislators!", message: "If you're currently at your home within the United States, Starlight can use your device's location to determine your congressional legislators.\n\nAlternatively, you may search for your legislators by entering your home's full street address in the search box.\n(Be advised that postal zip codes may contain multiple congressional districts.)\n\nStarlight does not track or record your location or your home address.", preferredStyle: .alert)
+            
+            let useMyAddressAction = UIAlertAction(title: "Use Address", style: .default, handler: { (action) in
+                // none
+            })
+            onboardingAlert.addAction(useMyAddressAction)
+            
+            let useMyLocationAction = UIAlertAction(title: "Use Location", style: .default, handler: { (action) in
+                self.loadLegislatorsWithCurrentLocation()
+            })
+            onboardingAlert.addAction(useMyLocationAction)
+            
+            self.present(onboardingAlert, animated: true, completion: nil)
         }
     }
     
@@ -88,6 +102,10 @@ class LegislatorsTableViewController: UITableViewController, UISearchBarDelegate
         case .legislators(let legislators):
             self.legislators = legislators
             self.tableView.reloadData()
+            
+            if self.legislators.count > 0 {
+                self.tableView.tableFooterView?.isHidden = false
+            }
         }
     }
     
@@ -180,8 +198,11 @@ class LegislatorsTableViewController: UITableViewController, UISearchBarDelegate
         case .error:
             self.showAlertWithTitle(title: "Error!", message: "Failed to save your legislators")
         case .success:
+            self.searchBar.resignFirstResponder()
             self.loadToolbarWithHomeLegislators()
             self.tableView.reloadData()
+            
+            self.showAlertWithTitle(title: "Saved!", message: "You can now call your home legislators from the bottom toolbar.")
         }
     }
     
