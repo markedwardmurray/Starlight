@@ -69,6 +69,7 @@ class UpcomingBillsTableViewController: UITableViewController {
                 print(error)
                 self.showAlertWithTitle(title: "Error!", message: error.localizedDescription)
             case .upcomingBills(let nextUpcomingBills):
+                
                 DataManager.sharedInstance.upcomingBills.append(contentsOf: nextUpcomingBills)
                 let previousCount = self.upcomingBills.count
                 self.upcomingBills.append(contentsOf: nextUpcomingBills)
@@ -81,6 +82,7 @@ class UpcomingBillsTableViewController: UITableViewController {
                 }
                 
                 self.tableView.insertRows(at: indexPaths, with: .automatic)
+                self.updateTableViewBackgroundView()
                 
                 for upcomingBill in nextUpcomingBills {
                     self.getBill(for: upcomingBill)
@@ -104,6 +106,7 @@ class UpcomingBillsTableViewController: UITableViewController {
                         
                         let indexPath = IndexPath(row: index, section: 0)
                         self.tableView.deleteRows(at: [indexPath], with: .automatic)
+                        self.updateTableViewBackgroundView()
                     }
                 } else {
                     self.showAlertWithTitle(title: "Error!", message: error.localizedDescription)
@@ -132,6 +135,17 @@ class UpcomingBillsTableViewController: UITableViewController {
                 self.tableView.reloadRows(at: indexPaths, with: .automatic)
             }
         })
+    }
+    
+    func updateTableViewBackgroundView() {
+        if self.upcomingBills.count > 0 {
+            self.tableView.backgroundView = nil
+        } else {
+            let label = UILabel(frame: CGRect(x: 0, y: 0, width: self.tableView.bounds.size.width, height: self.tableView.bounds.size.height))
+            label.textAlignment = .center
+            label.text = "No Results"
+            self.tableView.backgroundView = label
+        }
     }
     
     //MARK: UITableViewDataSource/Delegate
