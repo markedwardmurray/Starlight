@@ -29,6 +29,14 @@ extension UIViewController {
             
             items.append(UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil))
         } else {
+            let phoneIcon = UILabel()
+            phoneIcon.text = "✆"
+            phoneIcon.textColor = UIColor.init(hex: "808080")
+            phoneIcon.textAlignment = .center
+            phoneIcon.font = UIFont.systemFont(ofSize: 36)
+            phoneIcon.sizeToFit()
+            items.append(UIBarButtonItem(customView: phoneIcon))
+            
             items.append(UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil))
             
             for i in 0..<homeLegislators.count {
@@ -46,9 +54,11 @@ extension UIViewController {
                 button.sizeToFit()
                 
                 let barButton = UIBarButtonItem(customView: button)
-                
                 items.append(barButton)
-                items.append(UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil))
+                
+                if i < homeLegislators.count-1 {
+                    items.append(UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil))
+                }
             }
         }
         

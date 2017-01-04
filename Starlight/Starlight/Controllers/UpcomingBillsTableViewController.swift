@@ -51,6 +51,9 @@ class UpcomingBillsTableViewController: UITableViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
+        if self.upcomingBillsGate == false {
+            self.updateTableViewBackgroundView()
+        }
         self.loadToolbarWithHomeLegislators()
     }
     
