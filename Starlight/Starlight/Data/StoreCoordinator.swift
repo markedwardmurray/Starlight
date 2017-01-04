@@ -23,6 +23,11 @@ enum StoreError: Error {
     case fileDoesNotExistAtPath
 }
 
+fileprivate enum Directory {
+    case temporary
+    case documents
+}
+
 class StoreCoordinator {
     static let sharedInstance = StoreCoordinator()
     
@@ -30,13 +35,14 @@ class StoreCoordinator {
     
     fileprivate let fileManager = FileManager.default
     
-    fileprivate let k_folder_bills = "bills"
-    
     fileprivate let k_dot_json = ".json"
-    fileprivate let k_legislators_home = "legislators_home"
     
-    fileprivate func modificationDate(folderName: String?, fileName: String, homeDirectory: Bool) -> Date? {
-        let filePath = self.filePath(folderName: folderName, fileName: fileName, homeDirectory: homeDirectory)
+    fileprivate let k_folder_bills = "Bills/"
+    
+    fileprivate let k_file_legislators_home = "legislators_home"
+    
+    fileprivate func modificationDate(folderName: String?, fileName: String, directory: Directory) -> Date? {
+        let filePath = self.filePath(folderName: folderName, fileName: fileName, directory: directory)
         do {
             let attr = try fileManager.attributesOfItem(atPath: filePath)
             return attr[FileAttributeKey.modificationDate] as? Date
@@ -46,8 +52,8 @@ class StoreCoordinator {
         }
     }
     
-    fileprivate func loadJSON(folderName: String?, fileName: String, homeDirectory: Bool) -> JSONResult {
-        let filePath = self.filePath(folderName: folderName, fileName: fileName, homeDirectory: homeDirectory)
+    fileprivate func loadJSON(folderName: String?, fileName: String, directory: Directory) -> JSONResult {
+        let filePath = self.filePath(folderName: folderName, fileName: fileName, directory: directory)
         let fileURL = URL(fileURLWithPath: filePath)
         
         guard fileManager.fileExists(atPath: filePath) else {
@@ -66,11 +72,11 @@ class StoreCoordinator {
         }
     }
     
-    fileprivate func save(json: JSON, folderName: String?, fileName: String, homeDirectory: Bool) -> SuccessResult {
-        let filePath = self.filePath(folderName: folderName, fileName: fileName, homeDirectory: homeDirectory)
+    fileprivate func save(json: JSON, folderName: String?, fileName: String, directory: Directory) -> SuccessResult {
+        let filePath = self.filePath(folderName: folderName, fileName: fileName, directory: directory)
         
         if let folderName = folderName {
-            let error = self.createDirectoryIfNeeded(folderName: folderName, homeDirectory: homeDirectory)
+            let error = self.createDirectoryIfNeeded(folderName: folderName, directory: directory)
             if let error = error {
                 return SuccessResult.error(error: error)
             }
@@ -97,24 +103,35 @@ class StoreCoordinator {
         }
     }
     
-    fileprivate func filePath(folderName: String?, fileName: String, homeDirectory: Bool) -> String {
-        let directory = homeDirectory ? NSHomeDirectory() + "/" : NSTemporaryDirectory()
-        var filePath = directory
+    fileprivate func filePath(folderName: String?, fileName: String, directory: Directory) -> String {
+        var filePath = ""
+        
+        switch (directory) {
+        case .temporary:
+            filePath += NSTemporaryDirectory()
+        case .documents:
+            filePath += DocumentsDirectory()
+        }
+        
         if let folderName = folderName {
-            filePath += folderName + "/"
+            filePath += folderName
         }
         filePath += fileName + k_dot_json
         
         return filePath
     }
     
-    fileprivate func directoryPath(folderName: String, homeDirectory: Bool) -> String {
-        let directory = homeDirectory ? NSHomeDirectory() + "/" : NSTemporaryDirectory()
-        return directory + folderName
+    fileprivate func directoryPath(folderName: String, directory: Directory) -> String {
+        switch (directory) {
+        case .temporary:
+            return NSTemporaryDirectory() + folderName
+        case .documents:
+            return DocumentsDirectory() + folderName
+        }
     }
     
-    fileprivate func createDirectoryIfNeeded(folderName: String, homeDirectory: Bool) -> NSError? {
-        let directoryPath = self.directoryPath(folderName: folderName, homeDirectory: homeDirectory)
+    fileprivate func createDirectoryIfNeeded(folderName: String, directory: Directory) -> NSError? {
+        let directoryPath = self.directoryPath(folderName: folderName, directory: directory)
         if self.fileManager.fileExists(atPath: directoryPath) == false {
             do {
                 try self.fileManager.createDirectory(atPath: directoryPath, withIntermediateDirectories: false, attributes: nil)
@@ -132,7 +149,7 @@ class StoreCoordinator {
     //MARK: Public methods
     
     func loadHomeLegislators() -> LegislatorsResult {
-        let result = self.loadJSON(folderName: nil, fileName: k_legislators_home, homeDirectory: true)
+        let result = self.loadJSON(folderName: nil, fileName: k_file_legislators_home, directory: .documents)
         switch result {
         case .error(let error):
             return LegislatorsResult.error(error: error)
@@ -149,11 +166,11 @@ class StoreCoordinator {
         }
         let json = JSON(jsonArray)
         
-        return self.save(json: json, folderName: nil, fileName: k_legislators_home, homeDirectory: true)
+        return self.save(json: json, folderName: nil, fileName: k_file_legislators_home, directory: .documents)
     }
     
     func loadBill(bill_id: String) -> BillResult {
-        let result = self.loadJSON(folderName: k_folder_bills, fileName: bill_id, homeDirectory: false)
+        let result = self.loadJSON(folderName: k_folder_bills, fileName: bill_id, directory: .temporary)
         switch result {
         case .error(let error):
             return BillResult.error(error: error)
@@ -166,8 +183,13 @@ class StoreCoordinator {
     
     func save(bill: Bill) -> SuccessResult {
         print("StoreCoordinator: save bill \(bill.bill_id)")
-        return self.save(json: bill.json, folderName: k_folder_bills, fileName: bill.bill_id, homeDirectory: false)
+        return self.save(json: bill.json, folderName: k_folder_bills, fileName: bill.bill_id, directory: .temporary)
     }
 
+}
+
+fileprivate func DocumentsDirectory() -> String {
+    let paths = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)
+    return paths.first! + "/";
 }
 

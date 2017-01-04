@@ -18,8 +18,8 @@ class DataManager {
     func loadHomeLegislators() -> LegislatorsResult {
         let result = StoreCoordinator.sharedInstance.loadHomeLegislators()
         switch result {
-        case .error(_):
-            break
+        case .error(let error):
+            print("Error loading home legislators: \(error.localizedDescription)")
         case .legislators(let homeLegislators):
             self.homeLegislators = homeLegislators
         }
