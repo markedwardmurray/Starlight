@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		1F5328649140E9BA1DC75A44 /* Pods_Starlight.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E6BDEDC4E11829D606B0F8E5 /* Pods_Starlight.framework */; };
+		4D1E9C341E20C6F3003F1701 /* FloorUpdate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D1E9C331E20C6F3003F1701 /* FloorUpdate.swift */; };
 		4D50320F1DF64A5400C329A8 /* UIViewController+Telprompt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D50320E1DF64A5400C329A8 /* UIViewController+Telprompt.swift */; };
 		4D56B5BA1DE19B8800F9A52A /* AboutTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D56B5B91DE19B8800F9A52A /* AboutTableViewController.swift */; };
 		4D56B5BC1DE1A2ED00F9A52A /* UIViewController+Alerts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D56B5BB1DE1A2ED00F9A52A /* UIViewController+Alerts.swift */; };
@@ -47,6 +48,7 @@
 
 /* Begin PBXFileReference section */
 		22F5A2B706FFFAFAF1C6F2AF /* Pods-Starlight.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Starlight.release.xcconfig"; path = "Pods/Target Support Files/Pods-Starlight/Pods-Starlight.release.xcconfig"; sourceTree = "<group>"; };
+		4D1E9C331E20C6F3003F1701 /* FloorUpdate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FloorUpdate.swift; sourceTree = "<group>"; };
 		4D50320E1DF64A5400C329A8 /* UIViewController+Telprompt.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIViewController+Telprompt.swift"; sourceTree = "<group>"; };
 		4D56B5B91DE19B8800F9A52A /* AboutTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AboutTableViewController.swift; sourceTree = "<group>"; };
 		4D56B5BB1DE1A2ED00F9A52A /* UIViewController+Alerts.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIViewController+Alerts.swift"; sourceTree = "<group>"; };
@@ -190,6 +192,7 @@
 				4DC7FDFA1DDEA43B00F63B39 /* Legislator.swift */,
 				4DD7E6C61DE548F60078298F /* Bill.swift */,
 				4DD7E6C81DE5558B0078298F /* UpcomingBill.swift */,
+				4D1E9C331E20C6F3003F1701 /* FloorUpdate.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -440,6 +443,7 @@
 				4D9392961DF2B2A7004CD9B7 /* UIStoryboard+Storyboards.swift in Sources */,
 				4D9392921DF29223004CD9B7 /* UpcomingBillsTableViewController.swift in Sources */,
 				4DD7E6C71DE548F60078298F /* Bill.swift in Sources */,
+				4D1E9C341E20C6F3003F1701 /* FloorUpdate.swift in Sources */,
 				4DD7E6CE1DE589880078298F /* CLPlacemark+Extensions.swift in Sources */,
 				4DD7E6C91DE5558B0078298F /* UpcomingBill.swift in Sources */,
 				4DC7FDFB1DDEA43B00F63B39 /* Legislator.swift in Sources */,
