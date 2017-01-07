@@ -9,11 +9,17 @@
 import Foundation
 import SwiftyJSON
 
+enum FloorUpdatesResult {
+    case error(error: Error)
+    case floorUpdates(floorUpdates: [FloorUpdate])
+}
+
+
 struct FloorUpdate {
     let update   : String
+    let timestamp: Date
     
     let chamber  : String
-    let timestamp: Date
     let congress : Int
     let year     : Int?
     let legislative_day : Date?
@@ -25,8 +31,8 @@ struct FloorUpdate {
     
     init(result: JSON) {
         self.update          = result["update"].string!
-        
         self.timestamp       = zuluTime(string: result["timestamp"].string)!
+        
         self.chamber         = result["chamber"].string!
         self.congress        = result["congress"].int!
         self.year            = result["year"].int

@@ -14,9 +14,27 @@ enum SunlightError: Error {
     case resultsEmpty
 }
 
+struct SunlightPagination {
+    let count : Int
+    let page  : Int
+    let countOnPage  : Int
+    let countPerPage : Int
+    
+    init(json: JSON) {
+        self.count = json["count"].int!
+        self.page  = json["page"]["page"].int!
+        self.countOnPage  = json["page"]["count"].int!
+        self.countPerPage = json["page"]["per_page"].int!
+    }
+}
+
 class SunlightAPIClient {
     static let sharedInstance = SunlightAPIClient()
     let k_sunlightURL = "https://congress.api.sunlightfoundation.com/"
+    
+    let k_page = "page"
+    
+    //MARK: Legislators
     
     let k_legislators = "legislators"
     let k_locate = "locate"
@@ -64,10 +82,11 @@ class SunlightAPIClient {
         }
     }
     
+    // MARK: Upcoming_Bills
+    
     let k_upcomingBills = "upcoming_bills"
-    let k_page = "page"
-    var upcomingBills_page = 0
-    var upcomingBills_moreResults = true
+    private(set) var upcomingBills_page = 0
+    private(set) var upcomingBills_moreResults = true
     
     func getNextUpcomingBillsPage(completion: @escaping (UpcomingBillsResult) -> Void) {
         let urlString = k_sunlightURL+k_upcomingBills+"?"+k_page+"="+String(upcomingBills_page+1)
@@ -112,6 +131,8 @@ class SunlightAPIClient {
         }
     }
     
+    //MARK: Bills
+    
     let k_bills = "bills"
     let k_bill_id = "bill_id"
     
@@ -155,4 +176,81 @@ class SunlightAPIClient {
                 }
         }
     }
+
+    //MARK: Floor_Updates
+    
+    let k_floorUpdates = "floor_updates"
+    private(set) var floorUpdates_page = 0
+    private(set) var floorUpdates_lastRefreshAt: Date?
+    
+    func getFloorUpdatesNextPage(completion: @escaping (FloorUpdatesResult) -> Void) {
+        self.getFloorUpdates(page: self.floorUpdates_page, completion: { (floorUpdatesResult, pagination) in
+            switch floorUpdatesResult {
+            case .error(_):
+                break
+            case .floorUpdates(_):
+                if let pagination = pagination {
+                    self.floorUpdates_page = pagination.page
+                }
+            }
+            
+            completion(floorUpdatesResult)
+        })
+    }
+    
+    func getFloorUpdatesRefresh(completion: @escaping (FloorUpdatesResult) -> Void) {
+        self.getFloorUpdates(page: 0, completion: { (floorUpdatesResult, page) in
+            switch floorUpdatesResult {
+            case .error(_):
+                break
+            case .floorUpdates(_):
+                self.floorUpdates_lastRefreshAt = Date()
+            }
+            
+            completion(floorUpdatesResult)
+        })
+    }
+    
+    private func getFloorUpdates(page: Int, completion: @escaping (FloorUpdatesResult, SunlightPagination?) -> Void) {
+        let urlString = k_sunlightURL+k_floorUpdates+"?"+k_page+"="+String(page+1)
+        let url = URL(string: urlString)!
+        print(url)
+        
+        var request = URLRequest(url: url)
+        request.timeoutInterval = 6.0
+        
+        Alamofire.request( request )
+            .validate()
+            .responseJSON { response in
+                //print("Alamofire response: \(response)")
+                switch response.result {
+                case .failure(let error):
+                    print("Alamofire error: \(error)")
+                    completion(FloorUpdatesResult.error(error: error), nil)
+                case .success:
+                    if let value = response.result.value {
+                        let json = JSON(value)
+                        guard json.error == nil else {
+                            let error = json.error!
+                            print(error)
+                            completion(FloorUpdatesResult.error(error: error), nil)
+                            return;
+                        }
+                        
+                        let pagination = SunlightPagination(json: json)
+                        
+                        if self.floorUpdates_lastRefreshAt == nil {
+                            self.floorUpdates_lastRefreshAt = Date()
+                        }
+                        
+                        print("SunlightAPIClient: floor updates")
+                        let results = json["results"]
+                        let floorUpdates = FloorUpdate.floorUpdatesWithResults(results: results)
+                        completion(FloorUpdatesResult.floorUpdates(floorUpdates: floorUpdates), pagination)
+                    }
+                }
+        }
+    }
+    
 }
+
