@@ -33,6 +33,23 @@ func zuluTime(string: String?) -> Date? {
     return formatter.date(from: string)
 }
 
+func zuluTimeFloorUpdate(string: String?) -> Date? {
+    guard let string = string else {
+        return nil
+    }
+    
+    let formatter = DateFormatter()
+    formatter.timeZone = TimeZone(abbreviation: "UTC")
+    formatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss'Z'"
+    
+    let date = formatter.date(from: string)
+    if date == nil {
+        // ahh!
+    }
+    return date
+}
+
+
 func strings(jsons: [JSON]?) -> [String] {
     guard let jsons = jsons else {
         return [String]()

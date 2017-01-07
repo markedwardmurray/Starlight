@@ -18,8 +18,8 @@ struct FloorUpdate: Hashable {
     let update   : String
     let timestamp: Date
     
-    let chamber  : String
-    let congress : Int
+    let chamber  : String?
+    let congress : Int?
     let year     : Int?
     let legislative_day : Date?
     let category : String?
@@ -34,10 +34,10 @@ struct FloorUpdate: Hashable {
     
     init(result: JSON) {
         self.update          = result["update"].string!
-        self.timestamp       = zuluTime(string: result["timestamp"].string)!
+        self.timestamp       = zuluTimeFloorUpdate(string: result["timestamp"].string)!
         
-        self.chamber         = result["chamber"].string!
-        self.congress        = result["congress"].int!
+        self.chamber         = result["chamber"].string
+        self.congress        = result["congress"].int
         self.year            = result["year"].int
         self.legislative_day = zuluDay(string: result["legislative_day"].string)
         self.category        = result["category"].string

@@ -8,9 +8,11 @@
 
 import Foundation
 
-enum IndexSetResult {
+typealias Index = Int
+
+enum IndexesResult {
     case error(error: Error)
-    case indexSet(indexSet: IndexSet)
+    case indexes(indexes: [Index])
 }
 
 class DataManager {
@@ -66,36 +68,36 @@ class DataManager {
         }
     }
     
-    func getFloorUpdatesNextPage(completion: @escaping  (IndexSetResult) -> Void) {
+    func getFloorUpdatesNextPage(completion: @escaping  (IndexesResult) -> Void) {
         SunlightAPIClient.sharedInstance.getFloorUpdatesNextPage { (floorUpdatesResult) in
             switch floorUpdatesResult {
             case .error(let error):
-                completion(IndexSetResult.error(error: error))
+                completion(IndexesResult.error(error: error))
             case .floorUpdates(let floorUpdates):
                 let oldCount = self.floorUpdates.count
                 self.floorUpdates.addObjects(from: floorUpdates)
                 let newCount = self.floorUpdates.count
-                let indexSet = IndexSet(integersIn: (oldCount-1)..<newCount)
+                let indexes = Array((oldCount)..<newCount)
                 
-                completion(IndexSetResult.indexSet(indexSet: indexSet))
+                completion(IndexesResult.indexes(indexes: indexes))
             }
         }
     }
     
-    func getFloorUpdatesRefresh(completion: @escaping (IndexSetResult) -> Void) {
+    func getFloorUpdatesRefresh(completion: @escaping (IndexesResult) -> Void) {
         SunlightAPIClient.sharedInstance.getFloorUpdatesRefresh { (floorUpdatesResult) in
             switch floorUpdatesResult {
             case .error(let error):
-                completion(IndexSetResult.error(error: error))
+                completion(IndexesResult.error(error: error))
             case .floorUpdates(let floorUpdates):
                 let oldCount = self.floorUpdates.count
                 self.floorUpdates.insert(floorUpdates, at: IndexSet(integersIn: 0..<floorUpdates.count))
                 
                 let newCount = self.floorUpdates.count
                 let difference = newCount - oldCount
-                let indexSet = IndexSet(integersIn: 0..<difference)
+                let indexes = Array(0..<difference)
                 
-                completion(IndexSetResult.indexSet(indexSet: indexSet))
+                completion(IndexesResult.indexes(indexes: indexes))
             }
         }
     }

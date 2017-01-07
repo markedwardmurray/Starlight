@@ -10,7 +10,7 @@ import UIKit
 import SWRevealViewController
 
 enum MainRevealIndex: Int {
-    case upcomingBills, legislators, about
+    case upcomingBills, floorUpdates, legislators, about
 }
 
 class MainRevealViewController: SWRevealViewController {
@@ -33,6 +33,12 @@ class MainRevealViewController: SWRevealViewController {
     func pushUpcomingBillsTVC() {
         self.revealIndex = .upcomingBills
         let rootVC = UIStoryboard.main.instantiateViewController(withIdentifier: UpcomingBillsTableViewController.navConStoryboardId)
+        self.pushFrontViewController(rootVC, animated: true)
+    }
+    
+    func pushFloorUpdatesTVC() {
+        self.revealIndex = .floorUpdates
+        let rootVC = UIStoryboard.main.instantiateViewController(withIdentifier: FloorUpdatesTableViewController.navConStoryboardId)
         self.pushFrontViewController(rootVC, animated: true)
     }
 

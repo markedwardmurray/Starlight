@@ -8,6 +8,10 @@
 
 import UIKit
 
+fileprivate enum LeftMenuIndex : Int {
+    case upcomingBills, floorUpdates, legislators, about
+}
+
 class LeftMenuTableViewController: UITableViewController {
     var mainRevealController: MainRevealViewController {
         return self.revealViewController() as! MainRevealViewController
@@ -40,15 +44,17 @@ class LeftMenuTableViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        switch indexPath.row {
-        case 0:
+        let leftMenuIndex = LeftMenuIndex(rawValue: indexPath.row)!
+        
+        switch leftMenuIndex {
+        case .upcomingBills:
             self.mainRevealController.pushUpcomingBillsTVC()
-        case 1:
+        case .floorUpdates:
+            self.mainRevealController.pushFloorUpdatesTVC()
+        case .legislators:
             self.mainRevealController.pushLegislatorsTVC()
-        case 2:
+        case .about:
             self.mainRevealController.pushAboutTVC()
-        default:
-            break
         }
     }
 }
