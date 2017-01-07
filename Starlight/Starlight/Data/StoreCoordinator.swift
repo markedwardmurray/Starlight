@@ -21,6 +21,7 @@ enum SuccessResult {
 
 enum StoreError: Error {
     case fileDoesNotExistAtPath
+    case storedFileIsObsolete
 }
 
 fileprivate enum Directory {
@@ -30,6 +31,8 @@ fileprivate enum Directory {
 
 class StoreCoordinator {
     static let sharedInstance = StoreCoordinator()
+    
+    let gregorian = NSCalendar(calendarIdentifier: .gregorian)!
     
     //MARK: Private properties and methods
     
@@ -170,6 +173,14 @@ class StoreCoordinator {
     }
     
     func loadBill(bill_id: String) -> BillResult {
+        if let modificationDate = self.modificationDate(folderName: k_folder_bills, fileName: bill_id, directory: .temporary) {
+            
+            if self.gregorian.isDateInToday(modificationDate) == false {
+                print("bill info is older than today")
+                return BillResult.error(error: StoreError.storedFileIsObsolete)
+            }
+        }
+        
         let result = self.loadJSON(folderName: k_folder_bills, fileName: bill_id, directory: .temporary)
         switch result {
         case .error(let error):
