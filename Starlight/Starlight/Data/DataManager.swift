@@ -8,11 +8,17 @@
 
 import Foundation
 
+enum IndexSetResult {
+    case error(error: Error)
+    case indexSet(indexSet: IndexSet)
+}
+
 class DataManager {
     static let sharedInstance = DataManager()
     
     var upcomingBills = [UpcomingBill]()
     var bills = Set<Bill>()
+    var floorUpdates = NSMutableOrderedSet()
     var homeLegislators = [Legislator]()
     
     func loadHomeLegislators() -> LegislatorsResult {
@@ -57,6 +63,40 @@ class DataManager {
                 
                 completion(billResult)
             })
+        }
+    }
+    
+    func getFloorUpdatesNextPage(completion: @escaping  (IndexSetResult) -> Void) {
+        SunlightAPIClient.sharedInstance.getFloorUpdatesNextPage { (floorUpdatesResult) in
+            switch floorUpdatesResult {
+            case .error(let error):
+                completion(IndexSetResult.error(error: error))
+            case .floorUpdates(let floorUpdates):
+                let oldCount = self.floorUpdates.count
+                self.floorUpdates.addObjects(from: floorUpdates)
+                let newCount = self.floorUpdates.count
+                let indexSet = IndexSet(integersIn: (oldCount-1)..<newCount)
+                
+                completion(IndexSetResult.indexSet(indexSet: indexSet))
+            }
+        }
+    }
+    
+    func getFloorUpdatesRefresh(completion: @escaping (IndexSetResult) -> Void) {
+        SunlightAPIClient.sharedInstance.getFloorUpdatesRefresh { (floorUpdatesResult) in
+            switch floorUpdatesResult {
+            case .error(let error):
+                completion(IndexSetResult.error(error: error))
+            case .floorUpdates(let floorUpdates):
+                let oldCount = self.floorUpdates.count
+                self.floorUpdates.insert(floorUpdates, at: IndexSet(integersIn: 0..<floorUpdates.count))
+                
+                let newCount = self.floorUpdates.count
+                let difference = newCount - oldCount
+                let indexSet = IndexSet(integersIn: 0..<difference)
+                
+                completion(IndexSetResult.indexSet(indexSet: indexSet))
+            }
         }
     }
 }

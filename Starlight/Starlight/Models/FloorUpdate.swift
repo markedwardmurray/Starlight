@@ -14,8 +14,7 @@ enum FloorUpdatesResult {
     case floorUpdates(floorUpdates: [FloorUpdate])
 }
 
-
-struct FloorUpdate {
+struct FloorUpdate: Hashable {
     let update   : String
     let timestamp: Date
     
@@ -28,6 +27,10 @@ struct FloorUpdate {
     let bill_ids       : Array<String>
     let roll_ids       : Array<String>
     let legislator_ids : Array<String>
+    
+    var hashValue: Int {
+        return self.timestamp.hashValue
+    }
     
     init(result: JSON) {
         self.update          = result["update"].string!
@@ -55,5 +58,7 @@ struct FloorUpdate {
     }
 }
 
-
+func ==(lhs: FloorUpdate, rhs: FloorUpdate) -> Bool {
+    return lhs.timestamp == rhs.timestamp
+}
 
