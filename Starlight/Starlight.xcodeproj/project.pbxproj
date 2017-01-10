@@ -8,19 +8,26 @@
 
 /* Begin PBXBuildFile section */
 		1F5328649140E9BA1DC75A44 /* Pods_Starlight.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E6BDEDC4E11829D606B0F8E5 /* Pods_Starlight.framework */; };
+		4D50320F1DF64A5400C329A8 /* UIViewController+Telprompt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D50320E1DF64A5400C329A8 /* UIViewController+Telprompt.swift */; };
 		4D56B5BA1DE19B8800F9A52A /* AboutTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D56B5B91DE19B8800F9A52A /* AboutTableViewController.swift */; };
 		4D56B5BC1DE1A2ED00F9A52A /* UIViewController+Alerts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D56B5BB1DE1A2ED00F9A52A /* UIViewController+Alerts.swift */; };
 		4D56B5BF1DE2E7E100F9A52A /* Pods-Starlight-acknowledgements.markdown in Resources */ = {isa = PBXBuildFile; fileRef = 4D56B5BD1DE2E7CA00F9A52A /* Pods-Starlight-acknowledgements.markdown */; };
+		4D93928C1DF247F5004CD9B7 /* MainRevealViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D93928B1DF247F5004CD9B7 /* MainRevealViewController.swift */; };
+		4D93928E1DF249B5004CD9B7 /* LeftMenuTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D93928D1DF249B5004CD9B7 /* LeftMenuTableViewController.swift */; };
+		4D9392921DF29223004CD9B7 /* UpcomingBillsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D9392911DF29223004CD9B7 /* UpcomingBillsTableViewController.swift */; };
+		4D9392941DF2A501004CD9B7 /* DataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D9392931DF2A501004CD9B7 /* DataManager.swift */; };
+		4D9392961DF2B2A7004CD9B7 /* UIStoryboard+Storyboards.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D9392951DF2B2A7004CD9B7 /* UIStoryboard+Storyboards.swift */; };
 		4DABF3F91DE73B2400634948 /* BillTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DABF3F81DE73B2400634948 /* BillTableViewCell.swift */; };
-		4DABF3FE1DE74F6700634948 /* BillType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DABF3FD1DE74F6700634948 /* BillType.swift */; };
 		4DC7FDD91DDEA20000F63B39 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DC7FDD81DDEA20000F63B39 /* AppDelegate.swift */; };
-		4DC7FDDB1DDEA20000F63B39 /* MainTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DC7FDDA1DDEA20000F63B39 /* MainTableViewController.swift */; };
+		4DC7FDDB1DDEA20000F63B39 /* LegislatorsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DC7FDDA1DDEA20000F63B39 /* LegislatorsTableViewController.swift */; };
 		4DC7FDDE1DDEA20000F63B39 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4DC7FDDC1DDEA20000F63B39 /* Main.storyboard */; };
 		4DC7FDE01DDEA20000F63B39 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4DC7FDDF1DDEA20000F63B39 /* Assets.xcassets */; };
 		4DC7FDE31DDEA20000F63B39 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4DC7FDE11DDEA20000F63B39 /* LaunchScreen.storyboard */; };
 		4DC7FDEE1DDEA20000F63B39 /* StarlightTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DC7FDED1DDEA20000F63B39 /* StarlightTests.swift */; };
 		4DC7FDFB1DDEA43B00F63B39 /* Legislator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DC7FDFA1DDEA43B00F63B39 /* Legislator.swift */; };
 		4DC7FDFD1DDEB35A00F63B39 /* SunlightAPIClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DC7FDFC1DDEB35A00F63B39 /* SunlightAPIClient.swift */; };
+		4DCA2A631DEA3C8800F83A96 /* StoreCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DCA2A621DEA3C8800F83A96 /* StoreCoordinator.swift */; };
+		4DCA2A6B1DEAB7A800F83A96 /* UIViewController+LegislatorsToolbar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DCA2A6A1DEAB7A800F83A96 /* UIViewController+LegislatorsToolbar.swift */; };
 		4DD7E6C71DE548F60078298F /* Bill.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DD7E6C61DE548F60078298F /* Bill.swift */; };
 		4DD7E6C91DE5558B0078298F /* UpcomingBill.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DD7E6C81DE5558B0078298F /* UpcomingBill.swift */; };
 		4DD7E6CC1DE565D60078298F /* Functions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DD7E6CB1DE565D60078298F /* Functions.swift */; };
@@ -40,14 +47,19 @@
 
 /* Begin PBXFileReference section */
 		22F5A2B706FFFAFAF1C6F2AF /* Pods-Starlight.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Starlight.release.xcconfig"; path = "Pods/Target Support Files/Pods-Starlight/Pods-Starlight.release.xcconfig"; sourceTree = "<group>"; };
+		4D50320E1DF64A5400C329A8 /* UIViewController+Telprompt.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIViewController+Telprompt.swift"; sourceTree = "<group>"; };
 		4D56B5B91DE19B8800F9A52A /* AboutTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AboutTableViewController.swift; sourceTree = "<group>"; };
 		4D56B5BB1DE1A2ED00F9A52A /* UIViewController+Alerts.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIViewController+Alerts.swift"; sourceTree = "<group>"; };
 		4D56B5BD1DE2E7CA00F9A52A /* Pods-Starlight-acknowledgements.markdown */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = "Pods-Starlight-acknowledgements.markdown"; sourceTree = "<group>"; };
+		4D93928B1DF247F5004CD9B7 /* MainRevealViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainRevealViewController.swift; sourceTree = "<group>"; };
+		4D93928D1DF249B5004CD9B7 /* LeftMenuTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LeftMenuTableViewController.swift; sourceTree = "<group>"; };
+		4D9392911DF29223004CD9B7 /* UpcomingBillsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UpcomingBillsTableViewController.swift; sourceTree = "<group>"; };
+		4D9392931DF2A501004CD9B7 /* DataManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataManager.swift; sourceTree = "<group>"; };
+		4D9392951DF2B2A7004CD9B7 /* UIStoryboard+Storyboards.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIStoryboard+Storyboards.swift"; sourceTree = "<group>"; };
 		4DABF3F81DE73B2400634948 /* BillTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BillTableViewCell.swift; sourceTree = "<group>"; };
-		4DABF3FD1DE74F6700634948 /* BillType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BillType.swift; sourceTree = "<group>"; };
 		4DC7FDD51DDEA20000F63B39 /* Starlight.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Starlight.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4DC7FDD81DDEA20000F63B39 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		4DC7FDDA1DDEA20000F63B39 /* MainTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTableViewController.swift; sourceTree = "<group>"; };
+		4DC7FDDA1DDEA20000F63B39 /* LegislatorsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LegislatorsTableViewController.swift; sourceTree = "<group>"; };
 		4DC7FDDD1DDEA20000F63B39 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		4DC7FDDF1DDEA20000F63B39 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		4DC7FDE21DDEA20000F63B39 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -57,6 +69,8 @@
 		4DC7FDEF1DDEA20000F63B39 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		4DC7FDFA1DDEA43B00F63B39 /* Legislator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Legislator.swift; sourceTree = "<group>"; };
 		4DC7FDFC1DDEB35A00F63B39 /* SunlightAPIClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SunlightAPIClient.swift; sourceTree = "<group>"; };
+		4DCA2A621DEA3C8800F83A96 /* StoreCoordinator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StoreCoordinator.swift; sourceTree = "<group>"; };
+		4DCA2A6A1DEAB7A800F83A96 /* UIViewController+LegislatorsToolbar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIViewController+LegislatorsToolbar.swift"; sourceTree = "<group>"; };
 		4DD7E6C61DE548F60078298F /* Bill.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Bill.swift; sourceTree = "<group>"; };
 		4DD7E6C81DE5558B0078298F /* UpcomingBill.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UpcomingBill.swift; sourceTree = "<group>"; };
 		4DD7E6CB1DE565D60078298F /* Functions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Functions.swift; sourceTree = "<group>"; };
@@ -102,9 +116,14 @@
 		4D56B5B81DE19B0D00F9A52A /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				4DC7FDDA1DDEA20000F63B39 /* MainTableViewController.swift */,
+				4D93928B1DF247F5004CD9B7 /* MainRevealViewController.swift */,
+				4D93928D1DF249B5004CD9B7 /* LeftMenuTableViewController.swift */,
+				4D9392911DF29223004CD9B7 /* UpcomingBillsTableViewController.swift */,
+				4DC7FDDA1DDEA20000F63B39 /* LegislatorsTableViewController.swift */,
 				4D56B5B91DE19B8800F9A52A /* AboutTableViewController.swift */,
 				4D56B5BB1DE1A2ED00F9A52A /* UIViewController+Alerts.swift */,
+				4DCA2A6A1DEAB7A800F83A96 /* UIViewController+LegislatorsToolbar.swift */,
+				4D50320E1DF64A5400C329A8 /* UIViewController+Telprompt.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -144,6 +163,7 @@
 				4DC7FDDC1DDEA20000F63B39 /* Main.storyboard */,
 				4D56B5B81DE19B0D00F9A52A /* Controllers */,
 				4DABF3F71DE73AE400634948 /* Views */,
+				4DCA2A611DEA3C6400F83A96 /* Data */,
 				4DC7FDF91DDEA39F00F63B39 /* Networking */,
 				4DC7FDF81DDEA38B00F63B39 /* Models */,
 				4DD7E6CA1DE565AA0078298F /* Helpers */,
@@ -168,7 +188,6 @@
 			isa = PBXGroup;
 			children = (
 				4DC7FDFA1DDEA43B00F63B39 /* Legislator.swift */,
-				4DABF3FD1DE74F6700634948 /* BillType.swift */,
 				4DD7E6C61DE548F60078298F /* Bill.swift */,
 				4DD7E6C81DE5558B0078298F /* UpcomingBill.swift */,
 			);
@@ -183,11 +202,21 @@
 			path = Networking;
 			sourceTree = "<group>";
 		};
+		4DCA2A611DEA3C6400F83A96 /* Data */ = {
+			isa = PBXGroup;
+			children = (
+				4D9392931DF2A501004CD9B7 /* DataManager.swift */,
+				4DCA2A621DEA3C8800F83A96 /* StoreCoordinator.swift */,
+			);
+			path = Data;
+			sourceTree = "<group>";
+		};
 		4DD7E6CA1DE565AA0078298F /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
 				4DD7E6CB1DE565D60078298F /* Functions.swift */,
 				4DD7E6CD1DE589880078298F /* CLPlacemark+Extensions.swift */,
+				4D9392951DF2B2A7004CD9B7 /* UIStoryboard+Storyboards.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -406,17 +435,24 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4DCA2A6B1DEAB7A800F83A96 /* UIViewController+LegislatorsToolbar.swift in Sources */,
+				4D93928E1DF249B5004CD9B7 /* LeftMenuTableViewController.swift in Sources */,
+				4D9392961DF2B2A7004CD9B7 /* UIStoryboard+Storyboards.swift in Sources */,
+				4D9392921DF29223004CD9B7 /* UpcomingBillsTableViewController.swift in Sources */,
 				4DD7E6C71DE548F60078298F /* Bill.swift in Sources */,
 				4DD7E6CE1DE589880078298F /* CLPlacemark+Extensions.swift in Sources */,
 				4DD7E6C91DE5558B0078298F /* UpcomingBill.swift in Sources */,
 				4DC7FDFB1DDEA43B00F63B39 /* Legislator.swift in Sources */,
+				4D9392941DF2A501004CD9B7 /* DataManager.swift in Sources */,
 				4DABF3F91DE73B2400634948 /* BillTableViewCell.swift in Sources */,
+				4D50320F1DF64A5400C329A8 /* UIViewController+Telprompt.swift in Sources */,
 				4DD7E6CC1DE565D60078298F /* Functions.swift in Sources */,
-				4DABF3FE1DE74F6700634948 /* BillType.swift in Sources */,
+				4DCA2A631DEA3C8800F83A96 /* StoreCoordinator.swift in Sources */,
 				4D56B5BC1DE1A2ED00F9A52A /* UIViewController+Alerts.swift in Sources */,
+				4D93928C1DF247F5004CD9B7 /* MainRevealViewController.swift in Sources */,
 				4D56B5BA1DE19B8800F9A52A /* AboutTableViewController.swift in Sources */,
 				4DC7FDFD1DDEB35A00F63B39 /* SunlightAPIClient.swift in Sources */,
-				4DC7FDDB1DDEA20000F63B39 /* MainTableViewController.swift in Sources */,
+				4DC7FDDB1DDEA20000F63B39 /* LegislatorsTableViewController.swift in Sources */,
 				4DC7FDD91DDEA20000F63B39 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

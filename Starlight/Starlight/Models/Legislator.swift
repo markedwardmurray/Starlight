@@ -15,6 +15,8 @@ enum LegislatorsResult {
 }
 
 struct Legislator {
+    let json: JSON
+    
     let bioguide_id: String?
     let birthday: Date?
     let chamber: String
@@ -76,6 +78,8 @@ struct Legislator {
     }
     
     init(result: JSON) {
+        self.json = result
+        
         self.bioguide_id  = result["bioguide_id"].string
         self.birthday     = zuluDay(string: result["birthday"].string)
         self.chamber      = result["chamber"].string!

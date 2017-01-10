@@ -15,12 +15,21 @@ enum AboutTVCIndex: Int {
 }
 
 class AboutTableViewController: UITableViewController, MFMailComposeViewControllerDelegate {
+    static let navConStoryboardId = "AboutNavigationController"
+    
+    @IBOutlet var menuBarButton: UIBarButtonItem!
 
     @IBOutlet var tableHeaderViewLabel: UILabel!
     @IBOutlet var tableFooterViewLabel: UILabel!
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        if self.revealViewController() != nil {
+            self.menuBarButton.target = self.revealViewController()
+            self.menuBarButton.action = Selector(("revealToggle:"))
+            self.view.addGestureRecognizer(self.revealViewController().panGestureRecognizer())
+        }
         
         let appVersion = Bundle.main.object(forInfoDictionaryKey: "CFBundleShortVersionString")!
         let build = Bundle.main.object(forInfoDictionaryKey: "CFBundleVersion")!

@@ -5,6 +5,7 @@ PODS:
   - INTULocationManager (4.2.0)
   - JSQWebViewController (5.0.0)
   - SwiftyJSON (3.1.3)
+  - SWRevealViewController (2.3.0)
 
 DEPENDENCIES:
   - Alamofire (= 4.1.0)
@@ -13,6 +14,7 @@ DEPENDENCIES:
   - INTULocationManager (= 4.2.0)
   - JSQWebViewController (= 5.0.0)
   - SwiftyJSON (= 3.1.3)
+  - SWRevealViewController (= 2.3.0)
 
 SPEC CHECKSUMS:
   Alamofire: e266cf991b933498df791e645e0d8ac294492153
@@ -21,7 +23,8 @@ SPEC CHECKSUMS:
   INTULocationManager: 73f8254b3d05c897c56bb13c190e5b7c648c0998
   JSQWebViewController: 0461aa42612b221571556df61d9c09f080cb2eef
   SwiftyJSON: 38a8ea2006779c0fc4c310cb2ee8195327740faf
+  SWRevealViewController: 6d3fd97f70112fd7cef9de14df4260eacce4c63a
 
-PODFILE CHECKSUM: 065bce29291e01b66f687ee9010910688b18bfb6
+PODFILE CHECKSUM: bdabbf45b2be4bc96675e60ba48dda364419ff93
 
 COCOAPODS: 1.1.1

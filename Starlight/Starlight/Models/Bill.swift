@@ -19,7 +19,9 @@ enum BillsResult {
     case bills(bills: [Bill])
 }
 
-struct Bill : BillType {
+struct Bill: Hashable {
+    let json: JSON
+    
     let bill_id     : String
     let bill_type   : String
     let chamber     : String
@@ -45,7 +47,9 @@ struct Bill : BillType {
     let urls            : [String:URL]
     let withdrawn_cosponsors_count : Int
     
-    var upcomingBill : UpcomingBill?
+    var hashValue: Int {
+        return self.bill_id.hashValue
+    }
     
     var sponsorName: String {
         var fullName = ""
@@ -69,6 +73,8 @@ struct Bill : BillType {
     }
     
     init(result: JSON) {
+        self.json = result
+        
         self.bill_id     = result["bill_id"].string!
         self.bill_type   = result["bill_type"].string!
         self.chamber     = result["chamber"].string!
@@ -145,3 +151,8 @@ struct BillVersion {
         self.pages = json["pages"].int!
     }
 }
+
+func ==(lhs: Bill, rhs: Bill) -> Bool {
+    return lhs.bill_id == rhs.bill_id
+}
+

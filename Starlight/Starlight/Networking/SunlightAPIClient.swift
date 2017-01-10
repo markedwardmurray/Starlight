@@ -16,16 +16,16 @@ enum SunlightError: Error {
 
 class SunlightAPIClient {
     static let sharedInstance = SunlightAPIClient()
-    let sunlightURL = "https://congress.api.sunlightfoundation.com/"
+    let k_sunlightURL = "https://congress.api.sunlightfoundation.com/"
     
-    let legislators = "legislators"
-    let locate = "locate"
-    let latitude = "latitude"
-    let longitude = "longitude"
+    let k_legislators = "legislators"
+    let k_locate = "locate"
+    let k_latitude = "latitude"
+    let k_longitude = "longitude"
     
     func getLegislatorsWithLat(lat: Double, lng: Double, completion: @escaping (LegislatorsResult) -> Void) {
         
-        let urlString = sunlightURL+legislators+"/"+locate+"?"+latitude+"="+String(lat)+"&"+longitude+"="+String(lng)
+        let urlString = k_sunlightURL+k_legislators+"/"+k_locate+"?"+k_latitude+"="+String(lat)+"&"+k_longitude+"="+String(lng)
         let url = URL(string: urlString)!
         print(url)
         
@@ -52,17 +52,25 @@ class SunlightAPIClient {
                         
                         print("SunlightAPIClient: legislators")
                         let results = json["results"]
-                        let legislators = Legislator.legislatorsWithResults(results: results)
+                        var legislators = Legislator.legislatorsWithResults(results: results)
+                        
+                        legislators = legislators.sorted {
+                            return $0.chamber == $1.chamber ? $0.last_name < $1.last_name : $0.chamber < $1.chamber
+                        }
+                        
                         completion(LegislatorsResult.legislators(legislators: legislators))
                     }
                 }
         }
     }
     
-    let upcomingBills = "upcoming_bills"
+    let k_upcomingBills = "upcoming_bills"
+    let k_page = "page"
+    var upcomingBills_page = 0
+    var upcomingBills_moreResults = true
     
-    func getUpcomingBills(completion: @escaping (UpcomingBillsResult) -> Void) {
-        let urlString = sunlightURL+upcomingBills
+    func getNextUpcomingBillsPage(completion: @escaping (UpcomingBillsResult) -> Void) {
+        let urlString = k_sunlightURL+k_upcomingBills+"?"+k_page+"="+String(upcomingBills_page+1)
         let url = URL(string: urlString)!
         print(url)
         
@@ -86,6 +94,14 @@ class SunlightAPIClient {
                             completion(UpcomingBillsResult.error(error: error))
                             return;
                         }
+                        let count = json["count"].int!
+                        let page = json["page"]["page"].int!
+                        let countOnPage = json["page"]["count"].int!
+                        let countPerPage = json["page"]["per_page"].int!
+                        
+                        self.upcomingBills_page = page
+                        let maxResult = (page-1)*countPerPage + countOnPage
+                        self.upcomingBills_moreResults = count > maxResult
                         
                         print("SunlightAPIClient: upcoming bills")
                         let results = json["results"]
@@ -96,11 +112,11 @@ class SunlightAPIClient {
         }
     }
     
-    let bills = "bills"
-    let bill_id = "bill_id"
+    let k_bills = "bills"
+    let k_bill_id = "bill_id"
     
-    func getBill(billId: String, completion: @escaping (BillResult) -> Void) {
-        let urlString = sunlightURL+bills+"?"+bill_id+"="+billId
+    func getBill(bill_id: String, completion: @escaping (BillResult) -> Void) {
+        let urlString = k_sunlightURL+k_bills+"?"+k_bill_id+"="+bill_id
         let url = URL(string: urlString)!
         print(url)
         
@@ -125,7 +141,7 @@ class SunlightAPIClient {
                             return;
                         }
                         
-                        print("SunlightAPIClient: bill with id \(billId)")
+                        print("SunlightAPIClient: bill with id \(bill_id)")
                         let result = json["results"][0]
                         guard result != JSON.null else {
                             let error = SunlightError.resultsEmpty
