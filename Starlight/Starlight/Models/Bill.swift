@@ -43,7 +43,7 @@ struct Bill: Hashable {
     let related_bill_ids: [String]
     let short_title     : String?
     let sponsor         : [String:String] // name components
-    let sponsor_id      : String
+    let sponsor_id      : String?
     let urls            : [String:URL]
     let withdrawn_cosponsors_count : Int
     
@@ -96,7 +96,7 @@ struct Bill: Hashable {
         self.related_bill_ids = strings(jsons: result["related_bill_ids"].array)
         self.short_title     = result["short_title"].string
         self.sponsor         = stringStrings(stringJSONs: result["sponsor"].dictionary)
-        self.sponsor_id      = result["sponsor_id"].string!
+        self.sponsor_id      = result["sponsor_id"].string
         self.urls            = stringURLs(stringJSONs: result["urls"].dictionary)
         self.withdrawn_cosponsors_count = result["withdrawn_cosponsors_count"].int!
     }
