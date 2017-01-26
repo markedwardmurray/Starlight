@@ -18,6 +18,9 @@ class FloorUpdatesTableViewController: JSQMessagesViewController {
     let incomingMessagesBubbleImage = JSQMessagesBubbleImageFactory().incomingMessagesBubbleImage(with: UIColor.gray)!
     let outgoingMessagesBubbleImage = JSQMessagesBubbleImageFactory().outgoingMessagesBubbleImage(with: UIColor.jsq_messageBubbleBlue())!
     
+    let houseAvatar = JSQMessagesAvatarImageFactory.avatarImage(withUserInitials: "HR", backgroundColor: UIColor.gray, textColor: UIColor.white, font: UIFont.systemFont(ofSize: 12), diameter: 34)
+    let senateAvatar = JSQMessagesAvatarImageFactory.avatarImage(withUserInitials: "Sen", backgroundColor: UIColor.jsq_messageBubbleBlue(), textColor: UIColor.white, font: UIFont.systemFont(ofSize: 12), diameter: 34)
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -113,7 +116,24 @@ class FloorUpdatesTableViewController: JSQMessagesViewController {
     }
     
     override func collectionView(_ collectionView: JSQMessagesCollectionView!, avatarImageDataForItemAt indexPath: IndexPath!) -> JSQMessageAvatarImageDataSource! {
-        return nil
+        let floorUpdate = self.collectionView(collectionView, messageDataForItemAt: indexPath) as! FloorUpdate
+        
+        let isNotLastItem = indexPath.row < self.collectionView(collectionView, numberOfItemsInSection: 0)-1
+        if isNotLastItem == true {
+            let nextIndexPath = IndexPath(row: indexPath.row+1, section: 0)
+            let nextFloorUpdate = self.collectionView(collectionView, messageDataForItemAt: nextIndexPath) as! FloorUpdate
+            if floorUpdate.chamber == nextFloorUpdate.chamber {
+                return nil
+            }
+        }
+    
+        if floorUpdate.chamber == "house" {
+            return self.houseAvatar
+        } else if floorUpdate.chamber == "senate" {
+            return self.senateAvatar
+        } else {
+            return nil
+        }
     }
     
     override func collectionView(_ collectionView: JSQMessagesCollectionView!, attributedTextForCellTopLabelAt indexPath: IndexPath!) -> NSAttributedString! {
