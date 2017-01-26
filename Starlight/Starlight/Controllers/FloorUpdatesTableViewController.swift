@@ -13,6 +13,7 @@ class FloorUpdatesTableViewController: JSQMessagesViewController {
     static let navConStoryboardId = "FloorUpdatesNavigationController"
 
     @IBOutlet var menuBarButton: UIBarButtonItem!
+    @IBOutlet var infoBarButton: UIBarButtonItem!
     
     let incomingMessagesBubbleImage = JSQMessagesBubbleImageFactory().incomingMessagesBubbleImage(with: UIColor.gray)!
     let outgoingMessagesBubbleImage = JSQMessagesBubbleImageFactory().outgoingMessagesBubbleImage(with: UIColor.jsq_messageBubbleBlue())!
@@ -33,7 +34,7 @@ class FloorUpdatesTableViewController: JSQMessagesViewController {
         if DataManager.sharedInstance.floorUpdates.count == 0 {
             self.getFloorUpdatesNextPage()
         } else {
-            //TODO: refresh floor updates
+            self.getFloorUpdatesRefresh()
         }
     }
     
@@ -66,6 +67,27 @@ class FloorUpdatesTableViewController: JSQMessagesViewController {
                 }
             }
         }
+    }
+    
+    private func getFloorUpdatesRefresh() {
+        DataManager.sharedInstance.getFloorUpdatesRefresh { (indexesResult) in
+            switch indexesResult {
+            case .error(let error):
+                self.showAlertWithTitle(title: "Error!", message: error.localizedDescription)
+            case .indexes(let indexes):
+                var indexPaths = [IndexPath]()
+                
+                for i in 0..<indexes.count {
+                    indexPaths.append(IndexPath(row: i, section: 0))
+                }
+                
+                self.collectionView.insertItems(at: indexPaths)
+            }
+        }
+    }
+    
+    @IBAction func infoBarButtonTapped(_ sender: UIBarButtonItem) {
+        self.showAlertWithTitle(title: "Floor Updates", message: "These are recent real time, to-the-minute updates from the House and Senate floor.\n\nHouse floor updates are in gray and are sourced from the House Clerk.\n\nSenate updates are in blue and are sourced from the Senate Periodical Press Gallery.\n\nPlease note that the Senate does not offer precise timestamps. ")
     }
     
     override func isOutgoingMessage(_ messageItem: JSQMessageData!) -> Bool {

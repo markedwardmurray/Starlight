@@ -156,8 +156,14 @@ Title</string>
                     </view>
                     <navigationItem key="navigationItem" title="Floor Updates" id="bj4-M2-H8u">
                         <barButtonItem key="leftBarButtonItem" image="icon_menu" id="MqN-f5-3tS"/>
+                        <barButtonItem key="rightBarButtonItem" title="ⓘ" id="we8-mE-vM8">
+                            <connections>
+                                <action selector="infoBarButtonTapped:" destination="sqS-Wh-JFV" id="FZ3-zB-B0Z"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="infoBarButton" destination="we8-mE-vM8" id="UQk-vk-aiT"/>
                         <outlet property="menuBarButton" destination="MqN-f5-3tS" id="1cL-8u-3hc"/>
                     </connections>
                 </viewController>
