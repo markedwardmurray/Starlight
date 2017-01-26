@@ -30,7 +30,11 @@ class FloorUpdatesTableViewController: JSQMessagesViewController {
         self.senderId = "vox"
         self.senderDisplayName = "populi"
 
-        self.getFloorUpdatesNextPage()
+        if DataManager.sharedInstance.floorUpdates.count == 0 {
+            self.getFloorUpdatesNextPage()
+        } else {
+            //TODO: refresh floor updates
+        }
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -90,8 +94,36 @@ class FloorUpdatesTableViewController: JSQMessagesViewController {
         return nil
     }
     
+    override func collectionView(_ collectionView: JSQMessagesCollectionView!, attributedTextForCellTopLabelAt indexPath: IndexPath!) -> NSAttributedString! {
+        let floorUpdate = self.collectionView(collectionView, messageDataForItemAt: indexPath) as! FloorUpdate
+        
+        return JSQMessagesTimestampFormatter.shared().attributedTimestamp(for: floorUpdate.timestamp)
+    }
+    
     override func collectionView(_ collectionView: JSQMessagesCollectionView!, header headerView: JSQMessagesLoadEarlierHeaderView!, didTapLoadEarlierMessagesButton sender: UIButton!) {
         self.getFloorUpdatesNextPage()
+    }
+    
+    //MARK: JSQCollectionViewFlowLayoutDelegate
+    
+    override func collectionView(_ collectionView: JSQMessagesCollectionView!, layout collectionViewLayout: JSQMessagesCollectionViewFlowLayout!, heightForCellTopLabelAt indexPath: IndexPath!) -> CGFloat {
+        guard indexPath.row > 0 else {
+            return kJSQMessagesCollectionViewCellLabelHeightDefault
+        }
+        
+        let previousIndexPath = IndexPath(row: indexPath.row-1, section:0)
+        guard let previousLabelText = self.collectionView(collectionView, attributedTextForCellTopLabelAt: previousIndexPath) else {
+            return kJSQMessagesCollectionViewCellLabelHeightDefault
+        }
+        guard let labelText = self.collectionView(collectionView, attributedTextForCellTopLabelAt: indexPath) else {
+            return 0
+        }
+        
+        if (previousLabelText.isEqual(to: labelText)) {
+            return 0
+        } else {
+            return kJSQMessagesCollectionViewCellLabelHeightDefault
+        }
     }
     
     //MARK: UICollectionViewDataSource

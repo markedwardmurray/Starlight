@@ -15,7 +15,7 @@ enum FloorUpdatesResult {
     case floorUpdates(floorUpdates: [FloorUpdate])
 }
 
-class FloorUpdate: NSObject, JSQMessageData {
+class FloorUpdate: NSObject, JSQMessageData, Comparable {
     let update   : String
     let timestamp: Date
     let chamber  : String
@@ -75,7 +75,10 @@ class FloorUpdate: NSObject, JSQMessageData {
     }
 }
 
-func ==(lhs: FloorUpdate, rhs: FloorUpdate) -> Bool {
+func == (lhs: FloorUpdate, rhs: FloorUpdate) -> Bool {
     return lhs.timestamp == rhs.timestamp
 }
 
+func < (lhs: FloorUpdate, rhs: FloorUpdate) -> Bool {
+    return lhs.timestamp < rhs.timestamp
+}
