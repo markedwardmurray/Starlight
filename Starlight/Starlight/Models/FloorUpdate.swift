@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import JSQMessagesViewController
 import SwiftyJSON
 
 enum FloorUpdatesResult {
@@ -14,11 +15,11 @@ enum FloorUpdatesResult {
     case floorUpdates(floorUpdates: [FloorUpdate])
 }
 
-struct FloorUpdate: Hashable {
+class FloorUpdate: NSObject, JSQMessageData {
     let update   : String
     let timestamp: Date
+    let chamber  : String
     
-    let chamber  : String?
     let congress : Int?
     let year     : Int?
     let legislative_day : Date?
@@ -28,15 +29,11 @@ struct FloorUpdate: Hashable {
     let roll_ids       : Array<String>
     let legislator_ids : Array<String>
     
-    var hashValue: Int {
-        return self.timestamp.hashValue
-    }
-    
     init(result: JSON) {
         self.update          = result["update"].string!
         self.timestamp       = zuluTimeFloorUpdate(string: result["timestamp"].string)!
+        self.chamber         = result["chamber"].string!
         
-        self.chamber         = result["chamber"].string
         self.congress        = result["congress"].int
         self.year            = result["year"].int
         self.legislative_day = zuluDay(string: result["legislative_day"].string)
@@ -55,6 +52,26 @@ struct FloorUpdate: Hashable {
             floorUpdates.append(floorUpdate)
         }
         return floorUpdates;
+    }
+    
+    //MARK: JSQMessageData
+    func senderId() -> String? {
+        return self.chamber
+    }
+    func senderDisplayName() -> String? {
+        return self.chamber.capitalized
+    }
+    func date() -> Date? {
+        return Optional<Date>(self.timestamp)
+    }
+    func isMediaMessage() -> Bool {
+        return false
+    }
+    func messageHash() -> UInt {
+        return UInt(self.hashValue)
+    }
+    func text() -> String? {
+        return self.update
     }
 }
 

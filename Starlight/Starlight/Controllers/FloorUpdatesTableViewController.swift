@@ -7,11 +7,15 @@
 //
 
 import UIKit
+import JSQMessagesViewController
 
-class FloorUpdatesTableViewController: UITableViewController {
+class FloorUpdatesTableViewController: JSQMessagesViewController {
     static let navConStoryboardId = "FloorUpdatesNavigationController"
 
     @IBOutlet var menuBarButton: UIBarButtonItem!
+    
+    let incomingMessagesBubbleImage = JSQMessagesBubbleImageFactory().incomingMessagesBubbleImage(with: UIColor.gray)!
+    let outgoingMessagesBubbleImage = JSQMessagesBubbleImageFactory().outgoingMessagesBubbleImage(with: UIColor.jsq_messageBubbleBlue())!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -22,9 +26,24 @@ class FloorUpdatesTableViewController: UITableViewController {
             self.view.addGestureRecognizer(self.revealViewController().panGestureRecognizer())
         }
         
-        self.tableView.rowHeight = UITableViewAutomaticDimension
-        self.tableView.estimatedRowHeight = 60
+        self.showLoadEarlierMessagesHeader = true
+        self.senderId = "vox"
+        self.senderDisplayName = "populi"
 
+        self.getFloorUpdatesNextPage()
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        self.loadToolbarWithHomeLegislators()
+        
+        let insets = UIEdgeInsetsMake(0, 0, 4+(self.navigationController?.toolbar.frame.size.height)!, 0)
+        self.collectionView.contentInset = insets
+        self.collectionView.scrollIndicatorInsets = insets
+    }
+    
+    private func getFloorUpdatesNextPage() {
         DataManager.sharedInstance.getFloorUpdatesNextPage { (indexesResult) in
             switch indexesResult {
             case .error(let error):
@@ -32,35 +51,62 @@ class FloorUpdatesTableViewController: UITableViewController {
             case .indexes(let indexes):
                 var indexPaths = [IndexPath]()
                 
-                for index in indexes {
-                    indexPaths.append(IndexPath(row: index, section: 0))
+                for i in 0..<indexes.count {
+                    indexPaths.append(IndexPath(row: i, section: 0))
                 }
                 
-                self.tableView.insertRows(at: indexPaths, with: .automatic)
+                self.collectionView.insertItems(at: indexPaths)
+                
+                if let lastIndexPath = indexPaths.last {
+                    self.collectionView.scrollToItem(at: lastIndexPath, at: .bottom, animated: true)
+                }
             }
         }
     }
     
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        
-        self.loadToolbarWithHomeLegislators()
+    override func isOutgoingMessage(_ messageItem: JSQMessageData!) -> Bool {
+        return messageItem.senderId() == "senate"
     }
-
-    // MARK: - Table view data source
-
-    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    
+    //MARK: JSQMessagesCollectionViewDataSource
+    
+    override func collectionView(_ collectionView: JSQMessagesCollectionView!, messageDataForItemAt indexPath: IndexPath!) -> JSQMessageData! {
+        let index = DataManager.sharedInstance.floorUpdates.count-1 - indexPath.row
+        return DataManager.sharedInstance.floorUpdates[index] as! FloorUpdate;
+    }
+    
+    override func collectionView(_ collectionView: JSQMessagesCollectionView!, messageBubbleImageDataForItemAt indexPath: IndexPath!) -> JSQMessageBubbleImageDataSource! {
+        
+        let floorUpdate = self.collectionView(self.collectionView, messageDataForItemAt: indexPath) as! FloorUpdate
+        
+        if floorUpdate.chamber == "house" {
+            return self.incomingMessagesBubbleImage
+        } else {
+            return self.outgoingMessagesBubbleImage
+        }
+    }
+    
+    override func collectionView(_ collectionView: JSQMessagesCollectionView!, avatarImageDataForItemAt indexPath: IndexPath!) -> JSQMessageAvatarImageDataSource! {
+        return nil
+    }
+    
+    override func collectionView(_ collectionView: JSQMessagesCollectionView!, header headerView: JSQMessagesLoadEarlierHeaderView!, didTapLoadEarlierMessagesButton sender: UIButton!) {
+        self.getFloorUpdatesNextPage()
+    }
+    
+    //MARK: UICollectionViewDataSource
+    
+    override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return DataManager.sharedInstance.floorUpdates.count
     }
-
-    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let floorUpdateCell = tableView.dequeueReusableCell(withIdentifier: "floorUpdateCell", for: indexPath)
-
-        let floorUpdate = DataManager.sharedInstance.floorUpdates.object(at: indexPath.row) as! FloorUpdate
+    
+    override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = super.collectionView(collectionView, cellForItemAt: indexPath) as! JSQMessagesCollectionViewCell
         
-        floorUpdateCell.textLabel?.text = floorUpdate.update
-
-        return floorUpdateCell
+        // occasionally a cell will get reloaded with black text
+        cell.textView.textColor = UIColor.white
+        
+        return cell
     }
 
 }
