@@ -180,6 +180,9 @@ class FloorUpdatesTableViewController: JSQMessagesViewController {
         // occasionally a cell will get reloaded with black text
         cell.textView.textColor = UIColor.white
         
+        // turn off data detectors so dates don't get hyperlinked
+        cell.textView.dataDetectorTypes = .init(rawValue: 0)
+        
         return cell
     }
 
