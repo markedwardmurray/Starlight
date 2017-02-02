@@ -11,7 +11,7 @@ import MessageUI
 import Down
 
 enum AboutTVCIndex: Int {
-    case database, sunlight, oss, github, contact
+    case database, sunlight, oss, github, privacy, contact
 }
 
 class AboutTableViewController: UITableViewController, MFMailComposeViewControllerDelegate {
@@ -44,22 +44,28 @@ class AboutTableViewController: UITableViewController, MFMailComposeViewControll
         switch index {
         case .database:
             self.usCongressDatabaseCellSelected()
-            break;
         case .sunlight:
             self.sunlightCellSelected()
-            break
         case .oss:
             self.openSourceCellSelected()
-            break
         case .github:
             self.githubCellSelected()
-            break
+        case .privacy:
+            self.privacyCellSelected()
         case .contact:
             self.contactCellSelected()
-            break
         }
         
         tableView.deselectRow(at: indexPath, animated: true)
+    }
+    
+    func privacyCellSelected() {
+        guard let url = URL(string: "https://raw.githubusercontent.com/markedwardmurray/Starlight/master/PRIVACY.md") else {
+            print("Invalid URL")
+            return
+        }
+        
+        self.pushMarkdownController(title: "Privacy", url: url)
     }
     
     func usCongressDatabaseCellSelected() {
@@ -75,28 +81,8 @@ class AboutTableViewController: UITableViewController, MFMailComposeViewControll
     func openSourceCellSelected() {
         let url_str = Bundle.main.path(forResource: "Pods-Starlight-acknowledgements", ofType: "markdown")!
         let url = URL(fileURLWithPath: url_str)
-        var markdown = ""
-        do {
-            markdown = try String.init(contentsOf: url, encoding: .utf8)
-        }
-        catch {
-            print(error)
-            return
-        }
         
-        let ossVC = UIViewController()
-        ossVC.title = "Acknowledgements"
-        let downView = try? DownView(frame: self.view.frame, markdownString: markdown)
-        if let downView = downView {
-            ossVC.view.addSubview(downView)
-            downView.translatesAutoresizingMaskIntoConstraints = false
-            downView.leadingAnchor.constraint(equalTo: ossVC.view.leadingAnchor).isActive = true
-            downView.topAnchor.constraint(equalTo: ossVC.view.topAnchor).isActive = true
-            downView.trailingAnchor.constraint(equalTo: ossVC.view.trailingAnchor).isActive = true
-            downView.bottomAnchor.constraint(equalTo: ossVC.view.bottomAnchor).isActive = true
-            
-            self.navigationController?.pushViewController(ossVC, animated: true);
-        }
+        self.pushMarkdownController(title: "Acknowledgements", url: url)
     }
     
     func githubCellSelected() {
@@ -143,6 +129,33 @@ class AboutTableViewController: UITableViewController, MFMailComposeViewControll
             self.showAlertWithTitle(title: "Failed to Send", message: error!.localizedDescription)
         } else {
             controller.dismiss(animated: true, completion: nil)
+        }
+    }
+    
+    //MARK: Helpers
+    
+    private func pushMarkdownController(title: String, url: URL) {
+        var markdown = ""
+        do {
+            markdown = try String.init(contentsOf: url, encoding: .utf8)
+        }
+        catch {
+            self.showAlertWithTitle(title: "Error!", message: error.localizedDescription)
+            return
+        }
+        
+        let controller = UIViewController()
+        controller.title = title
+        let downView = try? DownView(frame: self.view.frame, markdownString: markdown)
+        if let downView = downView {
+            controller.view.addSubview(downView)
+            downView.translatesAutoresizingMaskIntoConstraints = false
+            downView.leadingAnchor.constraint(equalTo: controller.view.leadingAnchor).isActive = true
+            downView.topAnchor.constraint(equalTo: controller.view.topAnchor).isActive = true
+            downView.trailingAnchor.constraint(equalTo: controller.view.trailingAnchor).isActive = true
+            downView.bottomAnchor.constraint(equalTo: controller.view.bottomAnchor).isActive = true
+            
+            self.navigationController?.pushViewController(controller, animated: true);
         }
     }
 }
