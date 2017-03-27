@@ -72,7 +72,7 @@ extension UIViewController {
     
     @objc fileprivate func navigateToLegislatorsPage(sender: UIBarButtonItem) {
         if let mainRevealVC = self.revealViewController() as? MainRevealViewController {
-            mainRevealVC.pushLegislatorsTVC()
+            //mainRevealVC.pushLegislatorsTVC()
         }
     }
     

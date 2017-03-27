@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11542" systemVersion="15G1108" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="dR7-sh-AIt">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="15G1108" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina5_5" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11524"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -14,7 +14,7 @@
         <!--Legislators-->
         <scene sceneID="M8Y-Cj-1o6">
             <objects>
-                <tableViewController title="Legislators" id="BqG-r5-aNL" customClass="UpcomingBillsTableViewController" customModule="Starlight" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController storyboardIdentifier="UpcomingBillsTableViewController" title="Legislators" id="BqG-r5-aNL" customClass="UpcomingBillsTableViewController" customModule="Starlight" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="fAc-3T-fbh">
                         <rect key="frame" x="0.0" y="64" width="414" height="672"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -47,7 +47,7 @@
                                 <rect key="frame" x="0.0" y="72" width="414" height="170"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="LbC-If-1M6" id="dLW-2Q-CNb">
-                                    <rect key="frame" x="0.0" y="0.0" width="381" height="169.5"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="381" height="169.66666666666666"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="1000" text="Short Title" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3hq-hH-lru">
@@ -133,18 +133,19 @@ Title</string>
                     <navigationItem key="navigationItem" title="Upcoming Bills" id="OXS-aj-r7Z">
                         <barButtonItem key="leftBarButtonItem" image="icon_menu" id="DKv-zI-AJp"/>
                     </navigationItem>
+                    <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" translucent="NO" prompted="NO"/>
                     <connections>
                         <outlet property="menuBarButton" destination="DKv-zI-AJp" id="X4d-P6-snt"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="j1d-pq-Nd0" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="701" y="20"/>
+            <point key="canvasLocation" x="58" y="20"/>
         </scene>
         <!--Floor Updates-->
         <scene sceneID="lwI-mY-hqd">
             <objects>
-                <viewController id="sqS-Wh-JFV" customClass="FloorUpdatesTableViewController" customModule="Starlight" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="FloorUpdatesTableViewController" id="sqS-Wh-JFV" customClass="FloorUpdatesTableViewController" customModule="Starlight" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="Zx0-hX-Uxw"/>
                         <viewControllerLayoutGuide type="bottom" id="e4m-85-hJW"/>
@@ -162,6 +163,7 @@ Title</string>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
+                    <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" translucent="NO" prompted="NO"/>
                     <connections>
                         <outlet property="infoBarButton" destination="we8-mE-vM8" id="UQk-vk-aiT"/>
                         <outlet property="menuBarButton" destination="MqN-f5-3tS" id="1cL-8u-3hc"/>
@@ -169,12 +171,12 @@ Title</string>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="uyZ-zy-n5i" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="699" y="735"/>
+            <point key="canvasLocation" x="58" y="727"/>
         </scene>
         <!--About-->
         <scene sceneID="l9B-nS-yfh">
             <objects>
-                <tableViewController title="About" id="U2B-8y-QKt" customClass="AboutTableViewController" customModule="Starlight" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController storyboardIdentifier="AboutTableViewController" title="About" id="U2B-8y-QKt" customClass="AboutTableViewController" customModule="Starlight" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="EVW-JD-CLE">
                         <rect key="frame" x="0.0" y="64" width="414" height="672"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -342,6 +344,7 @@ v0.0.0 (0)</string>
                     <navigationItem key="navigationItem" title="About" id="rWC-mq-61x">
                         <barButtonItem key="leftBarButtonItem" image="icon_menu" id="9qL-GQ-9fB"/>
                     </navigationItem>
+                    <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" translucent="NO" prompted="NO"/>
                     <connections>
                         <outlet property="menuBarButton" destination="9qL-GQ-9fB" id="KJD-6B-Nea"/>
                         <outlet property="tableFooterViewLabel" destination="RMG-Wa-pez" id="VaK-kt-exs"/>
@@ -350,34 +353,12 @@ v0.0.0 (0)</string>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="UFX-Ur-MeW" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="648" y="2223"/>
-        </scene>
-        <!--Main Reveal View Controller-->
-        <scene sceneID="dXa-y3-XMj">
-            <objects>
-                <viewController id="dR7-sh-AIt" customClass="MainRevealViewController" customModule="Starlight" customModuleProvider="target" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="ODA-6n-qhs"/>
-                        <viewControllerLayoutGuide type="bottom" id="Rzv-1Z-Zso"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="7yA-wS-xtj">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                    </view>
-                    <simulatedStatusBarMetrics key="simulatedStatusBarMetrics"/>
-                    <connections>
-                        <segue destination="zbB-ZO-hXe" kind="custom" identifier="sw_rear" customClass="SWRevealViewControllerSegueSetController" id="Cvr-GH-ld0"/>
-                        <segue destination="hX9-xc-59s" kind="custom" identifier="sw_front" customClass="SWRevealViewControllerSegueSetController" id="nOJ-Sa-XAL"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="wGi-wu-RCK" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="-1262" y="20"/>
+            <point key="canvasLocation" x="58" y="2201"/>
         </scene>
         <!--Left Menu Table View Controller-->
         <scene sceneID="Lan-Fj-2c7">
             <objects>
-                <tableViewController clearsSelectionOnViewWillAppear="NO" id="zbB-ZO-hXe" customClass="LeftMenuTableViewController" customModule="Starlight" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController storyboardIdentifier="LeftMenuTableViewController" clearsSelectionOnViewWillAppear="NO" id="zbB-ZO-hXe" customClass="LeftMenuTableViewController" customModule="Starlight" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="Wz3-h5-LNH">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -492,100 +473,16 @@ v0.0.0 (0)</string>
                             <outlet property="delegate" destination="zbB-ZO-hXe" id="Qx4-1V-0n9"/>
                         </connections>
                     </tableView>
-                    <nil key="simulatedStatusBarMetrics"/>
+                    <simulatedStatusBarMetrics key="simulatedStatusBarMetrics" statusBarStyle="lightContent"/>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="5OG-gp-Eza" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1262.3188405797102" y="734.51086956521749"/>
-        </scene>
-        <!--Navigation Controller-->
-        <scene sceneID="TvO-nF-paJ">
-            <objects>
-                <navigationController storyboardIdentifier="UpcomingBillsNavigationController" automaticallyAdjustsScrollViewInsets="NO" toolbarHidden="NO" id="hX9-xc-59s" sceneMemberID="viewController">
-                    <toolbarItems/>
-                    <simulatedStatusBarMetrics key="simulatedStatusBarMetrics" statusBarStyle="lightContent"/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" barStyle="black" translucent="NO" id="YKX-RJ-bTx">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                        <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <color key="barTintColor" red="0.0" green="0.062745098039215685" blue="0.50980392156862742" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                        <textAttributes key="titleTextAttributes">
-                            <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        </textAttributes>
-                    </navigationBar>
-                    <nil name="viewControllers"/>
-                    <toolbar key="toolbar" opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="3q4-iR-viz">
-                        <rect key="frame" x="0.0" y="692" width="414" height="44"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                    </toolbar>
-                    <connections>
-                        <segue destination="BqG-r5-aNL" kind="relationship" relationship="rootViewController" id="OOB-ee-dyk"/>
-                    </connections>
-                </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="I2M-pU-IA1" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="-249" y="20"/>
-        </scene>
-        <!--Navigation Controller-->
-        <scene sceneID="6pt-UW-Kqf">
-            <objects>
-                <navigationController storyboardIdentifier="AboutNavigationController" automaticallyAdjustsScrollViewInsets="NO" id="XmF-SY-oMo" sceneMemberID="viewController">
-                    <toolbarItems/>
-                    <simulatedStatusBarMetrics key="simulatedStatusBarMetrics" statusBarStyle="lightContent"/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" barStyle="black" translucent="NO" id="tp3-Sj-xG7">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                        <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <color key="barTintColor" red="0.0" green="0.062745098040000002" blue="0.50980392159999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                        <textAttributes key="titleTextAttributes">
-                            <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        </textAttributes>
-                    </navigationBar>
-                    <nil name="viewControllers"/>
-                    <toolbar key="toolbar" opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="zis-sh-mvP">
-                        <rect key="frame" x="0.0" y="692" width="414" height="44"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                    </toolbar>
-                    <connections>
-                        <segue destination="U2B-8y-QKt" kind="relationship" relationship="rootViewController" id="Nc4-Qu-KKT"/>
-                    </connections>
-                </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="LWK-dl-Xtz" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="-249" y="2223"/>
-        </scene>
-        <!--Navigation Controller-->
-        <scene sceneID="oEY-Ce-zHb">
-            <objects>
-                <navigationController storyboardIdentifier="LegislatorsNavigationController" automaticallyAdjustsScrollViewInsets="NO" id="YCl-g1-Cly" sceneMemberID="viewController">
-                    <toolbarItems/>
-                    <simulatedStatusBarMetrics key="simulatedStatusBarMetrics" statusBarStyle="lightContent"/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" barStyle="black" translucent="NO" id="yXy-7c-ZbB">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                        <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <color key="barTintColor" red="0.0" green="0.062745098040000002" blue="0.50980392159999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                        <textAttributes key="titleTextAttributes">
-                            <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        </textAttributes>
-                    </navigationBar>
-                    <nil name="viewControllers"/>
-                    <toolbar key="toolbar" opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="XON-ZJ-RN1">
-                        <rect key="frame" x="0.0" y="692" width="414" height="44"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                    </toolbar>
-                    <connections>
-                        <segue destination="fHD-zY-RwM" kind="relationship" relationship="rootViewController" id="AnR-4q-V4n"/>
-                    </connections>
-                </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="j5l-aG-g0v" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="-249" y="1482"/>
+            <point key="canvasLocation" x="-1275" y="20"/>
         </scene>
         <!--Legislators-->
         <scene sceneID="TS5-dL-AB0">
             <objects>
-                <tableViewController title="Legislators" id="fHD-zY-RwM" customClass="LegislatorsTableViewController" customModule="Starlight" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController storyboardIdentifier="LegislatorsTableViewController" title="Legislators" id="fHD-zY-RwM" customClass="LegislatorsTableViewController" customModule="Starlight" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="yQ0-lP-DQZ">
                         <rect key="frame" x="0.0" y="64" width="414" height="672"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -659,6 +556,7 @@ v0.0.0 (0)</string>
                     <navigationItem key="navigationItem" title="Legislators" id="3Q0-TG-7Z7">
                         <barButtonItem key="leftBarButtonItem" image="icon_menu" id="ZcW-hX-Y3o"/>
                     </navigationItem>
+                    <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" translucent="NO" prompted="NO"/>
                     <connections>
                         <outlet property="menuBarButton" destination="ZcW-hX-Y3o" id="Ak9-Ze-XyE"/>
                         <outlet property="saveLegislatorsButton" destination="plQ-Fr-WTz" id="wpg-0u-goF"/>
@@ -667,36 +565,7 @@ v0.0.0 (0)</string>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="iuG-Nz-fiL" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="699" y="1482"/>
-        </scene>
-        <!--Navigation Controller-->
-        <scene sceneID="uG0-8E-AaI">
-            <objects>
-                <navigationController storyboardIdentifier="FloorUpdatesNavigationController" automaticallyAdjustsScrollViewInsets="NO" toolbarHidden="NO" id="GpO-jL-cOL" sceneMemberID="viewController">
-                    <toolbarItems/>
-                    <simulatedStatusBarMetrics key="simulatedStatusBarMetrics" statusBarStyle="lightContent"/>
-                    <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" barStyle="black" translucent="NO" id="j4s-l4-DEh">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                        <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <color key="barTintColor" red="0.0" green="0.062745098040000002" blue="0.50980392159999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                        <textAttributes key="titleTextAttributes">
-                            <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        </textAttributes>
-                    </navigationBar>
-                    <nil name="viewControllers"/>
-                    <toolbar key="toolbar" opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="ORL-9N-S1A">
-                        <rect key="frame" x="0.0" y="692" width="414" height="44"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                    </toolbar>
-                    <connections>
-                        <segue destination="sqS-Wh-JFV" kind="relationship" relationship="rootViewController" id="4ty-cp-d5A"/>
-                    </connections>
-                </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="IKp-g4-MLg" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="-249" y="735"/>
+            <point key="canvasLocation" x="58" y="1456"/>
         </scene>
     </scenes>
     <resources>

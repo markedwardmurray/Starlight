@@ -8,11 +8,22 @@
 
 import UIKit
 
-fileprivate enum LeftMenuIndex : Int {
+enum RevealIndex : Int {
     case upcomingBills, floorUpdates, legislators, about
 }
 
+protocol LeftMenuTableViewControllerCoordinator: Coordinator {
+    func leftMenuTableViewController(_ controller: LeftMenuTableViewController, didSelectRevealIndex revealIndex: RevealIndex)
+    var currentRevealIndex: RevealIndex { get }
+}
+
 class LeftMenuTableViewController: UITableViewController {
+    static func instance() -> LeftMenuTableViewController {
+        return UIStoryboard.main.instantiateViewController(withIdentifier: String(describing: self)) as! LeftMenuTableViewController
+    }
+    
+    weak var coordinator: LeftMenuTableViewControllerCoordinator?
+    
     var mainRevealController: MainRevealViewController {
         return self.revealViewController() as! MainRevealViewController
     }
@@ -30,9 +41,10 @@ class LeftMenuTableViewController: UITableViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
     
-        let row: Int = self.mainRevealController.revealIndex.rawValue
-        let indexPath = IndexPath(row: row, section: 0)
-        self.tableView.selectRow(at: indexPath, animated: false, scrollPosition: .top)
+        if let row: Int = coordinator?.currentRevealIndex.rawValue {
+            let indexPath = IndexPath(row: row, section: 0)
+            self.tableView.selectRow(at: indexPath, animated: false, scrollPosition: .top)
+        }
     }
     
     override func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
@@ -44,17 +56,8 @@ class LeftMenuTableViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let leftMenuIndex = LeftMenuIndex(rawValue: indexPath.row)!
+        let revealIndex = RevealIndex(rawValue: indexPath.row)!
         
-        switch leftMenuIndex {
-        case .upcomingBills:
-            self.mainRevealController.pushUpcomingBillsTVC()
-        case .floorUpdates:
-            self.mainRevealController.pushFloorUpdatesTVC()
-        case .legislators:
-            self.mainRevealController.pushLegislatorsTVC()
-        case .about:
-            self.mainRevealController.pushAboutTVC()
-        }
+        self.coordinator?.leftMenuTableViewController(self, didSelectRevealIndex: revealIndex)
     }
 }

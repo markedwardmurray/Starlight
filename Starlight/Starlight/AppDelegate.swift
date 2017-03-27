@@ -12,12 +12,27 @@ import UIKit
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
-
+    var rootViewController: ContainerViewController!
+    var mainRevealCoordinator: MainRevealCoordinator!
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
         
         _ = DataManager.sharedInstance.loadHomeLegislators()
+        
+        self.window = UIWindow.init(frame: UIScreen.main.bounds)
+        self.rootViewController = ContainerViewController()
+        self.window?.rootViewController = self.rootViewController
+        self.mainRevealCoordinator = MainRevealCoordinator(rootViewController: self.rootViewController)
+        self.mainRevealCoordinator.start(withCompletion: nil)
+        
+        self.window?.makeKeyAndVisible()
+        
+        
+        UINavigationBar.appearance().barStyle = UIBarStyle.black
+        UINavigationBar.appearance().isTranslucent = false
+        UINavigationBar.appearance().barTintColor = UIColor.init(hex: "#000080")
+        UINavigationBar.appearance().tintColor = UIColor.white
         
         return true
     }

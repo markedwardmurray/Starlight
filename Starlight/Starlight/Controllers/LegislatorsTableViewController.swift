@@ -11,7 +11,9 @@ import INTULocationManager
 import Hex
 
 class LegislatorsTableViewController: UITableViewController, UISearchBarDelegate {
-    static let navConStoryboardId = "LegislatorsNavigationController"
+    static func instance() -> LegislatorsTableViewController {
+        return UIStoryboard.main.instantiateViewController(withIdentifier: String(describing: self)) as! LegislatorsTableViewController
+    }
     
     @IBOutlet var menuBarButton: UIBarButtonItem!
     

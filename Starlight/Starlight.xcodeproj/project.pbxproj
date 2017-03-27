@@ -20,6 +20,13 @@
 		4D9392941DF2A501004CD9B7 /* DataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D9392931DF2A501004CD9B7 /* DataManager.swift */; };
 		4D9392961DF2B2A7004CD9B7 /* UIStoryboard+Storyboards.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D9392951DF2B2A7004CD9B7 /* UIStoryboard+Storyboards.swift */; };
 		4DABF3F91DE73B2400634948 /* BillTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DABF3F81DE73B2400634948 /* BillTableViewCell.swift */; };
+		4DBAC7441E88082900A0E121 /* Coordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DBAC7431E88082900A0E121 /* Coordinator.swift */; };
+		4DBAC7461E88084200A0E121 /* MainRevealCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DBAC7451E88084200A0E121 /* MainRevealCoordinator.swift */; };
+		4DBAC7481E88085400A0E121 /* UpcomingBillsCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DBAC7471E88085400A0E121 /* UpcomingBillsCoordinator.swift */; };
+		4DBAC74A1E88086400A0E121 /* FloorUpdatesCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DBAC7491E88086400A0E121 /* FloorUpdatesCoordinator.swift */; };
+		4DBAC74C1E88087100A0E121 /* LegislatorsCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DBAC74B1E88087100A0E121 /* LegislatorsCoordinator.swift */; };
+		4DBAC74E1E88087E00A0E121 /* AboutCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DBAC74D1E88087E00A0E121 /* AboutCoordinator.swift */; };
+		4DBAC7521E880DDD00A0E121 /* ContainerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DBAC7511E880DDD00A0E121 /* ContainerViewController.swift */; };
 		4DC7FDD91DDEA20000F63B39 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DC7FDD81DDEA20000F63B39 /* AppDelegate.swift */; };
 		4DC7FDDB1DDEA20000F63B39 /* LegislatorsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DC7FDDA1DDEA20000F63B39 /* LegislatorsTableViewController.swift */; };
 		4DC7FDDE1DDEA20000F63B39 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4DC7FDDC1DDEA20000F63B39 /* Main.storyboard */; };
@@ -61,6 +68,13 @@
 		4D9392931DF2A501004CD9B7 /* DataManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataManager.swift; sourceTree = "<group>"; };
 		4D9392951DF2B2A7004CD9B7 /* UIStoryboard+Storyboards.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIStoryboard+Storyboards.swift"; sourceTree = "<group>"; };
 		4DABF3F81DE73B2400634948 /* BillTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BillTableViewCell.swift; sourceTree = "<group>"; };
+		4DBAC7431E88082900A0E121 /* Coordinator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Coordinator.swift; sourceTree = "<group>"; };
+		4DBAC7451E88084200A0E121 /* MainRevealCoordinator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainRevealCoordinator.swift; sourceTree = "<group>"; };
+		4DBAC7471E88085400A0E121 /* UpcomingBillsCoordinator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UpcomingBillsCoordinator.swift; sourceTree = "<group>"; };
+		4DBAC7491E88086400A0E121 /* FloorUpdatesCoordinator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FloorUpdatesCoordinator.swift; sourceTree = "<group>"; };
+		4DBAC74B1E88087100A0E121 /* LegislatorsCoordinator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LegislatorsCoordinator.swift; sourceTree = "<group>"; };
+		4DBAC74D1E88087E00A0E121 /* AboutCoordinator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AboutCoordinator.swift; sourceTree = "<group>"; };
+		4DBAC7511E880DDD00A0E121 /* ContainerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContainerViewController.swift; sourceTree = "<group>"; };
 		4DC7FDD51DDEA20000F63B39 /* Starlight.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Starlight.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4DC7FDD81DDEA20000F63B39 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		4DC7FDDA1DDEA20000F63B39 /* LegislatorsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LegislatorsTableViewController.swift; sourceTree = "<group>"; };
@@ -120,6 +134,7 @@
 		4D56B5B81DE19B0D00F9A52A /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				4DBAC7511E880DDD00A0E121 /* ContainerViewController.swift */,
 				4D93928B1DF247F5004CD9B7 /* MainRevealViewController.swift */,
 				4D93928D1DF249B5004CD9B7 /* LeftMenuTableViewController.swift */,
 				4D9392911DF29223004CD9B7 /* UpcomingBillsTableViewController.swift */,
@@ -139,6 +154,19 @@
 				4DABF3F81DE73B2400634948 /* BillTableViewCell.swift */,
 			);
 			path = Views;
+			sourceTree = "<group>";
+		};
+		4DBAC7421E8807E700A0E121 /* Coordinators */ = {
+			isa = PBXGroup;
+			children = (
+				4DBAC7431E88082900A0E121 /* Coordinator.swift */,
+				4DBAC7451E88084200A0E121 /* MainRevealCoordinator.swift */,
+				4DBAC7471E88085400A0E121 /* UpcomingBillsCoordinator.swift */,
+				4DBAC7491E88086400A0E121 /* FloorUpdatesCoordinator.swift */,
+				4DBAC74B1E88087100A0E121 /* LegislatorsCoordinator.swift */,
+				4DBAC74D1E88087E00A0E121 /* AboutCoordinator.swift */,
+			);
+			path = Coordinators;
 			sourceTree = "<group>";
 		};
 		4DC7FDCC1DDEA20000F63B39 = {
@@ -166,6 +194,7 @@
 			children = (
 				4DC7FDD81DDEA20000F63B39 /* AppDelegate.swift */,
 				4DC7FDDC1DDEA20000F63B39 /* Main.storyboard */,
+				4DBAC7421E8807E700A0E121 /* Coordinators */,
 				4D56B5B81DE19B0D00F9A52A /* Controllers */,
 				4DABF3F71DE73AE400634948 /* Views */,
 				4DCA2A611DEA3C6400F83A96 /* Data */,
@@ -447,18 +476,25 @@
 				4D9392921DF29223004CD9B7 /* UpcomingBillsTableViewController.swift in Sources */,
 				4DD7E6C71DE548F60078298F /* Bill.swift in Sources */,
 				4D1E9C341E20C6F3003F1701 /* FloorUpdate.swift in Sources */,
+				4DBAC7441E88082900A0E121 /* Coordinator.swift in Sources */,
 				4DD7E6CE1DE589880078298F /* CLPlacemark+Extensions.swift in Sources */,
 				4DD7E6C91DE5558B0078298F /* UpcomingBill.swift in Sources */,
+				4DBAC7461E88084200A0E121 /* MainRevealCoordinator.swift in Sources */,
 				4DC7FDFB1DDEA43B00F63B39 /* Legislator.swift in Sources */,
 				4D9392941DF2A501004CD9B7 /* DataManager.swift in Sources */,
+				4DBAC74C1E88087100A0E121 /* LegislatorsCoordinator.swift in Sources */,
 				4DABF3F91DE73B2400634948 /* BillTableViewCell.swift in Sources */,
+				4DBAC7481E88085400A0E121 /* UpcomingBillsCoordinator.swift in Sources */,
 				4D50320F1DF64A5400C329A8 /* UIViewController+Telprompt.swift in Sources */,
 				4DD7E6CC1DE565D60078298F /* Functions.swift in Sources */,
 				4DCA2A631DEA3C8800F83A96 /* StoreCoordinator.swift in Sources */,
 				4D56B5BC1DE1A2ED00F9A52A /* UIViewController+Alerts.swift in Sources */,
 				4D93928C1DF247F5004CD9B7 /* MainRevealViewController.swift in Sources */,
 				4D56B5BA1DE19B8800F9A52A /* AboutTableViewController.swift in Sources */,
+				4DBAC7521E880DDD00A0E121 /* ContainerViewController.swift in Sources */,
+				4DBAC74E1E88087E00A0E121 /* AboutCoordinator.swift in Sources */,
 				4D1E9C361E20E0CA003F1701 /* FloorUpdatesTableViewController.swift in Sources */,
+				4DBAC74A1E88086400A0E121 /* FloorUpdatesCoordinator.swift in Sources */,
 				4DC7FDFD1DDEB35A00F63B39 /* SunlightAPIClient.swift in Sources */,
 				4DC7FDDB1DDEA20000F63B39 /* LegislatorsTableViewController.swift in Sources */,
 				4DC7FDD91DDEA20000F63B39 /* AppDelegate.swift in Sources */,

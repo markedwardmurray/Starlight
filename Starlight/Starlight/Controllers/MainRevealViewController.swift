@@ -23,13 +23,15 @@ class MainRevealViewController: SWRevealViewController {
         self.frontViewShadowColor = UIColor.white
         self.frontViewShadowRadius = 5.0
         
+        /*
         if DataManager.sharedInstance.homeLegislators.count == 0 {
             self.revealIndex = .legislators
             let legislatorsRootVC = UIStoryboard.main.instantiateViewController(withIdentifier: LegislatorsTableViewController.navConStoryboardId)
             self.setFront(legislatorsRootVC, animated: false)
-        }
+        }*/
     }
     
+    /*
     func pushUpcomingBillsTVC() {
         self.revealIndex = .upcomingBills
         let rootVC = UIStoryboard.main.instantiateViewController(withIdentifier: UpcomingBillsTableViewController.navConStoryboardId)
@@ -53,4 +55,5 @@ class MainRevealViewController: SWRevealViewController {
         let rootVC = UIStoryboard.main.instantiateViewController(withIdentifier: AboutTableViewController.navConStoryboardId)
         self.pushFrontViewController(rootVC, animated: true)
     }
+ */
 }

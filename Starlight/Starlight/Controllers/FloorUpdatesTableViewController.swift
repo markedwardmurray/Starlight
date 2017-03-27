@@ -10,7 +10,9 @@ import UIKit
 import JSQMessagesViewController
 
 class FloorUpdatesTableViewController: JSQMessagesViewController {
-    static let navConStoryboardId = "FloorUpdatesNavigationController"
+    static func instance() -> FloorUpdatesTableViewController {
+        return UIStoryboard.main.instantiateViewController(withIdentifier: String(describing: self)) as! FloorUpdatesTableViewController
+    }
 
     @IBOutlet var menuBarButton: UIBarButtonItem!
     @IBOutlet var infoBarButton: UIBarButtonItem!
