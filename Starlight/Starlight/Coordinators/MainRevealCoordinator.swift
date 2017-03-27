@@ -39,22 +39,32 @@ class MainRevealCoordinator: Coordinator, LeftMenuTableViewControllerCoordinator
     
     func start(withCompletion completion: CoordinatorCompletion?) {
         
+        var startingFrontViewController: UIViewController
+        if DataManager.sharedInstance.homeLegislators.count == 0 {
+            currentRevealIndex = .legislators
+            startingFrontViewController = legislatorsCoordinator.navigationController
+        } else {
+            currentRevealIndex = .upcomingBills
+            startingFrontViewController = upcomingBillsCoordinator.navigationController
+        }
+        
         leftMenuTableViewController = LeftMenuTableViewController.instance()
         leftMenuTableViewController.coordinator = self
         
-        mainRevealViewController = MainRevealViewController(rearViewController: leftMenuTableViewController, frontViewController: upcomingBillsCoordinator.navigationController)
+        mainRevealViewController = MainRevealViewController(rearViewController: leftMenuTableViewController, frontViewController: startingFrontViewController)
         
         rootViewController.setEmbeddedMainViewController(mainRevealViewController)
-        
-        upcomingBillsCoordinator.start(withCompletion: nil)
     }
     
     func stop(withCompletion completion: CoordinatorCompletion?) {
+        
     }
     
-    //MARK: - LeftMenuTableViewControllerCoordinator
+    //MARK: RevealViewControllerCoordinator
     
     private(set) var currentRevealIndex: RevealIndex = .upcomingBills
+    
+    //MARK: LeftMenuTableViewControllerCoordinator
     
     func leftMenuTableViewController(_ controller: LeftMenuTableViewController, didSelectRevealIndex revealIndex: RevealIndex) {
         self.currentRevealIndex = revealIndex

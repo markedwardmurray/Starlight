@@ -8,13 +8,8 @@
 
 import UIKit
 
-enum RevealIndex : Int {
-    case upcomingBills, floorUpdates, legislators, about
-}
-
-protocol LeftMenuTableViewControllerCoordinator: Coordinator {
+protocol LeftMenuTableViewControllerCoordinator: RevealViewControllerCoordinator {
     func leftMenuTableViewController(_ controller: LeftMenuTableViewController, didSelectRevealIndex revealIndex: RevealIndex)
-    var currentRevealIndex: RevealIndex { get }
 }
 
 class LeftMenuTableViewController: UITableViewController {
